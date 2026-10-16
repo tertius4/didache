@@ -1,0 +1,49 @@
+import type { Lesson, Section, Unit } from './types';
+import { bibleStories } from './bible-stories/section';
+
+export const sections: Section[] = [bibleStories];
+
+/** Globally unique, stable key for a lesson; used for progress and analytics. */
+export function lessonKey(sectionId: string, unitId: string, lessonId: string): string {
+	return `${sectionId}/${unitId}/${lessonId}`;
+}
+
+export interface LessonLocation {
+	section: Section;
+	unit: Unit;
+	lesson: Lesson;
+	index: number;
+	key: string;
+}
+
+export function findLesson(
+	sectionId: string,
+	unitId: string,
+	lessonId: string
+): LessonLocation | undefined {
+	const section = sections.find((s) => s.id === sectionId);
+	const unit = section?.units.find((u) => u.id === unitId);
+	const index = unit?.lessons.findIndex((l) => l.id === lessonId) ?? -1;
+	if (!section || !unit || index < 0) return undefined;
+	return {
+		section,
+		unit,
+		lesson: unit.lessons[index],
+		index,
+		key: lessonKey(section.id, unit.id, lessonId)
+	};
+}
+
+/** The next lesson in the same unit, if any. */
+export function nextLesson(loc: LessonLocation): Lesson | undefined {
+	return loc.unit.lessons[loc.index + 1];
+}
+
+/** Every lesson route, for prerendering. */
+export function allLessonParams(): { section: string; unit: string; lesson: string }[] {
+	return sections.flatMap((section) =>
+		section.units.flatMap((unit) =>
+			unit.lessons.map((lesson) => ({ section: section.id, unit: unit.id, lesson: lesson.id }))
+		)
+	);
+}

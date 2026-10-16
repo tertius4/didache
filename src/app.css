@@ -1,0 +1,247 @@
+:root {
+	--bg: #fffaf0;
+	--surface: #ffffff;
+	--text: #2b2633;
+	--muted: #6f6878;
+	--border: #e8e1d4;
+	--border-strong: #d6cdbd;
+
+	--primary: #2fb36b;
+	--primary-shadow: #218a51;
+	--primary-soft: #dff7e8;
+	--sky: #3aa6e8;
+	--sky-shadow: #2380bd;
+	--sky-soft: #e3f3fd;
+	--sun: #ffc533;
+	--sun-shadow: #d99c00;
+	--danger: #ef5b5b;
+	--danger-shadow: #c43f3f;
+	--danger-soft: #ffe8e6;
+	--locked: #e3ddd1;
+	--locked-shadow: #c9c1b2;
+
+	--radius: 16px;
+	--radius-lg: 24px;
+	--content-width: 520px;
+
+	font-family: 'Nunito Variable', system-ui, sans-serif;
+	color: var(--text);
+	background: var(--bg);
+	-webkit-tap-highlight-color: transparent;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	min-height: 100%;
+	background: var(--bg);
+}
+
+body {
+	min-height: 100dvh;
+	font-size: 17px;
+	line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.2;
+	margin: 0;
+	font-weight: 900;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: var(--sky-shadow);
+}
+
+button {
+	font: inherit;
+	color: inherit;
+}
+
+:focus-visible {
+	outline: 3px solid var(--sky);
+	outline-offset: 2px;
+}
+
+/* Chunky, tactile buttons */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	width: 100%;
+	padding: 14px 20px;
+	border: none;
+	border-radius: var(--radius);
+	font-weight: 900;
+	font-size: 16px;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	text-decoration: none;
+	cursor: pointer;
+	background: var(--primary);
+	color: white;
+	box-shadow: 0 4px 0 var(--primary-shadow);
+	transition:
+		transform 80ms ease,
+		box-shadow 80ms ease,
+		filter 120ms ease;
+}
+
+.btn:hover:not(:disabled) {
+	filter: brightness(1.05);
+}
+
+.btn:active:not(:disabled) {
+	transform: translateY(4px);
+	box-shadow: 0 0 0 var(--primary-shadow);
+}
+
+.btn:disabled {
+	background: var(--locked);
+	color: var(--muted);
+	box-shadow: 0 4px 0 var(--locked-shadow);
+	cursor: not-allowed;
+}
+
+.btn.sky {
+	background: var(--sky);
+	box-shadow: 0 4px 0 var(--sky-shadow);
+}
+
+.btn.danger {
+	background: var(--danger);
+	box-shadow: 0 4px 0 var(--danger-shadow);
+}
+
+.btn.ghost {
+	background: var(--surface);
+	color: var(--sky-shadow);
+	border: 2px solid var(--border);
+	box-shadow: 0 4px 0 var(--border);
+}
+
+.btn.ghost:active:not(:disabled) {
+	box-shadow: 0 0 0 var(--border);
+}
+
+/* Selectable answer tiles */
+.tile {
+	display: block;
+	width: 100%;
+	padding: 14px 16px;
+	border: 2px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--surface);
+	box-shadow: 0 3px 0 var(--border);
+	font-weight: 700;
+	text-align: left;
+	cursor: pointer;
+	transition:
+		transform 80ms ease,
+		background 120ms ease,
+		border-color 120ms ease;
+}
+
+.tile:active:not(:disabled) {
+	transform: translateY(2px);
+	box-shadow: 0 1px 0 var(--border);
+}
+
+.tile:disabled {
+	cursor: default;
+}
+
+.tile.selected {
+	border-color: var(--sky);
+	background: var(--sky-soft);
+	box-shadow: 0 3px 0 var(--sky);
+}
+
+.tile.correct {
+	border-color: var(--primary);
+	background: var(--primary-soft);
+	box-shadow: 0 3px 0 var(--primary);
+}
+
+.tile.wrong {
+	border-color: var(--danger);
+	background: var(--danger-soft);
+	box-shadow: 0 3px 0 var(--danger);
+}
+
+.chip {
+	padding: 10px 14px;
+	border: 2px solid var(--border);
+	border-radius: 12px;
+	background: var(--surface);
+	box-shadow: 0 3px 0 var(--border);
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.chip:disabled {
+	cursor: default;
+}
+
+.chip.used {
+	color: transparent;
+	background: var(--locked);
+	box-shadow: none;
+	border-color: var(--locked);
+}
+
+.verse {
+	margin: 0;
+	padding: 12px 16px;
+	border-left: 4px solid var(--sun);
+	background: #fff6dc;
+	border-radius: 0 12px 12px 0;
+	font-size: 15px;
+}
+
+.verse cite {
+	display: block;
+	margin-top: 6px;
+	font-style: normal;
+	font-weight: 800;
+	font-size: 13px;
+	color: var(--muted);
+}
+
+.page {
+	width: 100%;
+	max-width: var(--content-width);
+	margin: 0 auto;
+	padding: 16px;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
+}
