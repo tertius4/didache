@@ -111,5 +111,7 @@ export interface Section {
 	id: string;
 	title: string;
 	description: string;
+	/** "Coming soon" blurb shown below the section's units. */
+	upcoming?: string;
 	units: Unit[];
 }

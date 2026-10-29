@@ -98,7 +98,11 @@
 <div class="player">
 	{#if phase !== 'complete'}
 		<header class="top">
-			<a class="close" href={resolve('/learn')} aria-label="Close lesson">✕</a>
+			<a
+				class="close"
+				href={resolve('/learn/[section]', { section: section.id })}
+				aria-label="Close lesson">✕</a
+			>
 			<ProgressBar
 				value={barValue}
 				label={phase === 'story' ? 'Story progress' : 'Exercise progress'}
@@ -130,6 +134,7 @@
 				total={session.total}
 				{unitComplete}
 				unitTitle={unit.title}
+				sectionId={section.id}
 				context={ids}
 			/>
 		{/if}

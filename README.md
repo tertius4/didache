@@ -28,7 +28,7 @@ To add a native app later: `npx cap add android` (or `ios`), then `npm run build
 Content is plain TypeScript data in [src/lib/content](src/lib/content):
 
 ```
-Section  (bible-stories/section.ts)       e.g. Bible Stories, later Church History
+Section  (bible-stories/section.ts)       Bible Stories, The Big Story, Christ in All Scripture
 └─ Unit  (bible-stories/noah/unit.ts)     e.g. Noah and the Flood
    └─ Lesson (01-a-wicked-world.ts, …)    story cards + ~10 exercises
 ```

@@ -5,5 +5,6 @@ export const bibleStories: Section = {
 	id: 'bible-stories',
 	title: 'Bible Stories',
 	description: 'Walk through the great stories of Scripture and see God’s grace in each one.',
+	upcoming: 'Abraham, Moses, David, the life of Jesus…',
 	units: [noah]
 };

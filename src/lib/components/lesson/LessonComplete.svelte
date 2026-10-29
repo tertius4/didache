@@ -11,6 +11,7 @@
 		total,
 		unitComplete,
 		unitTitle,
+		sectionId,
 		context
 	}: {
 		lesson: Lesson;
@@ -18,6 +19,7 @@
 		total: number;
 		unitComplete: boolean;
 		unitTitle: string;
+		sectionId: string;
 		context: Record<string, string>;
 	} = $props();
 
@@ -51,7 +53,9 @@
 		</section>
 	{/if}
 
-	<a class="btn" href={resolve('/learn')}>{unitComplete ? 'Back to lessons' : 'Continue'}</a>
+	<a class="btn" href={resolve('/learn/[section]', { section: sectionId })}
+		>{unitComplete ? 'Back to lessons' : 'Continue'}</a
+	>
 </div>
 
 <style>

@@ -23,7 +23,9 @@
 		<p class="icon" aria-hidden="true">🔒</p>
 		<h1>This lesson is locked</h1>
 		<p>Finish the lessons before it to unlock “{loc.lesson.title}”.</p>
-		<a class="btn" href={resolve('/learn')}>Back to lessons</a>
+		<a class="btn" href={resolve('/learn/[section]', { section: loc.section.id })}
+			>Back to lessons</a
+		>
 	</main>
 {/if}
 

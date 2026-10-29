@@ -1,7 +1,13 @@
 import type { Lesson, Section, Unit } from './types';
 import { bibleStories } from './bible-stories/section';
+import { theBigStory } from './the-big-story/section';
+import { christInAllScripture } from './christ-in-all-scripture/section';
 
-export const sections: Section[] = [bibleStories];
+export const sections: Section[] = [bibleStories, theBigStory, christInAllScripture];
+
+export function findSection(sectionId: string): Section | undefined {
+	return sections.find((s) => s.id === sectionId);
+}
 
 /** Globally unique, stable key for a lesson; used for progress and analytics. */
 export function lessonKey(sectionId: string, unitId: string, lessonId: string): string {
@@ -21,7 +27,7 @@ export function findLesson(
 	unitId: string,
 	lessonId: string
 ): LessonLocation | undefined {
-	const section = sections.find((s) => s.id === sectionId);
+	const section = findSection(sectionId);
 	const unit = section?.units.find((u) => u.id === unitId);
 	const index = unit?.lessons.findIndex((l) => l.id === lessonId) ?? -1;
 	if (!section || !unit || index < 0) return undefined;
