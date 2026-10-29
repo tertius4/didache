@@ -6,57 +6,29 @@
 	let { card, onlearnmore }: { card: StoryCard; onlearnmore: () => void } = $props();
 </script>
 
-<article class="card">
+<article class="grid animate-pop-in gap-4">
 	{#if card.illustration}
-		<div class="art"><Illustration name={card.illustration} /></div>
+		<div class="overflow-hidden rounded-lg border border-sepia/25 sepia-[.2]">
+			<Illustration name={card.illustration} />
+		</div>
 	{/if}
-	<h2>{card.title}</h2>
-	<p class="body">{card.body}</p>
+	<h2 class="text-3xl">{card.title}</h2>
+	<!-- Rubricated drop cap, as in a manuscript. -->
+	<p
+		class="text-lg first-letter:float-left first-letter:mt-1 first-letter:mr-2 first-letter:font-display first-letter:text-6xl first-letter:leading-[0.8] first-letter:text-rubric"
+	>
+		{card.body}
+	</p>
 	{#if card.verse}
 		<VerseQuote verse={card.verse} />
 	{/if}
 	{#if card.learnMore}
-		<button type="button" class="learn-more" onclick={onlearnmore}>
-			<span aria-hidden="true">📖</span> Learn more: {card.learnMore.title}
+		<button
+			type="button"
+			class="cursor-pointer justify-self-start rounded-full border border-gold/60 bg-gold-soft/50 px-3.5 py-1.5 text-sm font-medium hover:bg-gold-soft"
+			onclick={onlearnmore}
+		>
+			Learn more: {card.learnMore.title}
 		</button>
 	{/if}
 </article>
-
-<style>
-	.card {
-		display: grid;
-		gap: 14px;
-		animation: pop-in 260ms ease;
-	}
-
-	.art {
-		border-radius: 20px;
-		overflow: hidden;
-	}
-
-	h2 {
-		font-size: 24px;
-	}
-
-	.body {
-		font-size: 18px;
-	}
-
-	.learn-more {
-		justify-self: start;
-		padding: 10px 14px;
-		border: 2px solid var(--sun);
-		border-radius: 999px;
-		background: #fff6dc;
-		font-weight: 800;
-		font-size: 15px;
-		cursor: pointer;
-	}
-
-	@keyframes pop-in {
-		from {
-			opacity: 0;
-			transform: translateY(8px);
-		}
-	}
-</style>

@@ -5,6 +5,7 @@
 </script>
 
 <svg
+	class="block h-auto w-full"
 	viewBox="0 0 240 160"
 	role={label ? 'img' : 'presentation'}
 	aria-label={label || undefined}
@@ -210,11 +211,3 @@
 		</g>
 	{/if}
 </svg>
-
-<style>
-	svg {
-		display: block;
-		width: 100%;
-		height: auto;
-	}
-</style>

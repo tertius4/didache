@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { MatchExercise } from '#lib/content/types.ts';
 	import type { Status } from '#lib/lesson/engine.svelte.ts';
+	import { tile } from '#lib/components/ui/classes.ts';
 	import { shuffle } from '#lib/lesson/check.ts';
 
 	let {
@@ -13,7 +14,8 @@
 		onanswer: (answer: Record<string, string> | null) => void;
 	} = $props();
 
-	const colors = ['#3aa6e8', '#ff8a3d', '#8a63d2', '#2fb36b', '#ef5b5b'];
+	// Manuscript pigments: lapis, ochre, madder, verdigris, umber.
+	const colors = ['#2f4f7a', '#b88a2e', '#8c3b5e', '#3d6b66', '#7a5c3e'];
 
 	const lefts = $derived(shuffle(exercise.pairs.map(([l]) => l)));
 	const rights = $derived(shuffle(exercise.pairs.map(([, r]) => r)));
@@ -59,89 +61,54 @@
 	}
 </script>
 
-<h2>{exercise.prompt}</h2>
-<p class="hint">Tap an item on the left, then its match on the right.</p>
+<h2 class="text-2xl">{exercise.prompt}</h2>
+<p class="mt-1 text-sepia">Tap an item on the left, then its match on the right.</p>
 
-<div class="columns" class:correct={status === 'correct'} class:wrong={status === 'wrong'}>
-	<div class="col">
+{#snippet item(
+	label: string,
+	color: string | undefined,
+	props: { active?: boolean; disabled: boolean; onclick: () => void }
+)}
+	<button
+		type="button"
+		class={[
+			tile(
+				{
+					selected: props.active,
+					paired: !!color,
+					correct: status === 'correct',
+					wrong: status === 'wrong'
+				},
+				'p-3 text-center'
+			),
+			'min-h-16 text-[15px] disabled:text-ink'
+		]}
+		style:--pair={color}
+		disabled={props.disabled}
+		aria-pressed={props.active === undefined ? undefined : props.active}
+		onclick={props.onclick}
+	>
+		{label}
+	</button>
+{/snippet}
+
+<div class="mt-5 grid grid-cols-2 gap-3">
+	<div class="grid content-start gap-2.5">
 		{#each lefts as left (left)}
-			{@const color = colorForLeft(left)}
-			<button
-				type="button"
-				class="tile"
-				class:selected={activeLeft === left}
-				class:paired={color}
-				style:--pair={color}
-				disabled={locked}
-				aria-pressed={activeLeft === left}
-				onclick={() => tapLeft(left)}
-			>
-				{left}
-			</button>
+			{@render item(left, colorForLeft(left), {
+				active: activeLeft === left,
+				disabled: locked,
+				onclick: () => tapLeft(left)
+			})}
 		{/each}
 	</div>
-	<div class="col">
+	<div class="grid content-start gap-2.5">
 		{#each rights as right (right)}
 			{@const owner = leftForRight(right)}
-			{@const color = owner ? colorForLeft(owner) : undefined}
-			<button
-				type="button"
-				class="tile"
-				class:paired={color}
-				style:--pair={color}
-				disabled={locked || (!activeLeft && !owner)}
-				onclick={() => tapRight(right)}
-			>
-				{right}
-			</button>
+			{@render item(right, owner ? colorForLeft(owner) : undefined, {
+				disabled: locked || (!activeLeft && !owner),
+				onclick: () => tapRight(right)
+			})}
 		{/each}
 	</div>
 </div>
-
-<style>
-	.hint {
-		margin-top: 4px;
-		color: var(--muted);
-		font-size: 15px;
-	}
-
-	.columns {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 12px;
-		margin-top: 20px;
-	}
-
-	.col {
-		display: grid;
-		gap: 10px;
-		align-content: start;
-	}
-
-	.col .tile {
-		padding: 12px;
-		font-size: 15px;
-		text-align: center;
-		min-height: 64px;
-	}
-
-	.col .tile:disabled {
-		color: inherit;
-	}
-
-	.tile.paired {
-		border-color: var(--pair);
-		box-shadow: 0 3px 0 var(--pair);
-		background: color-mix(in srgb, var(--pair) 14%, white);
-	}
-
-	.columns.correct .tile {
-		border-color: var(--primary);
-		box-shadow: 0 3px 0 var(--primary);
-	}
-
-	.columns.wrong .tile {
-		border-color: var(--danger);
-		box-shadow: 0 3px 0 var(--danger);
-	}
-</style>

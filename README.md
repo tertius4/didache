@@ -1,6 +1,6 @@
 # Unilogos
 
-Duolingo-style lessons for learning the Bible from a Reformed perspective. This is a demo with one unit (Noah and the Flood, six lessons), no accounts, and progress saved on the device.
+Short, story-first lessons for learning the Bible from a Reformed perspective. This is a demo with one unit (Noah and the Flood, six lessons), no accounts, and progress saved on the device.
 
 Built with SvelteKit (static, client-rendered) and Capacitor.
 
@@ -30,7 +30,7 @@ Content is plain TypeScript data in [src/lib/content](src/lib/content):
 ```
 Section  (bible-stories/section.ts)       Bible Stories, The Big Story, Christ in All Scripture
 └─ Unit  (bible-stories/noah/unit.ts)     e.g. Noah and the Flood
-   └─ Lesson (01-a-wicked-world.ts, …)    story cards + ~10 exercises
+   └─ Lesson (01-a-wicked-world.ts, …)    intro video + story cards + ~10 exercises
 ```
 
 - A lesson has `story` cards (with optional `learnMore` doctrine) and `exercises` of type `mc`, `fill`, `truefalse`, `order` or `match`. Every exercise carries an ESV `verse` that is shown in the feedback.

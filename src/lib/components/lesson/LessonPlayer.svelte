@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { onMount, type Snippet } from 'svelte';
+	import { onMount } from 'svelte';
 	import type { LessonLocation } from '#lib/content/index.ts';
 	import type { AnyAnswer, LearnMore } from '#lib/content/types.ts';
 	import { LessonSession } from '#lib/lesson/engine.svelte.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
 	import { track } from '#lib/analytics.ts';
 	import ExerciseView from '#lib/components/exercises/ExerciseView.svelte';
+	import ActionBar from '#lib/components/ui/ActionBar.svelte';
 	import Button from '#lib/components/ui/Button.svelte';
 	import ProgressBar from './ProgressBar.svelte';
 	import StoryCard from './StoryCard.svelte';
@@ -119,7 +120,7 @@
 		>
 			<a
 				class="p-1 text-xl text-sepia no-underline hover:text-ink"
-				href={resolve('/learn/[section]', { section: section.id })}
+				href={resolve('/learn/[section]/[unit]', { section: section.id, unit: unit.id })}
 				aria-label="Close lesson">✕</a
 			>
 			{#if phase === 'video'}
@@ -133,7 +134,7 @@
 		</header>
 	{/if}
 
-	<main class="px-5 pt-2 pb-36 [&_h2]:text-[22px]">
+	<main class="px-5 pt-2 pb-36">
 		{#if phase === 'video'}
 			<VideoIntro
 				{lesson}
@@ -169,47 +170,32 @@
 				accuracy={session.accuracy}
 				total={session.total}
 				{unitComplete}
-				unitTitle={unit.title}
-				sectionId={section.id}
+				{location}
 				context={ids}
 			/>
 		{/if}
 	</main>
 
 	{#if phase === 'video'}
-		{@render footer(videoActions)}
+		<ActionBar>
+			<Button onclick={() => goTo('exercises')}>Start practice</Button>
+		</ActionBar>
 	{:else if phase === 'story'}
-		{@render footer(storyActions)}
+		<ActionBar>
+			<div class="grid grid-cols-[1fr_2fr] gap-3">
+				<Button variant="ghost" onclick={prevCard}>Back</Button>
+				<Button onclick={nextCard}>{lastCard ? 'Start practice' : 'Next'}</Button>
+			</div>
+		</ActionBar>
 	{:else if phase === 'exercises' && session.current}
 		{#if session.status === 'answering'}
-			{@render footer(checkAction)}
+			<ActionBar>
+				<Button disabled={answer === null} onclick={check}>Check</Button>
+			</ActionBar>
 		{:else}
 			<FeedbackBanner exercise={session.current} correct={lastCorrect} oncontinue={continueOn} />
 		{/if}
 	{/if}
 </div>
-
-{#snippet footer(actions: Snippet)}
-	<footer
-		class="fixed bottom-0 left-1/2 w-full max-w-content -translate-x-1/2 border-t border-sepia/20 bg-vellum px-5 pt-3.5 pb-[calc(14px+env(safe-area-inset-bottom))]"
-	>
-		{@render actions()}
-	</footer>
-{/snippet}
-
-{#snippet videoActions()}
-	<Button onclick={() => goTo('exercises')}>Start practice</Button>
-{/snippet}
-
-{#snippet storyActions()}
-	<div class="grid grid-cols-[1fr_2fr] gap-3">
-		<Button variant="ghost" onclick={prevCard}>Back</Button>
-		<Button onclick={nextCard}>{lastCard ? 'Start practice' : 'Next'}</Button>
-	</div>
-{/snippet}
-
-{#snippet checkAction()}
-	<Button disabled={answer === null} onclick={check}>Check</Button>
-{/snippet}
 
 <LearnMoreSheet content={learnMore} onclose={() => (learnMore = null)} />

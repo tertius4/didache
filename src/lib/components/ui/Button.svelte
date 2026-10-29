@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
 
-	type Variant = 'primary' | 'ghost' | 'quiet';
+	type Variant = 'primary' | 'success' | 'ghost' | 'quiet';
 	type Props = { variant?: Variant; children: Snippet } & (
 		({ href: string } & HTMLAnchorAttributes) | ({ href?: undefined } & HTMLButtonAttributes)
 	);
@@ -11,6 +11,7 @@
 
 	const variants: Record<Variant, string> = {
 		primary: 'bg-rubric text-vellum hover:bg-rubric/90',
+		success: 'bg-olive text-vellum hover:bg-olive/90',
 		ghost: 'border border-sepia/40 text-ink hover:bg-vellum-deep/60',
 		quiet: 'text-sepia hover:text-ink'
 	};

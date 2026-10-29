@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { TrueFalseExercise } from '#lib/content/types.ts';
+	import { tile } from '#lib/components/ui/classes.ts';
 	import type { Status } from '#lib/lesson/engine.svelte.ts';
 
 	let {
@@ -20,47 +21,31 @@
 	}
 </script>
 
-<h2>True or false?</h2>
-<p class="statement">{exercise.statement}</p>
-<div class="choices">
+<h2 class="text-2xl">True or false?</h2>
+<p class="mt-5 border-l-2 border-sepia/40 py-1 pl-4 font-display text-2xl leading-snug italic">
+	{exercise.statement}
+</p>
+<div class="mt-6 grid grid-cols-2 gap-3">
 	{#each [true, false] as value (value)}
+		{@const mine = selected === value}
 		<button
 			type="button"
-			class="tile"
-			class:selected={selected === value && status === 'answering'}
-			class:correct={selected === value && status === 'correct'}
-			class:wrong={selected === value && status === 'wrong'}
+			class={[
+				tile(
+					{
+						selected: mine && status === 'answering',
+						correct: mine && status === 'correct',
+						wrong: mine && status === 'wrong'
+					},
+					'px-4 py-5 text-center'
+				),
+				'font-display text-xl'
+			]}
 			disabled={status !== 'answering'}
-			aria-pressed={selected === value}
+			aria-pressed={mine}
 			onclick={() => choose(value)}
 		>
-			<span aria-hidden="true">{value ? '👍' : '👎'}</span>
 			{value ? 'True' : 'False'}
 		</button>
 	{/each}
 </div>
-
-<style>
-	.statement {
-		margin-top: 20px;
-		padding: 20px;
-		border: 2px solid var(--border);
-		border-radius: var(--radius);
-		background: var(--surface);
-		font-size: 19px;
-		font-weight: 700;
-	}
-
-	.choices {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 12px;
-		margin-top: 24px;
-	}
-
-	.choices .tile {
-		text-align: center;
-		font-size: 18px;
-		padding: 18px;
-	}
-</style>

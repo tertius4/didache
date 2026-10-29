@@ -24,6 +24,10 @@
 		<p class="text-6xl" aria-hidden="true">🔒</p>
 		<h1 class="font-display text-3xl font-semibold">This lesson is locked</h1>
 		<p>Finish the lessons before it to unlock “{loc.lesson.title}”.</p>
-		<Button href={resolve('/learn/[section]', { section: loc.section.id })}>Back to lessons</Button>
+		<Button
+			href={resolve('/learn/[section]/[unit]', { section: loc.section.id, unit: loc.unit.id })}
+		>
+			Back to lessons
+		</Button>
 	</main>
 {/if}

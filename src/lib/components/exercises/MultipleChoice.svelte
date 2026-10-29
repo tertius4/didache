@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { MultipleChoiceExercise } from '#lib/content/types.ts';
 	import type { Status } from '#lib/lesson/engine.svelte.ts';
+	import { tile } from '#lib/components/ui/classes.ts';
 	import { shuffle } from '#lib/lesson/check.ts';
 
 	let {
@@ -22,28 +23,22 @@
 	}
 </script>
 
-<h2>{exercise.prompt}</h2>
-<div class="options">
+<h2 class="text-2xl">{exercise.prompt}</h2>
+<div class="mt-5 grid gap-3">
 	{#each options as option (option)}
+		{@const mine = selected === option}
 		<button
 			type="button"
-			class="tile"
-			class:selected={selected === option && status === 'answering'}
-			class:correct={selected === option && status === 'correct'}
-			class:wrong={selected === option && status === 'wrong'}
+			class={tile({
+				selected: mine && status === 'answering',
+				correct: mine && status === 'correct',
+				wrong: mine && status === 'wrong'
+			})}
 			disabled={status !== 'answering'}
-			aria-pressed={selected === option}
+			aria-pressed={mine}
 			onclick={() => choose(option)}
 		>
 			{option}
 		</button>
 	{/each}
 </div>
-
-<style>
-	.options {
-		display: grid;
-		gap: 12px;
-		margin-top: 20px;
-	}
-</style>

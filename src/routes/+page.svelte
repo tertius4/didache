@@ -6,22 +6,23 @@
 	import type { IllustrationKey } from '#lib/components/illustrations/keys.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
 	import { track } from '#lib/analytics.ts';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	const slides: { art: IllustrationKey; title: string; body: string }[] = [
 		{
 			art: 'ark',
-			title: 'Learn the Bible, one bite at a time',
-			body: 'Unilogos teaches the stories and truths of Scripture in short, playful lessons. Just a few minutes a day.'
+			title: 'Walk through the story of Scripture',
+			body: 'Unilogos is a journey through the Bible, one stop at a time: a short narrated story, then a few questions to help it stay with you. Just a few minutes a day.'
 		},
 		{
 			art: 'scroll',
 			title: 'Every answer rooted in Scripture',
-			body: 'Each lesson tells part of a Bible story, then helps it stick with quick exercises. Every question points you back to the verse.'
+			body: 'Each lesson opens with a short video of the Bible story, then quick exercises. Every question points you back to the verse.'
 		},
 		{
 			art: 'rainbow',
 			title: 'Grounded in Reformed teaching',
-			body: 'Want to go deeper? Tap “Learn more” to see what the story teaches about God, grace and the gospel, guided by the historic Reformed confessions.'
+			body: 'Want to go deeper? Tap “Go deeper” to see what the story teaches about God, grace and the gospel, guided by the historic Reformed confessions.'
 		}
 	];
 
@@ -44,124 +45,41 @@
 	<title>Unilogos: learn the Bible</title>
 </svelte:head>
 
-<main class="page intro">
-	<div class="top">
-		<span class="logo">Unilogos</span>
+<main class="flex flex-1 flex-col gap-5 px-5 pt-4">
+	<div class="flex items-center justify-between">
+		<span class="font-display text-2xl font-semibold text-rubric">Unilogos</span>
 		{#if !last}
-			<button type="button" class="skip" onclick={() => finish(true)}>Skip</button>
+			<Button variant="quiet" class="w-auto! px-2!" onclick={() => finish(true)}>Skip</Button>
 		{/if}
 	</div>
 
 	{#key index}
-		<div class="slide">
-			<div class="art"><Illustration name={slide.art} /></div>
-			<h1>{slide.title}</h1>
-			<p>{slide.body}</p>
+		<div class="grid animate-pop-in gap-4 text-center">
+			<div class="overflow-hidden rounded-lg border border-sepia/25 sepia-[.2]">
+				<Illustration name={slide.art} />
+			</div>
+			<h1 class="text-4xl">{slide.title}</h1>
+			<p class="text-lg text-sepia">{slide.body}</p>
 		</div>
 	{/key}
 
-	<div class="dots" aria-hidden="true">
+	<div class="flex justify-center gap-2" aria-hidden="true">
 		{#each slides as s, i (s.title)}
-			<span class:active={i === index}></span>
+			<span
+				class={[
+					'h-2 rounded-full transition-all duration-200',
+					i === index ? 'w-7 bg-rubric' : 'w-2 bg-sepia/30'
+				]}
+			></span>
 		{/each}
 	</div>
 
-	<div class="actions">
+	<div class="mt-auto grid gap-3.5 pb-[calc(16px+env(safe-area-inset-bottom))] text-center">
 		{#if last}
-			<button type="button" class="btn" onclick={() => finish(false)}>Get started</button>
+			<Button onclick={() => finish(false)}>Begin the journey</Button>
 		{:else}
-			<button type="button" class="btn" onclick={() => index++}>Next</button>
+			<Button onclick={() => index++}>Next</Button>
 		{/if}
-		<a class="about" href={resolve('/about')}>About Unilogos</a>
+		<a class="text-sm" href={resolve('/about')}>About Unilogos</a>
 	</div>
 </main>
-
-<style>
-	.intro {
-		display: flex;
-		flex-direction: column;
-		flex: 1;
-		gap: 20px;
-	}
-
-	.top {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.logo {
-		font-weight: 900;
-		font-size: 22px;
-		color: var(--primary-shadow);
-	}
-
-	.skip {
-		border: none;
-		background: none;
-		font-weight: 800;
-		color: var(--muted);
-		cursor: pointer;
-	}
-
-	.slide {
-		display: grid;
-		gap: 14px;
-		text-align: center;
-		animation: fade 300ms ease;
-	}
-
-	.art {
-		border-radius: 24px;
-		overflow: hidden;
-	}
-
-	h1 {
-		font-size: 28px;
-	}
-
-	.slide p {
-		font-size: 18px;
-		color: var(--muted);
-	}
-
-	.dots {
-		display: flex;
-		justify-content: center;
-		gap: 8px;
-	}
-
-	.dots span {
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		background: var(--locked);
-		transition: width 200ms ease;
-	}
-
-	.dots span.active {
-		width: 28px;
-		border-radius: 999px;
-		background: var(--primary);
-	}
-
-	.actions {
-		display: grid;
-		gap: 14px;
-		margin-top: auto;
-		padding-bottom: env(safe-area-inset-bottom);
-		text-align: center;
-	}
-
-	.about {
-		font-weight: 700;
-		font-size: 15px;
-	}
-
-	@keyframes fade {
-		from {
-			opacity: 0;
-			transform: translateX(16px);
-		}
-	}
-</style>

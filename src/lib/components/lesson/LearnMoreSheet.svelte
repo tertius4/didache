@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { LearnMore } from '#lib/content/types.ts';
+	import Button from '#lib/components/ui/Button.svelte';
 	import VerseQuote from './VerseQuote.svelte';
 
 	let { content, onclose }: { content: LearnMore | null; onclose: () => void } = $props();
@@ -15,15 +16,16 @@
 
 <dialog
 	bind:this={dialog}
+	class="mx-auto mt-auto mb-0 max-h-[85dvh] w-full max-w-content rounded-t-2xl bg-vellum paper-grain text-ink backdrop:bg-ink/45 open:animate-slide-up"
 	{onclose}
 	onclick={(e) => e.target === dialog && dialog.close()}
 	aria-labelledby="learn-more-title"
 >
 	{#if content}
-		<div class="sheet">
-			<div class="grabber" aria-hidden="true"></div>
-			<p class="eyebrow">Learn more</p>
-			<h2 id="learn-more-title">{content.title}</h2>
+		<div class="grid gap-3.5 px-5 pt-3 pb-[calc(20px+env(safe-area-inset-bottom))]">
+			<div class="h-1 w-11 justify-self-center rounded-full bg-sepia/30" aria-hidden="true"></div>
+			<p class="text-sm small-caps text-gold">Learn more</p>
+			<h2 id="learn-more-title" class="-mt-2 text-3xl">{content.title}</h2>
 			{#each content.paragraphs as paragraph, i (i)}
 				<p>{paragraph}</p>
 			{/each}
@@ -31,72 +33,12 @@
 				<VerseQuote {verse} />
 			{/each}
 			{#if content.confessions?.length}
-				<p class="confessions">
+				<p class="text-sm text-sepia">
 					<strong>Read further:</strong>
 					{content.confessions.join(' · ')}
 				</p>
 			{/if}
-			<button type="button" class="btn sky" onclick={() => dialog?.close()}>Got it</button>
+			<Button onclick={() => dialog?.close()}>Got it</Button>
 		</div>
 	{/if}
 </dialog>
-
-<style>
-	dialog {
-		width: 100%;
-		max-width: var(--content-width);
-		max-height: 85dvh;
-		margin: auto auto 0;
-		padding: 0;
-		border: none;
-		border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-		background: var(--surface);
-		color: var(--text);
-	}
-
-	dialog[open] {
-		animation: slide-up 240ms ease;
-	}
-
-	dialog::backdrop {
-		background: rgb(43 38 51 / 0.45);
-	}
-
-	.sheet {
-		display: grid;
-		gap: 14px;
-		padding: 12px 20px calc(20px + env(safe-area-inset-bottom));
-	}
-
-	.grabber {
-		justify-self: center;
-		width: 44px;
-		height: 5px;
-		border-radius: 999px;
-		background: var(--border-strong);
-	}
-
-	.eyebrow {
-		font-size: 13px;
-		font-weight: 900;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--sun-shadow);
-	}
-
-	h2 {
-		font-size: 22px;
-		margin-top: -8px;
-	}
-
-	.confessions {
-		font-size: 14px;
-		color: var(--muted);
-	}
-
-	@keyframes slide-up {
-		from {
-			transform: translateY(100%);
-		}
-	}
-</style>

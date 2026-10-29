@@ -9,6 +9,15 @@ export function findSection(sectionId: string): Section | undefined {
 	return sections.find((s) => s.id === sectionId);
 }
 
+export function findUnit(
+	sectionId: string,
+	unitId: string
+): { section: Section; unit: Unit } | undefined {
+	const section = findSection(sectionId);
+	const unit = section?.units.find((u) => u.id === unitId);
+	return section && unit ? { section, unit } : undefined;
+}
+
 /** Globally unique, stable key for a lesson; used for progress and analytics. */
 export function lessonKey(sectionId: string, unitId: string, lessonId: string): string {
 	return `${sectionId}/${unitId}/${lessonId}`;
@@ -27,10 +36,11 @@ export function findLesson(
 	unitId: string,
 	lessonId: string
 ): LessonLocation | undefined {
-	const section = findSection(sectionId);
-	const unit = section?.units.find((u) => u.id === unitId);
-	const index = unit?.lessons.findIndex((l) => l.id === lessonId) ?? -1;
-	if (!section || !unit || index < 0) return undefined;
+	const found = findUnit(sectionId, unitId);
+	if (!found) return undefined;
+	const { section, unit } = found;
+	const index = unit.lessons.findIndex((l) => l.id === lessonId);
+	if (index < 0) return undefined;
 	return {
 		section,
 		unit,

@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { progress } from '#lib/progress/store.svelte.ts';
+	import Button from '#lib/components/ui/Button.svelte';
 
 	function resetProgress() {
 		if (!confirm('Reset all your lesson progress on this device?')) return;
@@ -14,16 +15,18 @@
 	<title>About · Unilogos</title>
 </svelte:head>
 
-<main class="page about">
-	<a class="back" href={resolve('/learn')}>← Back to lessons</a>
-	<h1>About Unilogos</h1>
+<main class="grid gap-6 px-5 pt-4 pb-10 [&_h2]:mb-1.5 [&_h2]:text-2xl">
+	<a class="text-sm text-sepia no-underline hover:text-ink" href={resolve('/learn')}
+		>← Back to lessons</a
+	>
+	<h1 class="text-4xl">About Unilogos</h1>
 
 	<section>
 		<h2>What is this?</h2>
 		<p>
-			Unilogos is a playful way to learn the Bible: short lessons that tell the story, then help it
-			stick with quick exercises. This is an early demo with one story, Noah and the Flood. If you
-			enjoy it, let us know and join the waitlist for more.
+			Unilogos is a story-first way to learn the Bible: short narrated lessons that tell the story,
+			then help it stick with a few questions. This is an early demo with one story, Noah and the
+			Flood. If you enjoy it, let us know and join the waitlist for more.
 		</p>
 	</section>
 
@@ -40,7 +43,7 @@
 
 	<section>
 		<h2>Scripture</h2>
-		<p class="small">
+		<p class="text-sm text-sepia">
 			Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®),
 			copyright © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by
 			permission. All rights reserved.
@@ -57,32 +60,5 @@
 		</p>
 	</section>
 
-	<button type="button" class="btn ghost" onclick={resetProgress}>Reset my progress</button>
+	<Button variant="ghost" onclick={resetProgress}>Reset my progress</Button>
 </main>
-
-<style>
-	.about {
-		display: grid;
-		gap: 20px;
-		padding-bottom: 40px;
-	}
-
-	.back {
-		font-weight: 800;
-		text-decoration: none;
-	}
-
-	h1 {
-		font-size: 28px;
-	}
-
-	h2 {
-		font-size: 18px;
-		margin-bottom: 6px;
-	}
-
-	.small {
-		font-size: 14px;
-		color: var(--muted);
-	}
-</style>
