@@ -89,12 +89,28 @@ export interface AnswerMap {
 export type AnswerFor<E extends Exercise> = AnswerMap[E['type']];
 export type AnyAnswer = AnswerMap[ExerciseType];
 
+/**
+ * A lesson's intro video (vertical 9:16). Files live in
+ * `static/media/<section>/<unit>/<lesson>/`, so paths start with `/media/...`.
+ */
+export interface LessonVideo {
+	src: string;
+	poster?: string;
+	/** WebVTT captions file. */
+	captions?: string;
+	/** Display length, e.g. "2:10". */
+	duration?: string;
+}
+
 export interface Lesson {
 	id: string;
 	title: string;
 	/** Bible passage covered, e.g. "Genesis 6:1–7". */
 	passage: string;
 	illustration: IllustrationKey;
+	/** Intro video; a placeholder is shown until one is added. */
+	video?: LessonVideo;
+	/** Story as text: shown via "Read the story instead" and as the source of "Learn more". */
 	story: StoryCard[];
 	exercises: Exercise[];
 }

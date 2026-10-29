@@ -4,7 +4,9 @@
 	let { verse }: { verse: Verse } = $props();
 </script>
 
-<blockquote class="verse">
+<blockquote class="border-l-2 border-gold py-1 pl-4 font-display text-lg text-ink italic">
 	“{verse.text}”
-	<cite>{verse.ref} (ESV)</cite>
+	<cite class="mt-1 block font-sans text-sm small-caps text-sepia not-italic">
+		{verse.ref} (ESV)
+	</cite>
 </blockquote>

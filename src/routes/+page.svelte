@@ -80,7 +80,7 @@
 	.intro {
 		display: flex;
 		flex-direction: column;
-		min-height: 100dvh;
+		flex: 1;
 		gap: 20px;
 	}
 

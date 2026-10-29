@@ -38,14 +38,14 @@ Each prompt file lists a **motion** for every image (`zoom in`, `zoom out`, `pan
 
 ### Palette
 
-The palette is anchored to the app's colours, so the images sit naturally on the app's cream background.
+The palette is anchored to the app's scroll theme (aged vellum, sepia ink, gold leaf), so the images sit naturally on the app's vellum background. Keep colours slightly muted and warm; avoid pure white and neon saturation.
 
 | Role               | Colour          | Hex                                    |
 | ------------------ | --------------- | -------------------------------------- |
-| Paper / light      | warm cream      | `#FFFAF0`                              |
+| Paper / light      | warm vellum     | `#F5EBD3`                              |
 | Sky                | soft sky blue   | `#3AA6E8` (painted softer and lighter) |
 | Sun / glow / grace | sun yellow      | `#FFC533`                              |
-| Growth / land      | leaf green      | `#2FB36B` (muted toward olive)         |
+| Growth / land      | olive green     | `#5E6B3A` (painted lighter for fields) |
 | Wood / ark / earth | warm wood brown | `#A8693C`                              |
 | Shadow             | blue-violet     | about `#5B5A8A`                        |
 

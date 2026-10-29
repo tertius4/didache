@@ -91,10 +91,6 @@
 		color: var(--text);
 	}
 
-	.banner :global(.verse) {
-		color: var(--text);
-	}
-
 	.retry-note {
 		font-size: 14px;
 		font-weight: 700;

@@ -32,6 +32,9 @@ export function initAnalytics(): void {
 export type AnalyticsEvent =
 	| 'intro_completed'
 	| 'lesson_started'
+	| 'video_started'
+	| 'video_completed'
+	| 'story_opened'
 	| 'story_card_viewed'
 	| 'learn_more_opened'
 	| 'exercise_answered'

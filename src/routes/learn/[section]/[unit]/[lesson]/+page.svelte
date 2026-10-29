@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { progress } from '#lib/progress/store.svelte.ts';
 	import LessonPlayer from '#lib/components/lesson/LessonPlayer.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -19,26 +20,10 @@
 		<LessonPlayer location={loc} />
 	{/key}
 {:else}
-	<main class="page locked">
-		<p class="icon" aria-hidden="true">🔒</p>
-		<h1>This lesson is locked</h1>
+	<main class="grid flex-1 place-content-center gap-4 px-5 text-center">
+		<p class="text-6xl" aria-hidden="true">🔒</p>
+		<h1 class="font-display text-3xl font-semibold">This lesson is locked</h1>
 		<p>Finish the lessons before it to unlock “{loc.lesson.title}”.</p>
-		<a class="btn" href={resolve('/learn/[section]', { section: loc.section.id })}
-			>Back to lessons</a
-		>
+		<Button href={resolve('/learn/[section]', { section: loc.section.id })}>Back to lessons</Button>
 	</main>
 {/if}
-
-<style>
-	.locked {
-		display: grid;
-		gap: 16px;
-		place-content: center;
-		min-height: 100dvh;
-		text-align: center;
-	}
-
-	.icon {
-		font-size: 56px;
-	}
-</style>

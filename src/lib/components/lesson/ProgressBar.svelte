@@ -4,43 +4,15 @@
 </script>
 
 <div
-	class="track"
+	class="h-2 flex-1 overflow-hidden rounded-full bg-sepia/15"
 	role="progressbar"
 	aria-label={label}
 	aria-valuenow={pct}
 	aria-valuemin={0}
 	aria-valuemax={100}
 >
-	<div class="fill" style:width="{pct}%"></div>
+	<div
+		class="h-full min-w-2 rounded-full bg-rubric transition-[width] duration-300"
+		style:width="{pct}%"
+	></div>
 </div>
-
-<style>
-	.track {
-		flex: 1;
-		height: 16px;
-		border-radius: 999px;
-		background: var(--locked);
-		overflow: hidden;
-	}
-
-	.fill {
-		height: 100%;
-		min-width: 16px;
-		border-radius: 999px;
-		background: var(--primary);
-		box-shadow: inset 0 -4px 0 rgb(0 0 0 / 0.12);
-		transition: width 300ms ease;
-		position: relative;
-	}
-
-	.fill::after {
-		content: '';
-		position: absolute;
-		top: 4px;
-		left: 8px;
-		right: 8px;
-		height: 4px;
-		border-radius: 999px;
-		background: rgb(255 255 255 / 0.35);
-	}
-</style>

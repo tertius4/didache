@@ -1,14 +1,16 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { onMount } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import type { LessonLocation } from '#lib/content/index.ts';
 	import type { AnyAnswer, LearnMore } from '#lib/content/types.ts';
 	import { LessonSession } from '#lib/lesson/engine.svelte.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
 	import { track } from '#lib/analytics.ts';
 	import ExerciseView from '#lib/components/exercises/ExerciseView.svelte';
+	import Button from '#lib/components/ui/Button.svelte';
 	import ProgressBar from './ProgressBar.svelte';
 	import StoryCard from './StoryCard.svelte';
+	import VideoIntro from './VideoIntro.svelte';
 	import LearnMoreSheet from './LearnMoreSheet.svelte';
 	import FeedbackBanner from './FeedbackBanner.svelte';
 	import LessonComplete from './LessonComplete.svelte';
@@ -22,7 +24,7 @@
 	const session = new LessonSession(lesson.exercises);
 	const startedAt = Date.now();
 
-	let phase = $state<'story' | 'exercises' | 'complete'>('story');
+	let phase = $state<'video' | 'story' | 'exercises' | 'complete'>('video');
 	let cardIndex = $state(0);
 	let learnMore = $state<LearnMore | null>(null);
 	let answer = $state<AnyAnswer | null>(null);
@@ -48,14 +50,29 @@
 		if (phase === 'story') track('story_card_viewed', { ...ids, card: card.id });
 	});
 
-	function openLearnMore() {
-		if (!card.learnMore) return;
-		learnMore = card.learnMore;
-		track('learn_more_opened', { ...ids, card: card.id });
+	function openLearnMore(content: LearnMore, cardId: string) {
+		learnMore = content;
+		track('learn_more_opened', { ...ids, card: cardId });
+	}
+
+	function goTo(next: typeof phase) {
+		phase = next;
+		window.scrollTo({ top: 0 });
+	}
+
+	function readStory() {
+		cardIndex = 0;
+		goTo('story');
+		track('story_opened', ids);
+	}
+
+	function prevCard() {
+		if (cardIndex === 0) goTo('video');
+		else cardIndex--;
 	}
 
 	function nextCard() {
-		if (lastCard) phase = 'exercises';
+		if (lastCard) goTo('exercises');
 		else cardIndex++;
 		window.scrollTo({ top: 0 });
 	}
@@ -95,30 +112,49 @@
 	}
 </script>
 
-<div class="player">
+<div class="flex-1">
 	{#if phase !== 'complete'}
-		<header class="top">
+		<header
+			class="sticky top-0 z-5 flex items-center gap-3.5 bg-vellum px-4 pt-[calc(12px+env(safe-area-inset-top))] pb-3"
+		>
 			<a
-				class="close"
+				class="p-1 text-xl text-sepia no-underline hover:text-ink"
 				href={resolve('/learn/[section]', { section: section.id })}
 				aria-label="Close lesson">✕</a
 			>
-			<ProgressBar
-				value={barValue}
-				label={phase === 'story' ? 'Story progress' : 'Exercise progress'}
-			/>
+			{#if phase === 'video'}
+				<p class="flex-1 truncate text-sm text-sepia">{unit.title}</p>
+			{:else}
+				<ProgressBar
+					value={barValue}
+					label={phase === 'story' ? 'Story progress' : 'Exercise progress'}
+				/>
+			{/if}
 		</header>
 	{/if}
 
-	<main class="page content">
-		{#if phase === 'story'}
-			<p class="eyebrow">{lesson.title} · {lesson.passage}</p>
+	<main class="px-5 pt-2 pb-36 [&_h2]:text-[22px]">
+		{#if phase === 'video'}
+			<VideoIntro
+				{lesson}
+				onplay={() => track('video_started', ids)}
+				onended={() => track('video_completed', ids)}
+				onlearnmore={openLearnMore}
+				onread={readStory}
+			/>
+		{:else if phase === 'story'}
+			<p class="mb-3 text-sm small-caps tracking-wide text-sepia">
+				{lesson.title} · {lesson.passage}
+			</p>
 			{#key cardIndex}
-				<StoryCard {card} onlearnmore={openLearnMore} />
+				<StoryCard
+					{card}
+					onlearnmore={() => card.learnMore && openLearnMore(card.learnMore, card.id)}
+				/>
 			{/key}
 		{:else if phase === 'exercises' && session.current}
 			{#if session.isRetry}
-				<p class="eyebrow retry">↻ Let’s try this one again</p>
+				<p class="mb-3 text-sm font-semibold text-rubric">↻ Let’s try this one again</p>
 			{/if}
 			{#key session.position}
 				<ExerciseView
@@ -140,102 +176,40 @@
 		{/if}
 	</main>
 
-	{#if phase === 'story'}
-		<footer class="actions">
-			<div class="inner two">
-				<button
-					type="button"
-					class="btn ghost"
-					disabled={cardIndex === 0}
-					onclick={() => cardIndex--}
-				>
-					Back
-				</button>
-				<button type="button" class="btn" onclick={nextCard}>
-					{lastCard ? 'Start practice' : 'Next'}
-				</button>
-			</div>
-		</footer>
+	{#if phase === 'video'}
+		{@render footer(videoActions)}
+	{:else if phase === 'story'}
+		{@render footer(storyActions)}
 	{:else if phase === 'exercises' && session.current}
 		{#if session.status === 'answering'}
-			<footer class="actions">
-				<div class="inner">
-					<button type="button" class="btn" disabled={answer === null} onclick={check}>
-						Check
-					</button>
-				</div>
-			</footer>
+			{@render footer(checkAction)}
 		{:else}
 			<FeedbackBanner exercise={session.current} correct={lastCorrect} oncontinue={continueOn} />
 		{/if}
 	{/if}
 </div>
 
+{#snippet footer(actions: Snippet)}
+	<footer
+		class="fixed bottom-0 left-1/2 w-full max-w-content -translate-x-1/2 border-t border-sepia/20 bg-vellum px-5 pt-3.5 pb-[calc(14px+env(safe-area-inset-bottom))]"
+	>
+		{@render actions()}
+	</footer>
+{/snippet}
+
+{#snippet videoActions()}
+	<Button onclick={() => goTo('exercises')}>Start practice</Button>
+{/snippet}
+
+{#snippet storyActions()}
+	<div class="grid grid-cols-[1fr_2fr] gap-3">
+		<Button variant="ghost" onclick={prevCard}>Back</Button>
+		<Button onclick={nextCard}>{lastCard ? 'Start practice' : 'Next'}</Button>
+	</div>
+{/snippet}
+
+{#snippet checkAction()}
+	<Button disabled={answer === null} onclick={check}>Check</Button>
+{/snippet}
+
 <LearnMoreSheet content={learnMore} onclose={() => (learnMore = null)} />
-
-<style>
-	.player {
-		min-height: 100dvh;
-	}
-
-	.top {
-		position: sticky;
-		top: 0;
-		z-index: 5;
-		display: flex;
-		align-items: center;
-		gap: 14px;
-		max-width: var(--content-width);
-		margin: 0 auto;
-		padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
-		background: var(--bg);
-	}
-
-	.close {
-		font-size: 22px;
-		font-weight: 900;
-		color: var(--muted);
-		text-decoration: none;
-		padding: 4px;
-	}
-
-	.content {
-		padding-bottom: 140px;
-	}
-
-	.eyebrow {
-		margin-bottom: 12px;
-		font-size: 13px;
-		font-weight: 900;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		color: var(--muted);
-	}
-
-	.eyebrow.retry {
-		color: var(--sun-shadow);
-	}
-
-	.content :global(h2) {
-		font-size: 22px;
-	}
-
-	.actions {
-		position: fixed;
-		inset: auto 0 0 0;
-		padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
-		border-top: 2px solid var(--border);
-		background: var(--bg);
-	}
-
-	.inner {
-		max-width: var(--content-width);
-		margin: 0 auto;
-	}
-
-	.inner.two {
-		display: grid;
-		grid-template-columns: 1fr 2fr;
-		gap: 12px;
-	}
-</style>
