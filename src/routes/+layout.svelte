@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '@fontsource-variable/nunito';
+	import '@fontsource-variable/eb-garamond';
+	import '@fontsource-variable/inter';
 	import '../app.css';
 	import favicon from '#lib/assets/favicon.svg';
 	import { onMount } from 'svelte';

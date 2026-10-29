@@ -1,3 +1,56 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens for the scroll theme: aged papyrus and vellum, iron-gall ink,
+ * red rubrics for emphasis and gold leaf for milestones.
+ */
+@theme {
+	--color-papyrus: #eadbb8;
+	--color-vellum: #f5ebd3;
+	--color-vellum-deep: #e4d2aa;
+	--color-ink: #2e2117;
+	--color-sepia: #7a5c3e;
+	--color-rubric: #9e2b1f;
+	--color-rubric-soft: #f0d9c8;
+	--color-gold: #b88a2e;
+	--color-gold-soft: #efdfb4;
+	--color-lapis: #2f4f7a;
+	--color-olive: #5e6b3a;
+	--color-olive-soft: #e3e2c4;
+
+	--font-sans: 'Inter Variable', system-ui, sans-serif;
+	--font-display: 'EB Garamond Variable', Georgia, serif;
+
+	--container-content: 520px;
+
+	--animate-pop-in: pop-in 260ms ease;
+	--animate-slide-up: slide-up 220ms ease;
+
+	@keyframes pop-in {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
+	}
+
+	@keyframes slide-up {
+		from {
+			transform: translateY(100%);
+		}
+	}
+}
+
+@layer base {
+	:focus-visible {
+		outline: 3px solid var(--color-lapis);
+		outline-offset: 2px;
+	}
+}
+
+/*
+ * Legacy styles below. They stay until each screen is converted to Tailwind
+ * utilities, then get deleted.
+ */
 :root {
 	--bg: #fffaf0;
 	--surface: #ffffff;

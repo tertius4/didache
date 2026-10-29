@@ -72,6 +72,7 @@
 		gap: 8px;
 		margin: 20px 0 0;
 		padding: 0 0 0 28px;
+		list-style: decimal;
 		font-weight: 800;
 		color: var(--muted);
 	}
