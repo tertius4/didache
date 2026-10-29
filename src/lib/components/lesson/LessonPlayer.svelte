@@ -39,7 +39,6 @@
 	);
 
 	onMount(() => {
-		track('lesson_started', ids);
 		return () => {
 			if (phase !== 'complete') {
 				track('lesson_abandoned', { ...ids, phase, solved: session.solved, total: session.total });

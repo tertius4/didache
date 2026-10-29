@@ -3,6 +3,7 @@
 	import type { Unit } from '#lib/content/types.ts';
 	import { lessonKey } from '#lib/content/index.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
+	import { track } from '#lib/analytics.ts';
 
 	let { sectionId, unit }: { sectionId: string; unit: Unit } = $props();
 
@@ -31,6 +32,12 @@
 					: undefined}
 				aria-current={current ? 'step' : undefined}
 				aria-disabled={unlocked ? undefined : 'true'}
+				role={unlocked ? 'link' : undefined}
+				onclick={() => {
+					if (unlocked) {
+						track('lesson_started', { section: sectionId, unit: unit.id, lesson: lesson.id });
+					}
+				}}
 			>
 				<span
 					class={[

@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { lessonKey } from '#lib/content/index.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
+	import { track } from '#lib/analytics.ts';
 	import Illustration from '#lib/components/illustrations/Illustration.svelte';
 	import ChapterList from '#lib/components/path/ChapterList.svelte';
 	import ActionBar from '#lib/components/ui/ActionBar.svelte';
@@ -53,6 +54,8 @@
 				unit: unit.id,
 				lesson: current.id
 			})}
+			onclick={() =>
+				track('lesson_started', { section: section.id, unit: unit.id, lesson: current.id })}
 		>
 			{done === 0 ? 'Begin' : 'Continue'}: {current.title}
 		</Button>
