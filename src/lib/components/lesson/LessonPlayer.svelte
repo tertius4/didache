@@ -113,7 +113,7 @@
 </script>
 
 <div class="flex-1">
-	{#if phase !== 'complete'}
+	{#if phase === 'story' || phase === 'exercises'}
 		<header
 			class="sticky top-0 z-5 flex items-center gap-3.5 bg-vellum px-4 pt-[calc(12px+env(safe-area-inset-top))] pb-3"
 		>
@@ -122,14 +122,10 @@
 				href={resolve('/learn/[section]/[unit]', { section: section.id, unit: unit.id })}
 				aria-label="Close lesson">✕</a
 			>
-			{#if phase === 'video'}
-				<p class="flex-1 truncate text-sm text-sepia">{unit.title}</p>
-			{:else}
-				<ProgressBar
-					value={barValue}
-					label={phase === 'story' ? 'Story progress' : 'Exercise progress'}
-				/>
-			{/if}
+			<ProgressBar
+				value={barValue}
+				label={phase === 'story' ? 'Story progress' : 'Exercise progress'}
+			/>
 		</header>
 	{/if}
 
@@ -137,10 +133,13 @@
 		{#if phase === 'video'}
 			<VideoIntro
 				{lesson}
+				section={section.id}
+				unit={unit.id}
 				onplay={() => track('video_started', ids)}
 				onended={() => track('video_completed', ids)}
 				onlearnmore={openLearnMore}
 				onread={readStory}
+				onpractice={() => goTo('exercises')}
 			/>
 		{:else if phase === 'story'}
 			<p class="mb-3 text-sm small-caps tracking-wide text-sepia">
@@ -175,11 +174,7 @@
 		{/if}
 	</main>
 
-	{#if phase === 'video'}
-		<ActionBar>
-			<Button onclick={() => goTo('exercises')}>Start practice</Button>
-		</ActionBar>
-	{:else if phase === 'story'}
+	{#if phase === 'story'}
 		<ActionBar>
 			<div class="grid grid-cols-[1fr_2fr] gap-3">
 				<Button variant="ghost" onclick={prevCard}>Back</Button>

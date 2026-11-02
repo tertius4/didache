@@ -23,7 +23,7 @@ No named characters appear in this lesson, so no character lines are needed.
 **Narration:** "The LORD saw that the wickedness of man was great in the earth, and that every intention of the thoughts of his heart was only evil continually."
 **Caption ref:** Genesis 6:5
 
-**Shows:** On a flat rooftop, two men embrace like old friends. The man on the left is seen from behind. The man facing us looks over his friend's shoulder with a cold, scheming face, and his hand, held low and out of his friend's sight, grips a rough stone. Behind them, the town spreads out with lamps in its windows.
+**Shows:** Two men greet each other with a hug. The man on the left has his back to us. The man facing us looks over his friend's shoulder with a sly, devious smile, and behind his friend's back he holds a knife.
 
 ### 4. `the-lord-was-grieved`: Judgment
 
@@ -43,4 +43,4 @@ No named characters appear in this lesson, so no character lines are needed.
 - Make image 1 first and use it as the **style reference** for images 2–5, so the valley, the houses and the paper texture stay consistent.
 - Images 4 and 5 both show the same town below, so they read as the same place. If the generator supports it, use image 4 as an image reference for 5.
 - Image 4 must have **no person** in it. If the generator adds a potter, a hand, a face in the sky or a glowing figure, generate it again: we don't picture God. The jar stands for what God made with care (Genesis 2:7: he formed man from the dust), so it has to be clearly beautiful as well as clearly broken.
-- Image 3 depends on one contrast: the warm embrace against the cold face and the hidden stone. If the generator turns the face into a smile, hides the hand, or puts the stone in a raised hand, generate it again. Don't accept a softer version.
+- Image 3 shows the evil inside a man's heart: he hasn't done anything yet, but he is planning it. The scowl, the stone in his fist and the neighbour's house he is staring at must all be clear. If he looks merely sad or tired, or throws the stone, regenerate it.

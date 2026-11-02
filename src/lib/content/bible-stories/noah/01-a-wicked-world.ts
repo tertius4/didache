@@ -34,6 +34,11 @@ export const lesson: Lesson = {
 	title: 'A wicked world',
 	passage: 'Genesis 6:1–7',
 	illustration: 'world',
+	video: {
+		src: '/media/bible-stories/noah/a-wicked-world/video.mp4',
+		poster: '/media/bible-stories/noah/a-wicked-world/poster.jpg',
+		duration: '0:39'
+	},
 	story: [
 		{
 			id: 'people-multiplied',
