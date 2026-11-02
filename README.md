@@ -1,4 +1,4 @@
-# Unilogos
+# Didache
 
 Short, story-first lessons for learning the Bible from a Reformed perspective. This is a demo with one unit (Noah and the Flood, six lessons), no accounts, and progress saved on the device.
 
