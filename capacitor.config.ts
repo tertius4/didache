@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-	appId: 'com.unilogos.app',
-	appName: 'Unilogos',
+	appId: 'za.co.didache',
+	appName: 'Didache',
 	webDir: 'build'
 };
 

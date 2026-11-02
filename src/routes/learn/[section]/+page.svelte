@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-	<title>{section.title} · Unilogos</title>
+	<title>{section.title} · Didache</title>
 </svelte:head>
 
 <main class="px-5 pt-4 pb-10">

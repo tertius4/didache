@@ -3,7 +3,6 @@
 	import type { Section } from '#lib/content/types.ts';
 	import { lessonKey } from '#lib/content/index.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
-	import Illustration from '#lib/components/illustrations/Illustration.svelte';
 
 	let { section }: { section: Section } = $props();
 
@@ -82,9 +81,7 @@
 								!complete && !current && 'border-sepia/40 opacity-75 sepia-[.4]'
 							]}
 						>
-							<span class="block h-full w-[150%] -translate-x-1/6">
-								<Illustration name={unit.illustration} />
-							</span>
+							<img class="size-full object-cover" src={unit.illustration} alt="" />
 						</span>
 						{#if complete}
 							<span

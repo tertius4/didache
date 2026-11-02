@@ -39,8 +39,18 @@ describe('Progress', () => {
 
 	it('ignores corrupt saved data', () => {
 		const storage = memoryStorage();
-		storage.set('unilogos:progress:v1', '{not json');
+		storage.set('didache:progress:v1', '{not json');
 		const p = new Progress(storage);
 		expect(p.completed).toEqual([]);
+	});
+
+	it('migrates progress saved under the old Didache key', () => {
+		const storage = memoryStorage();
+		storage.set('didache:progress:v1', JSON.stringify({ completed: ['a'], seenIntro: true }));
+		const p = new Progress(storage);
+		expect(p.completed).toEqual(['a']);
+		expect(p.seenIntro).toBe(true);
+		expect(storage.get('didache:progress:v1')).toBeNull();
+		expect(storage.get('didache:progress:v1')).not.toBeNull();
 	});
 });

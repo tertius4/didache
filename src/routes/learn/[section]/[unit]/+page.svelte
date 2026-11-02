@@ -3,7 +3,6 @@
 	import { lessonKey } from '#lib/content/index.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
 	import { track } from '#lib/analytics.ts';
-	import Illustration from '#lib/components/illustrations/Illustration.svelte';
 	import ChapterList from '#lib/components/path/ChapterList.svelte';
 	import ActionBar from '#lib/components/ui/ActionBar.svelte';
 	import Button from '#lib/components/ui/Button.svelte';
@@ -22,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<title>{unit.title} · Unilogos</title>
+	<title>{unit.title} · Didache</title>
 </svelte:head>
 
 <main class="px-5 pt-4 pb-36">
@@ -33,7 +32,7 @@
 
 	<header class="mt-4 grid gap-3 text-center">
 		<div class="mx-auto w-3/5 overflow-hidden rounded-lg border border-sepia/25 sepia-[.2]">
-			<Illustration name={unit.illustration} />
+			<img class="block aspect-square h-auto w-full object-cover" src={unit.illustration} alt="" />
 		</div>
 		<h1 class="text-4xl">{unit.title}</h1>
 		<p class="text-sepia">{unit.description}</p>

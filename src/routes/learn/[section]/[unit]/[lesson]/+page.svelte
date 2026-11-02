@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-	<title>{loc.lesson.title} · Unilogos</title>
+	<title>{loc.lesson.title} · Didache</title>
 </svelte:head>
 
 {#if unlocked}

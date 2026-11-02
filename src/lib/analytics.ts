@@ -25,7 +25,7 @@ export function initAnalytics(): void {
 			api_host: host,
 			capture_pageview: 'history_change',
 			logs: {
-				serviceName: 'unilogos-web',
+				serviceName: 'didache-web',
 				environment: import.meta.env.MODE
 			},
 			capture_exceptions: {

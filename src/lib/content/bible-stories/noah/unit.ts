@@ -10,7 +10,7 @@ export const noah: Unit = {
 	id: 'noah',
 	title: 'Noah and the Flood',
 	description: 'Judgment, grace and a covenant promise. Genesis 6–9.',
-	illustration: 'ark',
+	illustration: '/media/bible-stories/noah/icon.webp',
 	lessons: [
 		aWickedWorld,
 		noahFoundGrace,

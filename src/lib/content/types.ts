@@ -119,7 +119,8 @@ export interface Unit {
 	id: string;
 	title: string;
 	description: string;
-	illustration: IllustrationKey;
+	/** Image path under `static/`, e.g. `/media/bible-stories/noah/icon.webp`. */
+	illustration: string;
 	lessons: Lesson[];
 }
 

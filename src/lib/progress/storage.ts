@@ -21,7 +21,7 @@ export function memoryStorage(): KeyValueStorage {
 export function browserStorage(): KeyValueStorage {
 	try {
 		const ls = globalThis.localStorage;
-		const probe = '__unilogos_probe__';
+		const probe = '__didache_probe__';
 		ls.setItem(probe, '1');
 		ls.removeItem(probe);
 		return {

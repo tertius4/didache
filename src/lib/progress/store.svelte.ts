@@ -2,7 +2,9 @@ import type { Unit } from '#lib/content/types.ts';
 import { lessonKey } from '#lib/content/index.ts';
 import { browserStorage, type KeyValueStorage } from './storage';
 
-const STORAGE_KEY = 'unilogos:progress:v1';
+const STORAGE_KEY = 'didache:progress:v1';
+/** Key used before the rename from Didache; migrated on first load. */
+const LEGACY_STORAGE_KEY = 'didache:progress:v1';
 
 interface Saved {
 	completed: string[];
@@ -58,6 +60,7 @@ export class Progress {
 	}
 
 	#load(): void {
+		this.#migrateLegacy();
 		const raw = this.#storage.get(STORAGE_KEY);
 		if (!raw) return;
 		try {
@@ -67,6 +70,13 @@ export class Progress {
 		} catch {
 			// Corrupt data: start fresh.
 		}
+	}
+
+	#migrateLegacy(): void {
+		const legacy = this.#storage.get(LEGACY_STORAGE_KEY);
+		if (legacy === null) return;
+		if (this.#storage.get(STORAGE_KEY) === null) this.#storage.set(STORAGE_KEY, legacy);
+		this.#storage.remove(LEGACY_STORAGE_KEY);
 	}
 
 	#save(): void {

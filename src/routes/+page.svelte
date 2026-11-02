@@ -2,25 +2,23 @@
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import Illustration from '#lib/components/illustrations/Illustration.svelte';
-	import type { IllustrationKey } from '#lib/components/illustrations/keys.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
 	import { track } from '#lib/analytics.ts';
 	import Button from '#lib/components/ui/Button.svelte';
 
-	const slides: { art: IllustrationKey; title: string; body: string }[] = [
+	const slides: { art: string; title: string; body: string }[] = [
 		{
-			art: 'ark',
+			art: '/media/about/about-story-alive.webp',
 			title: 'Walk through the story of Scripture',
-			body: 'Unilogos is a journey through the Bible, one stop at a time: a short narrated story, then a few questions to help it stay with you. Just a few minutes a day.'
+			body: 'Didache is a journey through the Bible, one stop at a time: a short narrated story, then a few questions to help it stay with you. Just a few minutes a day.'
 		},
 		{
-			art: 'scroll',
+			art: '/media/about/about-faith-handed-down.webp',
 			title: 'Every answer rooted in Scripture',
 			body: 'Each lesson opens with a short video of the Bible story, then quick exercises. Every question points you back to the verse.'
 		},
 		{
-			art: 'rainbow',
+			art: '/media/about/about-safe-at-home.webp',
 			title: 'Grounded in Reformed teaching',
 			body: 'Want to go deeper? Tap “Go deeper” to see what the story teaches about God, grace and the gospel, guided by the historic Reformed confessions.'
 		}
@@ -42,12 +40,12 @@
 </script>
 
 <svelte:head>
-	<title>Unilogos: learn the Bible</title>
+	<title>Didache: learn the Bible</title>
 </svelte:head>
 
 <main class="flex flex-1 flex-col gap-5 px-5 pt-4">
 	<div class="flex items-center justify-between">
-		<span class="font-display text-2xl font-semibold text-rubric">Unilogos</span>
+		<span class="font-display text-2xl font-semibold text-rubric">Didache</span>
 		{#if !last}
 			<Button variant="quiet" class="w-auto! px-2!" onclick={() => finish(true)}>Skip</Button>
 		{/if}
@@ -56,7 +54,7 @@
 	{#key index}
 		<div class="grid animate-pop-in gap-4 text-center">
 			<div class="overflow-hidden rounded-lg border border-sepia/25 sepia-[.2]">
-				<Illustration name={slide.art} />
+				<img class="block aspect-4/3 h-auto w-full object-cover" src={slide.art} alt="" />
 			</div>
 			<h1 class="text-4xl">{slide.title}</h1>
 			<p class="text-lg text-sepia">{slide.body}</p>
@@ -80,6 +78,6 @@
 		{:else}
 			<Button onclick={() => index++}>Next</Button>
 		{/if}
-		<a class="text-sm" href={resolve('/about')}>About Unilogos</a>
+		<a class="text-sm" href={resolve('/about')}>About Didache</a>
 	</div>
 </main>
