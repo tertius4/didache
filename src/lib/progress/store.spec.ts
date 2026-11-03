@@ -44,13 +44,13 @@ describe('Progress', () => {
 		expect(p.completed).toEqual([]);
 	});
 
-	it('migrates progress saved under the old Didache key', () => {
+	it('migrates progress saved under the old Unilogos key', () => {
 		const storage = memoryStorage();
-		storage.set('didache:progress:v1', JSON.stringify({ completed: ['a'], seenIntro: true }));
+		storage.set('unilogos:progress:v1', JSON.stringify({ completed: ['a'], seenIntro: true }));
 		const p = new Progress(storage);
 		expect(p.completed).toEqual(['a']);
 		expect(p.seenIntro).toBe(true);
-		expect(storage.get('didache:progress:v1')).toBeNull();
+		expect(storage.get('unilogos:progress:v1')).toBeNull();
 		expect(storage.get('didache:progress:v1')).not.toBeNull();
 	});
 });

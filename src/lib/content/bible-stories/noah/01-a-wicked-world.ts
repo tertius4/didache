@@ -20,10 +20,6 @@ const rom3_10: Verse = {
 	ref: 'Romans 3:10',
 	text: 'As it is written: “None is righteous, no, not one.”'
 };
-const rom6_23: Verse = {
-	ref: 'Romans 6:23',
-	text: 'For the wages of sin is death, but the free gift of God is eternal life in Christ Jesus our Lord.'
-};
 const pet3_20: Verse = {
 	ref: '1 Peter 3:20',
 	text: '…when God’s patience waited in the days of Noah, while the ark was being prepared…'
@@ -36,47 +32,43 @@ export const lesson: Lesson = {
 	illustration: 'world',
 	video: {
 		src: '/media/bible-stories/noah/a-wicked-world/video.mp4',
-		poster: '/media/bible-stories/noah/a-wicked-world/poster.jpg',
+		poster: '/media/bible-stories/noah/a-wicked-world/poster.webp',
 		duration: '0:39'
 	},
+	// One card per scene of the video script: docs/images/noah/01-a-wicked-world.md
 	story: [
 		{
-			id: 'people-multiplied',
+			id: 'world-filling-up',
 			title: 'A world filling up',
-			body: 'After Adam and Eve sinned, their children spread across the earth. There were more and more people, but sin spread with them.',
-			illustration: 'world'
+			body: 'After Adam and Eve sinned, their children spread across the earth. Families grew, villages grew, and there were more and more people.',
+			image: '/media/bible-stories/noah/a-wicked-world/world-filling-up.webp'
+		},
+		{
+			id: 'sin-spread',
+			title: 'Sin spread too',
+			body: 'But sin spread with them. People grabbed what wasn’t theirs, cheated their neighbours, and turned away anyone in need.',
+			image: '/media/bible-stories/noah/a-wicked-world/sin-spread.webp'
 		},
 		{
 			id: 'only-evil',
 			title: 'Only evil, all the time',
-			body: 'God looked at the world he had made. People weren’t just doing bad things now and then. Their hearts were turned away from him.',
+			body: 'God looked at the world he had made. People weren’t just doing bad things now and then. Every thought of their hearts was turned to evil.',
 			verse: gen6_5,
-			illustration: 'world',
-			learnMore: {
-				title: 'Total depravity',
-				paragraphs: [
-					'Reformed Christians call this “total depravity”. It doesn’t mean people are as bad as they could possibly be. It means sin has reached every part of us: our thoughts, our desires, our choices.',
-					'That’s why we can’t fix ourselves by trying harder. The problem is the heart, and only God can give a new one.'
-				],
-				verses: [rom3_10],
-				confessions: ['Heidelberg Catechism Q&A 5–8', 'Canons of Dort III/IV, Art. 1–3']
-			}
+			image: '/media/bible-stories/noah/a-wicked-world/only-evil.webp'
 		},
 		{
-			id: 'grieved',
+			id: 'the-lord-was-grieved',
 			title: 'The LORD was grieved',
-			body: 'Sin isn’t a small thing to God. It grieved him to his heart, and he said he would bring judgment on the earth.',
+			body: 'Sin isn’t a small thing to God. It grieved him to his heart. He said he would blot out man from the face of the land.',
 			verse: gen6_6,
-			illustration: 'rain',
-			learnMore: {
-				title: 'A holy and patient God',
-				paragraphs: [
-					'God is holy and just, so he can’t ignore sin forever. Judgment is what sin deserves.',
-					'But look at his patience: he gave the world 120 years of warning while the ark was being built. God is slow to anger, even when judgment is coming.'
-				],
-				verses: [rom6_23, pet3_20],
-				confessions: ['Heidelberg Catechism Q&A 10–11']
-			}
+			image: '/media/bible-stories/noah/a-wicked-world/the-lord-was-grieved.webp'
+		},
+		{
+			id: 'one-light',
+			title: 'One light in the dark',
+			body: 'But God is patient. He gave the world a hundred and twenty years of warning. And in that dark world, there was one man who still walked with God.',
+			verse: gen6_3,
+			image: '/media/bible-stories/noah/a-wicked-world/one-light.webp'
 		}
 	],
 	exercises: [

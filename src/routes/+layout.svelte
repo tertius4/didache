@@ -6,11 +6,15 @@
 	import { onMount } from 'svelte';
 	import ScrollSheet from '#lib/components/ui/ScrollSheet.svelte';
 	import { initAnalytics } from '#lib/analytics.ts';
+	import { progress } from '#lib/progress/store.svelte.ts';
 	import type { LayoutProps } from './$types';
 
-	let { children }: LayoutProps = $props();
+	const { children }: LayoutProps = $props();
 
-	onMount(initAnalytics);
+	onMount(() => {
+		progress.load();
+		initAnalytics();
+	});
 </script>
 
 <svelte:head>

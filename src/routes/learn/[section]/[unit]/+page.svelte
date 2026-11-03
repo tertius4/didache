@@ -7,9 +7,11 @@
 	import ActionBar from '#lib/components/ui/ActionBar.svelte';
 	import Button from '#lib/components/ui/Button.svelte';
 	import Ornament from '#lib/components/ui/Ornament.svelte';
+	import Meta from '#lib/components/Meta.svelte';
+	import Icon from '#lib/components/ui/Icon.svelte';
 	import type { PageProps } from './$types';
 
-	let { data }: PageProps = $props();
+	const { data }: PageProps = $props();
 
 	const { section, unit } = $derived(data);
 	const done = $derived(
@@ -20,14 +22,18 @@
 	);
 </script>
 
-<svelte:head>
-	<title>{unit.title} · Didache</title>
-</svelte:head>
+<Meta
+	title={unit.title}
+	description={unit.description}
+	image={unit.illustration}
+	path={resolve('/learn/[section]/[unit]', { section: section.id, unit: unit.id })}
+/>
 
-<main class="px-5 pt-4 pb-36">
+<main class="px-5 pt-4 pb-6">
 	<a
-		class="text-sm text-foreground-muted no-underline hover:text-foreground"
-		href={resolve('/learn/[section]', { section: section.id })}>← {section.title}</a
+		class="inline-flex items-center gap-1.5 text-sm text-foreground-muted no-underline hover:text-foreground"
+		href={resolve('/learn/[section]', { section: section.id })}
+		><Icon name="arrow-left" size={14} /> {section.title}</a
 	>
 
 	<header class="mt-4 grid gap-3 text-center">
@@ -56,6 +62,7 @@
 			onclick={() =>
 				track('lesson_started', { section: section.id, unit: unit.id, lesson: current.id })}
 		>
+			<Icon name="play" size={14} />
 			{done === 0 ? 'Begin' : 'Continue'}: {current.title}
 		</Button>
 	</ActionBar>

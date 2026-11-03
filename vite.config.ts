@@ -12,7 +12,9 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			adapter: adapter(),
+			// Pages are prerendered; 404.html is the client-rendered fallback the Worker serves
+			// for unknown paths (see not_found_handling in wrangler.jsonc).
+			adapter: adapter({ fallback: '404.html' }),
 			paths: {
 				relative: false
 			}

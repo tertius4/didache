@@ -32,15 +32,6 @@ const gen9_16: Verse = {
 	ref: 'Genesis 9:16',
 	text: 'When the bow is in the clouds, I will see it and remember the everlasting covenant between God and every living creature of all flesh that is on the earth.'
 };
-const eph5_2: Verse = {
-	ref: 'Ephesians 5:2',
-	text: 'And walk in love, as Christ loved us and gave himself up for us, a fragrant offering and sacrifice to God.'
-};
-const pet3_9: Verse = {
-	ref: '2 Peter 3:9',
-	text: 'The Lord is not slow to fulfill his promise as some count slowness, but is patient toward you, not wishing that any should perish, but that all should reach repentance.'
-};
-
 export const lesson: Lesson = {
 	id: 'the-rainbow-covenant',
 	title: 'The rainbow covenant',
@@ -52,16 +43,7 @@ export const lesson: Lesson = {
 			title: 'Noah built an altar',
 			body: 'The first thing Noah did on dry ground was worship. He built an altar and offered sacrifices to the LORD, and God was pleased.',
 			verse: gen8_20,
-			illustration: 'altar',
-			learnMore: {
-				title: 'A sacrifice that points to Christ',
-				paragraphs: [
-					'Noah’s offering was a “pleasing aroma” to God. But animal sacrifices could never take away sin for good.',
-					'They pointed forward to Jesus, who gave himself as the perfect sacrifice. Because of him, God is pleased with all who trust in him.'
-				],
-				verses: [eph5_2],
-				confessions: ['Heidelberg Catechism Q&A 37, 40']
-			}
+			illustration: 'altar'
 		},
 		{
 			id: 'seasons',
@@ -75,16 +57,7 @@ export const lesson: Lesson = {
 			title: 'My bow in the cloud',
 			body: 'God made a covenant, a solemn promise, with Noah and with every living creature: never again would a flood destroy the earth. The rainbow is the sign of that promise.',
 			verse: gen9_13,
-			illustration: 'rainbow',
-			learnMore: {
-				title: 'A covenant of preservation',
-				paragraphs: [
-					'In a covenant, God binds himself by a promise. This covenant with Noah promises to keep the world going, with seasons, life and order, even though people are still sinful (8:21).',
-					'Why? So that God’s greater plan of salvation can unfold, all the way to Jesus. Every rainbow reminds us that God is patient and keeps his word.'
-				],
-				verses: [pet3_9],
-				confessions: ['Belgic Confession Art. 13']
-			}
+			illustration: 'rainbow'
 		}
 	],
 	exercises: [

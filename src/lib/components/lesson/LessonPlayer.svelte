@@ -2,17 +2,18 @@
 	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
 	import type { LessonLocation } from '#lib/content/index.ts';
-	import type { AnyAnswer, LearnMore } from '#lib/content/types.ts';
+	import type { AnyAnswer } from '#lib/content/types.ts';
 	import { LessonSession } from '#lib/lesson/engine.svelte.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
+	import { scrollPageToTop } from '#lib/components/ui/scroll.ts';
 	import { track } from '#lib/analytics.ts';
 	import ExerciseView from '#lib/components/exercises/ExerciseView.svelte';
 	import ActionBar from '#lib/components/ui/ActionBar.svelte';
 	import Button from '#lib/components/ui/Button.svelte';
+	import Icon from '#lib/components/ui/Icon.svelte';
 	import ProgressBar from './ProgressBar.svelte';
 	import StoryCard from './StoryCard.svelte';
 	import VideoIntro from './VideoIntro.svelte';
-	import LearnMoreSheet from './LearnMoreSheet.svelte';
 	import FeedbackBanner from './FeedbackBanner.svelte';
 	import LessonComplete from './LessonComplete.svelte';
 
@@ -31,13 +32,14 @@
 
 	let phase = $state<'video' | 'story' | 'exercises' | 'complete'>('video');
 	let cardIndex = $state(0);
-	let learnMore = $state<LearnMore | null>(null);
 	let answer = $state<AnyAnswer | null>(null);
 	let lastCorrect = $state(false);
 	let unitComplete = $state(false);
 
 	const card = $derived(lesson.story[cardIndex]);
 	const lastCard = $derived(cardIndex === lesson.story.length - 1);
+	/** Fetched ahead so the next card's picture is there when "Next" is tapped. */
+	const nextImage = $derived(lesson.story[cardIndex + 1]?.image);
 	const barValue = $derived(
 		phase === 'story' ? (cardIndex + 1) / lesson.story.length : session.progress
 	);
@@ -54,14 +56,9 @@
 		if (phase === 'story') track('story_card_viewed', { ...ids, card: card.id });
 	});
 
-	function openLearnMore(content: LearnMore, cardId: string) {
-		learnMore = content;
-		track('learn_more_opened', { ...ids, card: cardId });
-	}
-
 	function goTo(next: typeof phase) {
 		phase = next;
-		window.scrollTo({ top: 0 });
+		scrollPageToTop();
 	}
 
 	function readStory() {
@@ -78,7 +75,7 @@
 	function nextCard() {
 		if (lastCard) goTo('exercises');
 		else cardIndex++;
-		window.scrollTo({ top: 0 });
+		scrollPageToTop();
 	}
 
 	function check() {
@@ -98,7 +95,7 @@
 	function continueOn() {
 		session.next();
 		answer = null;
-		window.scrollTo({ top: 0 });
+		scrollPageToTop();
 		if (session.done) finish();
 	}
 
@@ -116,15 +113,13 @@
 	}
 </script>
 
-<div class="flex-1">
+<div class="flex flex-1 flex-col">
 	{#if phase === 'story' || phase === 'exercises'}
-		<header
-			class="sticky top-0 z-5 flex items-center gap-3.5 bg-surface px-4 pt-[calc(12px+env(safe-area-inset-top))] pb-3"
-		>
+		<header class="sticky top-0 z-5 flex items-center gap-3.5 bg-surface px-4 py-3">
 			<a
 				class="p-1 text-xl text-foreground-muted no-underline hover:text-foreground"
 				href={resolve('/learn/[section]/[unit]', { section: section.id, unit: unit.id })}
-				aria-label="Close lesson">✕</a
+				aria-label="Close lesson"><Icon name="xmark" size={22} /></a
 			>
 			<ProgressBar
 				value={barValue}
@@ -133,7 +128,7 @@
 		</header>
 	{/if}
 
-	<main class="px-5 pt-2 pb-36">
+	<main class="px-5 pt-2 pb-6">
 		{#if phase === 'video'}
 			<VideoIntro
 				{lesson}
@@ -141,7 +136,6 @@
 				unit={unit.id}
 				onplay={() => track('video_started', ids)}
 				onended={() => track('video_completed', ids)}
-				onlearnmore={openLearnMore}
 				onread={readStory}
 				onpractice={() => goTo('exercises')}
 			/>
@@ -150,14 +144,13 @@
 				{lesson.title} · {lesson.passage}
 			</p>
 			{#key cardIndex}
-				<StoryCard
-					{card}
-					onlearnmore={() => card.learnMore && openLearnMore(card.learnMore, card.id)}
-				/>
+				<StoryCard {card} />
 			{/key}
 		{:else if phase === 'exercises' && session.current}
 			{#if session.isRetry}
-				<p class="mb-3 text-sm font-semibold text-warning-foreground">↻ Let’s try this one again</p>
+				<p class="mb-3 flex items-center gap-1.5 text-sm font-semibold text-warning-foreground">
+					<Icon name="rotate-left" size={14} /> Let’s try this one again
+				</p>
 			{/if}
 			{#key session.position}
 				<ExerciseView
@@ -181,19 +174,32 @@
 	{#if phase === 'story'}
 		<ActionBar>
 			<div class="grid grid-cols-[1fr_2fr] gap-3">
-				<Button variant="ghost" onclick={prevCard}>Back</Button>
-				<Button onclick={nextCard}>{lastCard ? 'Start practice' : 'Next'}</Button>
+				<Button variant="ghost" onclick={prevCard}><Icon name="arrow-left" size={16} /> Back</Button
+				>
+				<Button onclick={nextCard}>
+					{#if lastCard}
+						<Icon name="pencil" size={16} /> Start practice
+					{:else}
+						Next <Icon name="arrow-right" size={16} />
+					{/if}
+				</Button>
 			</div>
 		</ActionBar>
 	{:else if phase === 'exercises' && session.current}
-		{#if session.status === 'answering'}
-			<ActionBar>
-				<Button disabled={answer === null} onclick={check}>Check</Button>
-			</ActionBar>
-		{:else}
-			<FeedbackBanner exercise={session.current} correct={lastCorrect} oncontinue={continueOn} />
-		{/if}
+		<!-- The bar stays put while the result slides up over it, so the lesson never jumps. -->
+		<ActionBar>
+			<Button disabled={answer === null || session.status !== 'answering'} onclick={check}
+				><Icon name="check" size={16} /> Check</Button
+			>
+			{#if session.status !== 'answering'}
+				<FeedbackBanner exercise={session.current} correct={lastCorrect} oncontinue={continueOn} />
+			{/if}
+		</ActionBar>
 	{/if}
 </div>
 
-<LearnMoreSheet content={learnMore} onclose={() => (learnMore = null)} />
+<svelte:head>
+	{#if phase === 'story' && nextImage}
+		<link rel="preload" as="image" href={nextImage} />
+	{/if}
+</svelte:head>

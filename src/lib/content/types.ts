@@ -11,22 +11,18 @@ export interface Verse {
 	text: string;
 }
 
-/** Optional doctrinal deep-dive attached to a story card. */
-export interface LearnMore {
-	title: string;
-	paragraphs: string[];
-	verses?: Verse[];
-	/** Pointers to confessional standards, e.g. "Heidelberg Catechism Q&A 8". */
-	confessions?: string[];
-}
-
 export interface StoryCard {
 	id: string;
 	title: string;
 	body: string;
 	verse?: Verse;
+	/**
+	 * Picture for the card: a 4:3 image under `static/`, at
+	 * `/media/<section>/<unit>/<lesson>/<card-id>.webp`.
+	 */
+	image?: string;
+	/** Placeholder drawing, shown while the card has no `image`. */
 	illustration?: IllustrationKey;
-	learnMore?: LearnMore;
 }
 
 interface ExerciseBase {
@@ -110,7 +106,7 @@ export interface Lesson {
 	illustration: IllustrationKey;
 	/** Intro video; a placeholder is shown until one is added. */
 	video?: LessonVideo;
-	/** Story as text: shown via "Read the story instead" and as the source of "Learn more". */
+	/** The story as text, shown via "Read story". Follows the video script card by card. */
 	story: StoryCard[];
 	exercises: Exercise[];
 }
@@ -120,7 +116,9 @@ export interface Unit {
 	title: string;
 	description: string;
 	/** Image path under `static/`, e.g. `/media/bible-stories/noah/icon.webp`. */
-	illustration: string;
+	illustration?: string;
+	/** Shown on the journey but not open yet; has no lessons. */
+	comingSoon?: boolean;
 	lessons: Lesson[];
 }
 

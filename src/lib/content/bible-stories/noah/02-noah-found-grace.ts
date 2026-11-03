@@ -40,11 +40,6 @@ const heb11_7: Verse = {
 	ref: 'Hebrews 11:7',
 	text: 'By faith Noah, being warned by God concerning events as yet unseen, in reverent fear constructed an ark for the saving of his household. By this he condemned the world and became an heir of the righteousness that comes by faith.'
 };
-const eph2_8: Verse = {
-	ref: 'Ephesians 2:8',
-	text: 'For by grace you have been saved through faith. And this is not your own doing; it is the gift of God.'
-};
-
 export const lesson: Lesson = {
 	id: 'noah-found-grace',
 	title: 'Noah found grace',
@@ -56,16 +51,7 @@ export const lesson: Lesson = {
 			title: '“But Noah…”',
 			body: 'In a world full of evil, one small word changes everything: “But”. God showed favor to Noah.',
 			verse: gen6_8,
-			illustration: 'scroll',
-			learnMore: {
-				title: 'Grace comes first',
-				paragraphs: [
-					'Look at the order. First we read that Noah found favor (grace) with God (6:8). Only after that are we told Noah was righteous and walked with God (6:9).',
-					'Noah wasn’t saved because he was better than everyone else. God’s grace came first, and Noah’s faithful life grew out of that grace. It’s the same for us.'
-				],
-				verses: [eph2_8],
-				confessions: ['Heidelberg Catechism Q&A 60–61', 'Belgic Confession Art. 22–24']
-			}
+			illustration: 'scroll'
 		},
 		{
 			id: 'walked-with-god',
@@ -86,16 +72,7 @@ export const lesson: Lesson = {
 			title: 'Noah did all God commanded',
 			body: 'God promised to make a covenant with Noah and keep his family alive. Noah believed God and got to work, even though no flood had ever been seen.',
 			verse: gen6_22,
-			illustration: 'ark-build',
-			learnMore: {
-				title: 'Faith that obeys',
-				paragraphs: [
-					'Hebrews says Noah built the ark “by faith”. He trusted God’s word about something he couldn’t yet see.',
-					'True faith isn’t just agreeing with facts. It trusts God’s promises and then acts on them. Good works don’t earn grace; they are the fruit of it.'
-				],
-				verses: [heb11_7],
-				confessions: ['Heidelberg Catechism Q&A 21, 86']
-			}
+			illustration: 'ark-build'
 		}
 	],
 	exercises: [

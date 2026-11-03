@@ -28,10 +28,6 @@ const pet3_20: Verse = {
 	ref: '1 Peter 3:20',
 	text: '…while the ark was being prepared, in which a few, that is, eight persons, were brought safely through water.'
 };
-const john10_9: Verse = {
-	ref: 'John 10:9',
-	text: 'I am the door. If anyone enters by me, he will be saved and will go in and out and find pasture.'
-};
 const matt24_38: Verse = {
 	ref: 'Matthew 24:38–39',
 	text: 'For as in those days before the flood they were eating and drinking, marrying and giving in marriage, until the day when Noah entered the ark, and they were unaware until the flood came and swept them all away, so will be the coming of the Son of Man.'
@@ -55,31 +51,14 @@ export const lesson: Lesson = {
 			title: 'The flood begins',
 			body: 'Noah was 600 years old. Water burst up from deep under the earth and poured down from the sky. It rained for forty days and forty nights.',
 			verse: gen7_11,
-			illustration: 'rain',
-			learnMore: {
-				title: 'Unaware until it came',
-				paragraphs: [
-					'Jesus said people in Noah’s day carried on as usual, eating, drinking and marrying, right up until the flood came.',
-					'He warned that his own return will be the same. God’s patience is real, but it won’t last forever. Today is the day to come to him.'
-				],
-				verses: [matt24_38]
-			}
+			illustration: 'rain'
 		},
 		{
 			id: 'shut-in',
 			title: 'The LORD shut him in',
 			body: 'Once everyone was inside, Noah didn’t close the door. God did. Noah and his family were safe because God himself shut them in.',
 			verse: gen7_16,
-			illustration: 'ark',
-			learnMore: {
-				title: 'Christ, our ark',
-				paragraphs: [
-					'There was one ark with one door. Everyone inside was saved; everyone outside was lost. The Bible points to Jesus as the true ark and the true door.',
-					'And notice who closed the door: the LORD. Salvation is God’s work from start to finish. Those he brings in are kept safe by him, not by their own grip.'
-				],
-				verses: [john10_9, pet3_20],
-				confessions: ['Heidelberg Catechism Q&A 1', 'Canons of Dort V, Art. 8']
-			}
+			illustration: 'ark'
 		}
 	],
 	exercises: [

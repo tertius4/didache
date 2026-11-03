@@ -32,11 +32,6 @@ const gen8_16: Verse = {
 	ref: 'Genesis 8:15–16',
 	text: 'Then God said to Noah, “Go out from the ark, you and your wife, and your sons and your sons’ wives with you.”'
 };
-const pet2_5: Verse = {
-	ref: '2 Peter 2:5',
-	text: 'If he did not spare the ancient world, but preserved Noah, a herald of righteousness, with seven other persons, when he brought a flood upon the world of the ungodly…'
-};
-
 export const lesson: Lesson = {
 	id: 'the-flood-and-the-dove',
 	title: 'The flood and the dove',
@@ -48,30 +43,14 @@ export const lesson: Lesson = {
 			title: 'The waters prevailed',
 			body: 'The water rose until even the highest mountains were covered. Everything outside the ark died. Only Noah and those with him were left.',
 			verse: gen7_23,
-			illustration: 'rain',
-			learnMore: {
-				title: 'Judgment is real',
-				paragraphs: [
-					'The flood shows that God really does judge sin. Peter uses it as a warning: the same God will judge the world again one day.',
-					'But the flood also shows God keeping his people safe through judgment. In Christ, believers are carried through God’s judgment, just as the ark carried Noah.'
-				],
-				verses: [pet2_5]
-			}
+			illustration: 'rain'
 		},
 		{
 			id: 'god-remembered',
 			title: 'But God remembered Noah',
 			body: 'After 150 days, God sent a wind and the water began to go down. The ark came to rest on the mountains of Ararat.',
 			verse: gen8_1,
-			illustration: 'mountain',
-			learnMore: {
-				title: 'God remembers his promises',
-				paragraphs: [
-					'“God remembered” doesn’t mean God had forgotten. In the Bible it means God acts on his promise.',
-					'Back in Genesis 6:18 God promised a covenant with Noah. Now, right on time, he keeps it. God never forgets his people.'
-				],
-				confessions: ['Heidelberg Catechism Q&A 26–28']
-			}
+			illustration: 'mountain'
 		},
 		{
 			id: 'raven-and-dove',

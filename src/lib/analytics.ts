@@ -50,7 +50,6 @@ export type AnalyticsEvent =
 	| 'video_completed'
 	| 'story_opened'
 	| 'story_card_viewed'
-	| 'learn_more_opened'
 	| 'exercise_answered'
 	| 'lesson_completed'
 	| 'lesson_abandoned'

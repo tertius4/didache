@@ -36,15 +36,6 @@ const rom3_23: Verse = {
 	ref: 'Romans 3:23',
 	text: 'For all have sinned and fall short of the glory of God.'
 };
-const heb4_15: Verse = {
-	ref: 'Hebrews 4:15',
-	text: 'For we do not have a high priest who is unable to sympathize with our weaknesses, but one who in every respect has been tempted as we are, yet without sin.'
-};
-const pet4_8: Verse = {
-	ref: '1 Peter 4:8',
-	text: 'Above all, keep loving one another earnestly, since love covers a multitude of sins.'
-};
-
 export const lesson: Lesson = {
 	id: 'noahs-fall',
 	title: 'Noah’s fall',
@@ -56,46 +47,21 @@ export const lesson: Lesson = {
 			title: 'A man of the soil',
 			body: 'Noah planted a vineyard. One day he drank too much wine, got drunk and lay uncovered in his tent. The hero of the flood fell into sin.',
 			verse: gen9_21,
-			illustration: 'vineyard',
-			learnMore: {
-				title: 'We need a better Noah',
-				paragraphs: [
-					'The Bible doesn’t hide the sins of its heroes. Noah was saved by grace, but he was still a sinner who needed grace every day.',
-					'The flood washed the world, but it couldn’t wash the human heart. We need a Saviour who never sinned. That Saviour is Jesus, the true and better Noah.'
-				],
-				verses: [rom3_23, heb4_15],
-				confessions: ['Heidelberg Catechism Q&A 15–18']
-			}
+			illustration: 'vineyard'
 		},
 		{
 			id: 'covering',
 			title: 'Covering their father',
 			body: 'Ham saw his father’s shame and went and told his brothers. But Shem and Japheth walked in backward with a garment and covered their father without looking.',
 			verse: gen9_23,
-			illustration: 'cloak',
-			learnMore: {
-				title: 'Love covers',
-				paragraphs: [
-					'Ham exposed his father’s shame; Shem and Japheth covered it. Love doesn’t make a show of other people’s sins.',
-					'It is a picture of the gospel too: in Christ, God covers our shame with his righteousness, like a garment.'
-				],
-				verses: [pet4_8],
-				confessions: ['Heidelberg Catechism Q&A 112']
-			}
+			illustration: 'cloak'
 		},
 		{
 			id: 'blessing',
 			title: 'A blessing for Shem',
 			body: 'When Noah woke up, he spoke a curse on Canaan, Ham’s son, and a blessing on Shem. Noah lived 950 years in all, and then he died.',
 			verse: gen9_26,
-			illustration: 'scroll',
-			learnMore: {
-				title: 'The promised line',
-				paragraphs: [
-					'God’s blessing on Shem matters. From Shem’s family would come Abraham, then Israel, and finally Jesus Christ (Luke 3:36).',
-					'Even after Noah’s failure, God’s promise keeps moving forward. God’s plan never depends on how strong his people are.'
-				]
-			}
+			illustration: 'scroll'
 		}
 	],
 	exercises: [

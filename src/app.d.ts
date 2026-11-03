@@ -13,6 +13,8 @@ declare global {
 		readonly VITE_POSTHOG_KEY?: string;
 		readonly VITE_POSTHOG_HOST?: string;
 		readonly VITE_FORMSPREE_ID?: string;
+		/** Public site origin, e.g. https://didache.co.za; used for canonical and OG URLs. */
+		readonly VITE_SITE_URL?: string;
 	}
 }
 

@@ -143,6 +143,7 @@
 
 	--animate-pop-in: pop-in 260ms ease;
 	--animate-slide-up: slide-up 220ms ease;
+	--animate-pulse-ring: pulse-ring 2.2s ease-out infinite;
 
 	@keyframes pop-in {
 		from {
@@ -154,6 +155,16 @@
 	@keyframes slide-up {
 		from {
 			transform: translateY(100%);
+		}
+	}
+
+	/* A soft ring that swells out from the current stop on the journey. */
+	@keyframes pulse-ring {
+		from {
+			box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-primary) 40%, transparent);
+		}
+		to {
+			box-shadow: 0 0 0 16px transparent;
 		}
 	}
 }

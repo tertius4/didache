@@ -4,6 +4,7 @@
 	import WaitlistForm from '#lib/components/WaitlistForm.svelte';
 	import Button from '#lib/components/ui/Button.svelte';
 	import Ornament from '#lib/components/ui/Ornament.svelte';
+	import Icon from '#lib/components/ui/Icon.svelte';
 	import { nextLesson, type LessonLocation } from '#lib/content/index.ts';
 	import type { Lesson } from '#lib/content/types.ts';
 	import VerseQuote from './VerseQuote.svelte';
@@ -34,7 +35,7 @@
 		class="mx-auto grid size-28 place-items-center rounded-full border-4 border-double border-surface bg-secondary text-5xl text-on-secondary shadow-[0_0_0_3px_var(--color-secondary),0_6px_16px_-6px_color-mix(in_srgb,var(--color-overlay)_50%,transparent)]"
 		aria-hidden="true"
 	>
-		{unitComplete ? '✦' : '✓'}
+		<Icon name={unitComplete ? 'star' : 'check'} size={48} />
 	</div>
 
 	<div>
@@ -76,13 +77,23 @@
 					section: location.section.id,
 					unit: location.unit.id,
 					lesson: next.id
-				})}>Next stop: {next.title} →</Button
+				})}>Next stop: {next.title} <Icon name="arrow-right" size={16} /></Button
 			>
-			<Button variant="ghost" href={unitHref}>Back to {location.unit.title}</Button>
+			<Button variant="ghost" href={unitHref}
+				><Icon name="arrow-left" size={16} /> Back to {location.unit.title}</Button
+			>
 		{:else}
 			<Button href={resolve('/learn/[section]', { section: location.section.id })}>
 				Back to the journey
 			</Button>
+		{/if}
+		{#if !unitComplete}
+			<a
+				class="inline-flex items-center justify-center gap-1.5 text-sm"
+				href={resolve('/feedback')}
+			>
+				<Icon name="comment" size={14} /> Tell us what you thought of this lesson
+			</a>
 		{/if}
 	</div>
 </div>

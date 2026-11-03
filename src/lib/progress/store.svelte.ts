@@ -3,8 +3,8 @@ import { lessonKey } from '#lib/content/index.ts';
 import { browserStorage, type KeyValueStorage } from './storage';
 
 const STORAGE_KEY = 'didache:progress:v1';
-/** Key used before the rename from Didache; migrated on first load. */
-const LEGACY_STORAGE_KEY = 'didache:progress:v1';
+/** Key used before the rename from Unilogos; migrated on first load. */
+const LEGACY_STORAGE_KEY = 'unilogos:progress:v1';
 
 interface Saved {
 	completed: string[];
@@ -14,11 +14,21 @@ interface Saved {
 export class Progress {
 	completed = $state<string[]>([]);
 	seenIntro = $state(false);
+	/** True once saved progress has been read. Until then, progress-dependent UI should wait. */
+	ready = $state(false);
 	#storage: KeyValueStorage;
 
-	constructor(storage: KeyValueStorage) {
+	/** Pass `defer` to read saved progress later with `load()` instead of straight away. */
+	constructor(storage: KeyValueStorage, { defer = false } = {}) {
 		this.#storage = storage;
+		if (!defer) this.load();
+	}
+
+	/** Reads saved progress from storage. Safe to call more than once. */
+	load(): void {
+		if (this.ready) return;
 		this.#load();
+		this.ready = true;
 	}
 
 	isComplete(key: string): boolean {
@@ -89,4 +99,9 @@ function isString(value: unknown): value is string {
 	return typeof value === 'string';
 }
 
-export const progress = new Progress(browserStorage());
+/**
+ * Pages are prerendered, so the first render in the browser must match the HTML, which was
+ * built with no progress. Saved progress is therefore loaded after hydration (see
+ * +layout.svelte), and progress-dependent UI updates (or waits for `ready`) from there.
+ */
+export const progress = new Progress(browserStorage(), { defer: true });

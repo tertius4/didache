@@ -4,6 +4,17 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="text-scale" content="scale" />
+		<script>
+			// Returning visitors skip the intro. Mark them before first paint so the prerendered
+			// intro doesn't flash while the app loads and redirects (see routes/+page.svelte).
+			// The key must match STORAGE_KEY in src/lib/progress/store.svelte.ts.
+			try {
+				if (JSON.parse(localStorage.getItem('didache:progress:v1') || '{}').seenIntro)
+					document.documentElement.dataset.returning = '';
+			} catch {
+				// No storage: show the intro.
+			}
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

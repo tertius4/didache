@@ -8,13 +8,13 @@ Use this file every time you make an image for a lesson. It gives you fixed bloc
 
 **The solution:** close every gap with a fixed block, and change only the SCENE line.
 
-| Gap              | What goes wrong                                                          | Fixed by                                    |
-| ---------------- | ------------------------------------------------------------------------ | ------------------------------------------- |
-| Colour           | Loose words ("warm cream, sky blue") give a new palette each time        | Named paint pigments in the STYLE LOCK (§1) |
-| Light            | Each scene describes its own light, and Grok blends it with the default  | One LIGHT preset per mood (§2)              |
-| Camera           | Lens, height and size of people change per image                         | Four CAMERA presets (§3)                    |
-| Recurring things | Clouds, water, trees and faces are drawn differently each time           | Rendering recipes (§4)                      |
-| Paper            | "On paper" makes Grok paint a sheet with edges or tape                   | Full-bleed rule in the STYLE LOCK (§1)      |
+| Gap              | What goes wrong                                                         | Fixed by                                    |
+| ---------------- | ----------------------------------------------------------------------- | ------------------------------------------- |
+| Colour           | Loose words ("warm cream, sky blue") give a new palette each time       | Named paint pigments in the STYLE LOCK (§1) |
+| Light            | Each scene describes its own light, and Grok blends it with the default | One LIGHT preset per mood (§2)              |
+| Camera           | Lens, height and size of people change per image                        | Four CAMERA presets (§3)                    |
+| Recurring things | Clouds, water, trees and faces are drawn differently each time          | Rendering recipes (§4)                      |
+| Paper            | "On paper" makes Grok paint a sheet with edges or tape                  | Full-bleed rule in the STYLE LOCK (§1)      |
 
 **The rule:** only the SCENE line ever changes. Everything else is pasted from this file, unchanged, in the same order.
 
@@ -49,31 +49,37 @@ Traditional gouache painting with light watercolour washes, from a hand-made fam
 The mood names match the mood scale in the style guide. The sun direction is fixed so that consecutive images match without the light jumping sides.
 
 **GRACE**
+
 ```
 LIGHT: low golden sunrise light from the upper left, warm Naples-yellow and cadmium glow on every lit edge, long soft violet shadows falling to the right, a clear pale sky warming to gold near the horizon. Warmest saturation of the series.
 ```
 
 **CALM**
+
 ```
 LIGHT: soft clear morning light from the upper left, gentle warm highlights, short soft ultramarine-violet shadows falling to the right, a pale cerulean sky with a few soft cream clouds. Balanced, even, peaceful.
 ```
 
 **SHADOW**
+
 ```
 LIGHT: low dusk light from the far left, colours slightly greyed and cooler than a normal day, long cool violet shadows across the ground, a dull fading ochre-orange sky turning grey-violet overhead. Uneasy and quiet.
 ```
 
 **SORROW**
+
 ```
 LIGHT: the last light just after sunset from the far left, soft and even, colours gently drained toward greyed ochre, dusty olive and grey-blue, a faint fading warmth on the left-facing edges of things, soft short violet shadows, a pale even grey-violet sky with no cloud shapes and no rays of light. Sorrowful, tender and still, not frightening.
 ```
 
 **JUDGMENT**
+
 ```
 LIGHT: flat, dim, overcast light, a heavy sky of soft slate-blue and grey-violet clouds, low contrast, muted olive, grey-blue and dusty brown colours across the land, only a thin band of pale light at the horizon. Solemn and still, not frightening.
 ```
 
 **NIGHT** (use for night scenes inside any mood, such as lesson 1 image 5)
+
 ```
 LIGHT: night, deep ultramarine and violet everywhere, soft starlight, the only warm colour coming from small lamp-lit windows or fires that glow cadmium yellow and cast soft pools of light. Quiet and still.
 ```
@@ -83,26 +89,31 @@ If a scene must break the light direction (the sun rising over the ark on the ri
 ## 3. CAMERA presets (paste exactly one)
 
 **WIDE** (establishing shots, open country, the ark at full size, judgment)
+
 ```
 CAMERA: wide distant view from a slightly raised position, low horizon in the lower third, a large sky filling the upper half, people tiny or absent, main subject inside the centre 70% of the frame.
 ```
 
 **MEDIUM** (people doing something, groups, a family scene)
+
 ```
 CAMERA: eye-level view at a natural distance, people shown full-length and filling about half the frame height, simple uncluttered background, main subject inside the centre 70% of the frame.
 ```
 
 **OBJECT**
+
 ```
 CAMERA: low close view at the height of a single object or small group of objects in the foreground, the main object filling about half the frame height just below centre, the ground falling away behind it to a small, pale, distant background, horizon in the upper third, only a thin strip of sky, main subject inside the centre 70% of the frame.
 ```
 
 **CLOSE** (a face, a hand with the olive leaf, two people talking)
+
 ```
 CAMERA: close eye-level view, one or two people shown from the waist up, a soft simplified background, faces in the centre of the frame and well away from the edges.
 ```
 
 **HIGH** (seeing a whole town, God's point of view without a figure)
+
 ```
 CAMERA: high bird's-eye view looking down at an angle, rooftops and courtyards small and readable, no sky except a thin strip at the top edge, main subject inside the centre 70% of the frame.
 ```
@@ -111,20 +122,20 @@ CAMERA: high bird's-eye view looking down at an angle, rooftops and courtyards s
 
 You do not need to paste these into every prompt. Add the matching line **only when the thing is a main part of the scene**. They keep clouds, water and faces looking the same across lessons.
 
-| Thing        | Line to add                                                                                                                                         |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Faces        | `Faces are simple and painterly: natural-sized dark eyes, small soft noses, a few warm strokes for expression, never cartoon or doll-like.`          |
-| Clouds       | `Clouds are soft wet-in-wet gouache masses with no hard edges and no shapes, faces or figures in them.`                                             |
-| Water        | `Water is painted in flat layered bands of cerulean and ultramarine with a few soft cream highlights, no splashes, no foam detail.`                  |
-| Rain / storm | `Rain is a soft diagonal veil of grey-blue wash, no lightning bolts, no dramatic splashes.`                                                          |
-| Trees        | `Palms and olive trees are simplified into a few soft brush-shaped clumps of olive and sap green.`                                                   |
-| Houses       | `Houses are small cubes of sun-dried mud brick in raw sienna and ochre, flat roofs, small dark doorways, no windows with glass.`                     |
-| Animals      | `Animals are natural and painterly, with real proportions, no human expressions, no large eyes and no smiles.`                                       |
-| Glowing light | `The glow is a soft warm cadmium-yellow bloom with no rays, no beams and no figure inside it.`                                                      |
+| Thing         | Line to add                                                                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Faces         | `Faces are simple and painterly: natural-sized dark eyes, small soft noses, a few warm strokes for expression, never cartoon or doll-like.` |
+| Clouds        | `Clouds are soft wet-in-wet gouache masses with no hard edges and no shapes, faces or figures in them.`                                     |
+| Water         | `Water is painted in flat layered bands of cerulean and ultramarine with a few soft cream highlights, no splashes, no foam detail.`         |
+| Rain / storm  | `Rain is a soft diagonal veil of grey-blue wash, no lightning bolts, no dramatic splashes.`                                                 |
+| Trees         | `Palms and olive trees are simplified into a few soft brush-shaped clumps of olive and sap green.`                                          |
+| Houses        | `Houses are small cubes of sun-dried mud brick in raw sienna and ochre, flat roofs, small dark doorways, no windows with glass.`            |
+| Animals       | `Animals are natural and painterly, with real proportions, no human expressions, no large eyes and no smiles.`                              |
+| Glowing light | `The glow is a soft warm cadmium-yellow bloom with no rays, no beams and no figure inside it.`                                              |
 
 ## 5. AVOID line (paste last, every time, unchanged)
 
-Grok has no separate negative-prompt box, so this goes at the end of the prompt. It is kept short on purpose: in Grok a long list of forbidden things can make some of them *more* likely to appear. The important rules are already built into the positive text above (no outlines, full bleed, no figures in clouds).
+Grok has no separate negative-prompt box, so this goes at the end of the prompt. It is kept short on purpose: in Grok a long list of forbidden things can make some of them _more_ likely to appear. The important rules are already built into the positive text above (no outlines, full bleed, no figures in clouds).
 
 ```
 Avoid: text, letters, numbers, signatures, watermarks; borders or frames; outlines; cartoon, chibi or anime style; big eyes; 3D render; photorealism; glossy digital art; neon colours; lens flare; halos; faces in clouds or light; modern objects; European castles.
@@ -144,7 +155,7 @@ Text alone gets you about 80% of the way. The rest comes from showing Grok the s
 
 ## 7. A selection routine
 
-Consistency also comes from what you *keep*.
+Consistency also comes from what you _keep_.
 
 - Generate a full batch (Grok gives several images per prompt). Judge them side by side with the style anchor open next to them.
 - Throw away anything that fails the style guide's checklist (§7) on the first look. Do not "fix" a wrong look by adding adjectives to the prompt. Change only the SCENE line, or regenerate.

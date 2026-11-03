@@ -8,9 +8,7 @@
 	const { children }: Props = $props();
 </script>
 
-<!-- Fixed to the bottom of the viewport, but only as wide as the scroll sheet. -->
-<footer
-	class="fixed bottom-0 left-1/2 z-10 w-full max-w-content -translate-x-1/2 border-t border-border bg-surface px-5 pt-3.5 pb-[calc(14px+env(safe-area-inset-bottom))]"
->
+<!-- Sticks to the bottom of the sheet's scroll area, just above its bottom edge. Place it last in the page. -->
+<footer class="sticky bottom-0 z-10 mt-auto border-t border-border bg-surface px-5 py-3.5">
 	{@render children()}
 </footer>

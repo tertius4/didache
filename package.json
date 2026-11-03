@@ -13,7 +13,8 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"test:unit": "vitest",
-		"test": "npm run test:unit -- --run"
+		"test": "npm run test:unit -- --run",
+		"deploy": "npm run build && wrangler deploy"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "^7.6.9",
@@ -36,7 +37,8 @@
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.60.1",
 		"vite": "^8.3.0",
-		"vitest": "^4.1.8"
+		"vitest": "^4.1.8",
+		"wrangler": "^4.157.0"
 	},
 	"imports": {
 		"#lib": "./src/lib/index.js",

@@ -4,6 +4,7 @@
 	import { lessonKey } from '#lib/content/index.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
 	import { track } from '#lib/analytics.ts';
+	import Icon from '#lib/components/ui/Icon.svelte';
 
 	interface Props {
 		sectionId: string;
@@ -52,9 +53,9 @@
 						!complete && !current && 'border-border-strong text-foreground-muted'
 					]}
 				>
-					{#if complete}<span aria-label="Complete">✓</span>
-					{:else if current}<span aria-label="Up next">▶</span>
-					{:else if !unlocked}<span aria-label="Locked">🔒︎</span>
+					{#if complete}<span class="sr-only">Complete</span><Icon name="check" size={18} />
+					{:else if current}<span class="sr-only">Up next</span><Icon name="play" size={16} />
+					{:else if !unlocked}<span class="sr-only">Locked</span><Icon name="lock" size={16} />
 					{:else}{i + 1}{/if}
 				</span>
 				<span class="grid min-w-0 flex-1">
