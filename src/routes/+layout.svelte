@@ -16,7 +16,8 @@
 <svelte:head>
 	<link rel="icon" href={favicon} type="image/svg+xml" />
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-	<meta name="theme-color" content="#eadbb8" />
+	<!-- neutral-100 (--color-background); meta tags can't read CSS variables. -->
+	<meta name="theme-color" content="#EAE4DF" />
 </svelte:head>
 
 <ScrollSheet>{@render children()}</ScrollSheet>

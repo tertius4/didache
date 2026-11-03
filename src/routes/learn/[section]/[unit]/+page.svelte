@@ -26,17 +26,17 @@
 
 <main class="px-5 pt-4 pb-36">
 	<a
-		class="text-sm text-sepia no-underline hover:text-ink"
+		class="text-sm text-foreground-muted no-underline hover:text-foreground"
 		href={resolve('/learn/[section]', { section: section.id })}>← {section.title}</a
 	>
 
 	<header class="mt-4 grid gap-3 text-center">
-		<div class="mx-auto w-3/5 overflow-hidden rounded-lg border border-sepia/25 sepia-[.2]">
+		<div class="mx-auto w-3/5 overflow-hidden rounded-lg border border-border sepia-[.2]">
 			<img class="block aspect-square h-auto w-full object-cover" src={unit.illustration} alt="" />
 		</div>
 		<h1 class="text-4xl">{unit.title}</h1>
-		<p class="text-sepia">{unit.description}</p>
-		<p class="text-sm small-caps text-sepia">
+		<p class="text-foreground-muted">{unit.description}</p>
+		<p class="text-sm small-caps text-foreground-muted">
 			{done} of {unit.lessons.length} lessons complete
 		</p>
 	</header>

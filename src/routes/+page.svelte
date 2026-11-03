@@ -45,7 +45,7 @@
 
 <main class="flex flex-1 flex-col gap-5 px-5 pt-4">
 	<div class="flex items-center justify-between">
-		<span class="font-display text-2xl font-semibold text-rubric">Didache</span>
+		<span class="font-display text-2xl font-semibold text-primary">Didache</span>
 		{#if !last}
 			<Button variant="quiet" class="w-auto! px-2!" onclick={() => finish(true)}>Skip</Button>
 		{/if}
@@ -53,11 +53,11 @@
 
 	{#key index}
 		<div class="grid animate-pop-in gap-4 text-center">
-			<div class="overflow-hidden rounded-lg border border-sepia/25 sepia-[.2]">
+			<div class="overflow-hidden rounded-lg border border-border sepia-[.2]">
 				<img class="block aspect-4/3 h-auto w-full object-cover" src={slide.art} alt="" />
 			</div>
 			<h1 class="text-4xl">{slide.title}</h1>
-			<p class="text-lg text-sepia">{slide.body}</p>
+			<p class="text-lg text-foreground-muted">{slide.body}</p>
 		</div>
 	{/key}
 
@@ -66,7 +66,7 @@
 			<span
 				class={[
 					'h-2 rounded-full transition-all duration-200',
-					i === index ? 'w-7 bg-rubric' : 'w-2 bg-sepia/30'
+					i === index ? 'w-7 bg-primary' : 'w-2 bg-border-strong'
 				]}
 			></span>
 		{/each}

@@ -16,7 +16,10 @@
 </svelte:head>
 
 <main class="grid gap-6 px-5 pt-4 pb-10 [&_h2]:mb-1.5 [&_h2]:text-2xl">
-	<a class="text-sm text-sepia no-underline hover:text-ink" href={resolve('/learn')}>
+	<a
+		class="text-sm text-foreground-muted no-underline hover:text-foreground"
+		href={resolve('/learn')}
+	>
 		← Back to lessons
 	</a>
 	<h1 class="text-4xl">About Didache</h1>
@@ -43,7 +46,7 @@
 
 	<section>
 		<h2>Scripture</h2>
-		<p class="text-sm text-sepia">
+		<p class="text-sm text-foreground-muted">
 			Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®),
 			copyright © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by
 			permission. All rights reserved.

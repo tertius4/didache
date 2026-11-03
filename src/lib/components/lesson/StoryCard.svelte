@@ -13,14 +13,14 @@
 
 <article class="grid animate-pop-in gap-4">
 	{#if card.illustration}
-		<div class="overflow-hidden rounded-lg border border-sepia/25 sepia-[.2]">
+		<div class="overflow-hidden rounded-lg border border-border sepia-[.2]">
 			<Illustration name={card.illustration} />
 		</div>
 	{/if}
 	<h2 class="text-3xl">{card.title}</h2>
 	<!-- Rubricated drop cap, as in a manuscript. -->
 	<p
-		class="text-lg first-letter:float-left first-letter:mt-1 first-letter:mr-2 first-letter:font-display first-letter:text-6xl first-letter:leading-[0.8] first-letter:text-rubric"
+		class="text-lg first-letter:float-left first-letter:mt-1 first-letter:mr-2 first-letter:font-display first-letter:text-6xl first-letter:leading-[0.8] first-letter:text-primary"
 	>
 		{card.body}
 	</p>
@@ -30,7 +30,7 @@
 	{#if card.learnMore}
 		<button
 			type="button"
-			class="cursor-pointer justify-self-start rounded-full border border-gold/60 bg-gold-soft/50 px-3.5 py-1.5 text-sm font-medium hover:bg-gold-soft"
+			class="cursor-pointer justify-self-start rounded-full border border-secondary/60 bg-secondary-soft px-3.5 py-1.5 text-sm font-medium hover:bg-secondary-soft/70"
 			onclick={onlearnmore}
 		>
 			Learn more: {card.learnMore.title}

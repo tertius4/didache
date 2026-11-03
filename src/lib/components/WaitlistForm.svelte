@@ -22,7 +22,7 @@
 </script>
 
 {#if sendState === 'done'}
-	<p class="font-semibold text-olive" role="status">
+	<p class="font-semibold text-success" role="status">
 		You’re on the list! We’ll let you know when new lessons arrive.
 	</p>
 {:else}
@@ -32,7 +32,7 @@
 		>
 		<div class="flex gap-2.5">
 			<input
-				class="min-w-0 flex-1 rounded-lg border border-sepia/35 bg-vellum/60 px-3.5 py-3 focus:border-ink focus:outline-none"
+				class="min-w-0 flex-1 rounded-lg border border-border bg-card px-3.5 py-3 focus:border-primary focus:outline-none"
 				id="waitlist-{source}"
 				type="email"
 				required
@@ -45,7 +45,7 @@
 			</Button>
 		</div>
 		{#if sendState === 'error'}
-			<p class="font-semibold text-rubric" role="alert">Something went wrong. Please try again.</p>
+			<p class="font-semibold text-error" role="alert">Something went wrong. Please try again.</p>
 		{/if}
 	</form>
 {/if}

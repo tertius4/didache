@@ -1,23 +1,141 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens for the scroll theme: aged papyrus and vellum, iron-gall ink,
- * red rubrics for emphasis and gold leaf for milestones.
+ * Colour scales, named by function. Values are supplied by design; don't edit
+ * them in markup. The Tailwind default palette is switched off so only these
+ * names (and the semantic tokens below) exist. `static` keeps every variable in
+ * the CSS, including ones only referenced from script (e.g. --color-pair-*).
  */
-@theme {
-	--color-papyrus: #eadbb8;
-	--color-vellum: #f5ebd3;
-	--color-vellum-deep: #e4d2aa;
-	--color-ink: #2e2117;
-	--color-sepia: #7a5c3e;
-	--color-rubric: #9e2b1f;
-	--color-rubric-soft: #f0d9c8;
-	--color-gold: #b88a2e;
-	--color-gold-soft: #efdfb4;
-	--color-lapis: #2f4f7a;
-	--color-olive: #5e6b3a;
-	--color-olive-soft: #e3e2c4;
+@theme static {
+	--color-*: initial;
 
+	--color-primary-50: #eef1f5;
+	--color-primary-100: #dce2ea;
+	--color-primary-200: #b9c6d7;
+	--color-primary-300: #899fbb;
+	--color-primary-400: #526f96;
+	--color-primary-500: #2f4f7a;
+	--color-primary-600: #203f69;
+	--color-primary-700: #183356;
+	--color-primary-800: #132945;
+	--color-primary-900: #112137;
+	--color-primary-950: #07101e;
+	--color-primary: #2f4f7a;
+
+	--color-secondary-50: #faf6f0;
+	--color-secondary-100: #f4ede0;
+	--color-secondary-200: #eadabf;
+	--color-secondary-300: #dcc08f;
+	--color-secondary-400: #c8a058;
+	--color-secondary-500: #b88a2e;
+	--color-secondary-600: #9b6f00;
+	--color-secondary-700: #805b00;
+	--color-secondary-800: #694a05;
+	--color-secondary-900: #563f10;
+	--color-secondary-950: #322408;
+	--color-secondary: #b88a2e;
+
+	--color-success-50: #f2f4ef;
+	--color-success-100: #e4e7df;
+	--color-success-200: #cacfbd;
+	--color-success-300: #a5af90;
+	--color-success-400: #7a865c;
+	--color-success-500: #5e6b3a;
+	--color-success-600: #4b5727;
+	--color-success-700: #3d471e;
+	--color-success-800: #313a19;
+	--color-success-900: #282f16;
+	--color-success-950: #15190a;
+	--color-success: #5e6b3a;
+
+	--color-warning-50: #fbf5ef;
+	--color-warning-100: #f6ebdf;
+	--color-warning-200: #f0d6bb;
+	--color-warning-300: #e4b88a;
+	--color-warning-400: #d2944f;
+	--color-warning-500: #c27c1e;
+	--color-warning-600: #a46300;
+	--color-warning-700: #875000;
+	--color-warning-800: #704100;
+	--color-warning-900: #5b3808;
+	--color-warning-950: #351f05;
+	--color-warning: #c27c1e;
+
+	--color-error-50: #faefed;
+	--color-error-100: #f3deda;
+	--color-error-200: #e9bdb5;
+	--color-error-300: #d78e82;
+	--color-error-400: #b85547;
+	--color-error-500: #9e2b1f;
+	--color-error-600: #88130a;
+	--color-error-700: #700d06;
+	--color-error-800: #5b0c06;
+	--color-error-900: #490f09;
+	--color-error-950: #290604;
+	--color-error: #9e2b1f;
+
+	--color-neutral-50: #f5f2f0;
+	--color-neutral-100: #eae4df;
+	--color-neutral-200: #d5c9be;
+	--color-neutral-300: #b9a592;
+	--color-neutral-400: #94795f;
+	--color-neutral-500: #7a5c3e;
+	--color-neutral-600: #66492c;
+	--color-neutral-700: #533b22;
+	--color-neutral-800: #43301c;
+	--color-neutral-900: #372718;
+	--color-neutral-950: #1e150b;
+	--color-neutral: #7a5c3e;
+}
+
+/*
+ * Semantic tokens: what markup uses. Each one points at a scale step, so the
+ * palette can change here without touching components.
+ */
+@theme static {
+	/* Page */
+	--color-background: var(--color-neutral-100); /* behind the sheet */
+	--color-surface: var(--color-neutral-50); /* the sheet itself */
+	--color-surface-sunken: var(--color-neutral-100); /* insets, panels, tracks */
+	--color-card: color-mix(in srgb, var(--color-neutral-50) 55%, #fff); /* tiles, inputs */
+	--color-card-hover: var(--color-neutral-100);
+	--color-overlay: var(--color-neutral-950); /* video stage, modal backdrops */
+
+	/* Lines */
+	--color-border: var(--color-neutral-200);
+	--color-border-strong: var(--color-neutral-300);
+
+	/* Text */
+	--color-foreground: var(--color-neutral-950);
+	--color-foreground-muted: var(--color-neutral-600);
+	--color-foreground-subtle: var(--color-neutral-400);
+	--color-on-primary: var(--color-neutral-50);
+	--color-on-secondary: var(--color-neutral-50);
+	--color-on-success: var(--color-neutral-50);
+	--color-on-overlay: var(--color-neutral-50);
+	--color-link: var(--color-primary-500);
+	--color-focus-ring: var(--color-primary-500);
+
+	/* Actions and states */
+	--color-primary-hover: var(--color-primary-600);
+	--color-primary-active: var(--color-primary-700);
+	--color-primary-soft: var(--color-primary-100);
+	--color-secondary-soft: var(--color-secondary-100);
+	--color-success-hover: var(--color-success-600);
+	--color-success-soft: var(--color-success-100);
+	--color-warning-soft: var(--color-warning-100);
+	--color-warning-foreground: var(--color-warning-700);
+	--color-error-soft: var(--color-error-100);
+
+	/* Match-pairs exercise: one colour per pair, kept clear of success and error. */
+	--color-pair-1: var(--color-primary-500);
+	--color-pair-2: var(--color-warning-500);
+	--color-pair-3: var(--color-neutral-700);
+	--color-pair-4: var(--color-primary-300);
+	--color-pair-5: var(--color-secondary-400);
+}
+
+@theme {
 	--font-sans: 'Inter Variable', system-ui, sans-serif;
 	--font-display: 'EB Garamond Variable', Georgia, serif;
 
@@ -43,7 +161,11 @@
 /* Fibrous paper grain plus a faint darkening toward the edges. */
 @utility paper-grain {
 	background-image:
-		radial-gradient(ellipse at center, transparent 55%, rgb(122 92 62 / 0.1)),
+		radial-gradient(
+			ellipse at center,
+			transparent 55%,
+			color-mix(in srgb, var(--color-neutral-500) 10%, transparent)
+		),
 		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.35' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.48 0 0 0 0 0.36 0 0 0 0 0.24 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -55,8 +177,8 @@
 @layer base {
 	html,
 	body {
-		background: var(--color-papyrus);
-		color: var(--color-ink);
+		background: var(--color-background);
+		color: var(--color-foreground);
 		-webkit-tap-highlight-color: transparent;
 	}
 
@@ -75,11 +197,11 @@
 	}
 
 	a {
-		color: var(--color-lapis);
+		color: var(--color-link);
 	}
 
 	:focus-visible {
-		outline: 2px solid var(--color-lapis);
+		outline: 2px solid var(--color-focus-ring);
 		outline-offset: 2px;
 	}
 

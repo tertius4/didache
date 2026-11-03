@@ -12,8 +12,8 @@
 
 	const { exercise, status, onanswer }: Props = $props();
 
-	// Manuscript pigments: lapis, ochre, madder, verdigris, umber.
-	const colors = ['#2f4f7a', '#b88a2e', '#8c3b5e', '#3d6b66', '#7a5c3e'];
+	/** One theme colour per pair (see `--color-pair-*` in app.css). */
+	const colors = [1, 2, 3, 4, 5].map((n) => `var(--color-pair-${n})`);
 
 	const lefts = $derived(shuffle(exercise.pairs.map(([l]) => l)));
 	const rights = $derived(shuffle(exercise.pairs.map(([, r]) => r)));
@@ -60,7 +60,7 @@
 </script>
 
 <h2 class="text-2xl">{exercise.prompt}</h2>
-<p class="mt-1 text-sepia">Tap an item on the left, then its match on the right.</p>
+<p class="mt-1 text-foreground-muted">Tap an item on the left, then its match on the right.</p>
 
 {#snippet item(
 	label: string,
@@ -79,7 +79,7 @@
 				},
 				'p-3 text-center'
 			),
-			'min-h-16 text-[15px] disabled:text-ink'
+			'min-h-16 text-[15px] disabled:text-foreground'
 		]}
 		style:--pair={color}
 		disabled={props.disabled}

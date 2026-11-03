@@ -12,7 +12,7 @@ export interface TileState {
 }
 
 /**
- * A full-width answer tile. Selected = inked outline; results = olive / rubric tint.
+ * A full-width answer tile. Selected = primary outline; results = success / error tint.
  * Pass `layout` to change padding/alignment: conflicting utilities can't be overridden by appending.
  */
 export function tile(
@@ -23,14 +23,14 @@ export function tile(
 		'block w-full cursor-pointer rounded-lg border font-medium transition-colors disabled:cursor-default',
 		layout,
 		correct
-			? 'border-olive bg-olive-soft ring-1 ring-olive'
+			? 'border-success bg-success-soft ring-1 ring-success'
 			: wrong
-				? 'border-rubric bg-rubric-soft ring-1 ring-rubric'
+				? 'border-error bg-error-soft ring-1 ring-error'
 				: selected
-					? 'border-ink bg-vellum-deep ring-1 ring-ink'
+					? 'border-primary bg-primary-soft ring-1 ring-primary'
 					: paired
-						? 'border-(--pair) bg-[color-mix(in_srgb,var(--pair)_14%,var(--color-vellum))] ring-1 ring-(--pair)'
-						: 'border-sepia/35 bg-vellum/60 enabled:hover:bg-vellum-deep/50'
+						? 'border-(--pair) bg-[color-mix(in_srgb,var(--pair)_14%,var(--color-card))] ring-1 ring-(--pair)'
+						: 'border-border-strong bg-card enabled:hover:bg-card-hover'
 	];
 }
 
@@ -39,7 +39,7 @@ export function chip(used = false) {
 	return [
 		'cursor-pointer rounded-md border px-3.5 py-2.5 font-medium disabled:cursor-default',
 		used
-			? 'border-transparent bg-vellum-deep text-transparent'
-			: 'border-sepia/35 bg-vellum/60 enabled:hover:bg-vellum-deep/50'
+			? 'border-transparent bg-surface-sunken text-transparent'
+			: 'border-border-strong bg-card enabled:hover:bg-card-hover'
 	];
 }

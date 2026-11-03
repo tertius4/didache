@@ -119,10 +119,10 @@
 <div class="flex-1">
 	{#if phase === 'story' || phase === 'exercises'}
 		<header
-			class="sticky top-0 z-5 flex items-center gap-3.5 bg-vellum px-4 pt-[calc(12px+env(safe-area-inset-top))] pb-3"
+			class="sticky top-0 z-5 flex items-center gap-3.5 bg-surface px-4 pt-[calc(12px+env(safe-area-inset-top))] pb-3"
 		>
 			<a
-				class="p-1 text-xl text-sepia no-underline hover:text-ink"
+				class="p-1 text-xl text-foreground-muted no-underline hover:text-foreground"
 				href={resolve('/learn/[section]/[unit]', { section: section.id, unit: unit.id })}
 				aria-label="Close lesson">✕</a
 			>
@@ -146,7 +146,7 @@
 				onpractice={() => goTo('exercises')}
 			/>
 		{:else if phase === 'story'}
-			<p class="mb-3 text-sm small-caps tracking-wide text-sepia">
+			<p class="mb-3 text-sm small-caps tracking-wide text-foreground-muted">
 				{lesson.title} · {lesson.passage}
 			</p>
 			{#key cardIndex}
@@ -157,7 +157,7 @@
 			{/key}
 		{:else if phase === 'exercises' && session.current}
 			{#if session.isRetry}
-				<p class="mb-3 text-sm font-semibold text-rubric">↻ Let’s try this one again</p>
+				<p class="mb-3 text-sm font-semibold text-warning-foreground">↻ Let’s try this one again</p>
 			{/if}
 			{#key session.position}
 				<ExerciseView

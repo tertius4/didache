@@ -29,11 +29,11 @@
 		type="button"
 		class={[
 			'mx-1.5 inline-block min-w-24 cursor-pointer px-3 py-0.5 font-sans text-lg leading-snug font-semibold disabled:cursor-default',
-			!selected && 'border-b-2 border-sepia/50',
+			!selected && 'border-b-2 border-border-strong',
 			selected && 'rounded-md border',
-			selected && status === 'answering' && 'border-ink bg-vellum-deep',
-			status === 'correct' && 'border-olive bg-olive-soft text-olive',
-			status === 'wrong' && 'border-rubric bg-rubric-soft text-rubric'
+			selected && status === 'answering' && 'border-primary bg-primary-soft',
+			status === 'correct' && 'border-success bg-success-soft text-success',
+			status === 'wrong' && 'border-error bg-error-soft text-error'
 		]}
 		disabled={locked || !selected}
 		aria-label={selected ? `Remove “${selected}”` : 'Empty blank'}

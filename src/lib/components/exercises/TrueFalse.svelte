@@ -20,7 +20,7 @@
 </script>
 
 <h2 class="text-2xl">True or false?</h2>
-<p class="mt-5 border-l-2 border-sepia/40 py-1 pl-4 font-display text-2xl leading-snug italic">
+<p class="mt-5 border-l-2 border-border-strong py-1 pl-4 font-display text-2xl leading-snug italic">
 	{exercise.statement}
 </p>
 <div class="mt-6 grid grid-cols-2 gap-3">

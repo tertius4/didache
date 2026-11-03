@@ -22,14 +22,14 @@
 
 	<section aria-labelledby="section-{section.id}">
 		<h1 id="section-{section.id}" class="text-center text-4xl">{section.title}</h1>
-		<p class="mx-auto mt-2 max-w-sm text-center text-sepia">{section.description}</p>
+		<p class="mx-auto mt-2 max-w-sm text-center text-foreground-muted">{section.description}</p>
 		<Ornament />
 		<JourneyMap {section} />
 	</section>
 
-	<aside class="mt-4 rounded-lg border border-sepia/25 bg-vellum-deep/40 p-5">
+	<aside class="mt-4 rounded-lg border border-border bg-surface-sunken p-5">
 		{#if section.units.length === 0}
-			<p class="mb-3 text-sepia">
+			<p class="mb-3 text-foreground-muted">
 				We’re writing the first lessons for this section. Join the waitlist to hear when they’re
 				ready.
 			</p>

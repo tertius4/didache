@@ -16,7 +16,8 @@
 		onpractice: () => void;
 	}
 
-	const { lesson, section, unit, onplay, onended, onlearnmore, onread, onpractice }: Props = $props();
+	const { lesson, section, unit, onplay, onended, onlearnmore, onread, onpractice }: Props =
+		$props();
 
 	const deeper = $derived(lesson.story.filter((card) => card.learnMore));
 	let started = false;
@@ -31,7 +32,7 @@
 </script>
 
 <!-- Full-screen: covers the scroll sheet and fills the whole viewport. -->
-<div class="fixed inset-0 z-20 flex animate-pop-in flex-col bg-ink text-vellum">
+<div class="fixed inset-0 z-20 flex animate-pop-in flex-col bg-overlay text-on-overlay">
 	<div class="relative min-h-0 flex-1">
 		{#if lesson.video}
 			<!-- Captions are optional in the content data; add a .vtt per video when available. -->
@@ -56,31 +57,33 @@
 			</video>
 		{:else}
 			<div
-				class="flex size-full flex-col items-center justify-center gap-6 bg-vellum-deep/70 paper-grain p-6 text-center text-ink"
+				class="flex size-full flex-col items-center justify-center gap-6 bg-surface-sunken paper-grain p-6 text-center text-foreground"
 			>
 				<div class="w-4/5 max-w-sm overflow-hidden rounded-lg opacity-80 sepia-[.35]">
 					<Illustration name={lesson.illustration} />
 				</div>
 				<span
-					class="grid size-16 place-items-center rounded-full bg-rubric/85 text-2xl text-vellum"
+					class="grid size-16 place-items-center rounded-full bg-primary/85 text-2xl text-on-primary"
 					aria-hidden="true">▶</span
 				>
-				<p class="text-sm font-semibold tracking-widest text-sepia uppercase">Video coming soon</p>
+				<p class="text-sm font-semibold tracking-widest text-foreground-muted uppercase">
+					Video coming soon
+				</p>
 			</div>
 		{/if}
 
 		<!-- Title overlay; fades while playing so it doesn't sit on the picture. -->
 		<header
-			class="pointer-events-none absolute inset-x-0 top-0 flex items-start gap-3 bg-linear-to-b from-ink/80 to-transparent px-4 pt-[calc(12px+env(safe-area-inset-top))] pb-10 transition-opacity duration-300"
+			class="pointer-events-none absolute inset-x-0 top-0 flex items-start gap-3 bg-linear-to-b from-overlay/80 to-transparent px-4 pt-[calc(12px+env(safe-area-inset-top))] pb-10 transition-opacity duration-300"
 			class:opacity-0={playing}
 		>
 			<a
-				class="pointer-events-auto p-1 text-xl text-vellum/80 no-underline hover:text-vellum"
+				class="pointer-events-auto p-1 text-xl text-on-overlay/80 no-underline hover:text-on-overlay"
 				href={resolve('/learn/[section]/[unit]', { section, unit })}
 				aria-label="Close lesson">✕</a
 			>
 			<div class="min-w-0 flex-1 pt-0.5">
-				<p class="text-sm small-caps tracking-wide text-vellum/75">{lesson.passage}</p>
+				<p class="text-sm small-caps tracking-wide text-on-overlay/75">{lesson.passage}</p>
 				<h1 class="font-display text-2xl font-semibold">{lesson.title}</h1>
 			</div>
 		</header>
@@ -92,7 +95,7 @@
 				{#each deeper as card (card.id)}
 					<button
 						type="button"
-						class="shrink-0 cursor-pointer rounded-full border border-gold/60 bg-gold/15 px-3.5 py-1.5 text-sm font-medium hover:bg-gold/30"
+						class="shrink-0 cursor-pointer rounded-full border border-secondary/60 bg-secondary/15 px-3.5 py-1.5 text-sm font-medium hover:bg-secondary/30"
 						onclick={() => card.learnMore && onlearnmore(card.learnMore, card.id)}
 					>
 						{card.learnMore?.title}
@@ -103,7 +106,7 @@
 		<div class="mx-auto grid w-full max-w-content grid-cols-[1fr_2fr] gap-3">
 			<button
 				type="button"
-				class="cursor-pointer rounded-lg border border-vellum/40 px-5 py-3.5 font-semibold transition-colors hover:bg-vellum/10"
+				class="cursor-pointer rounded-lg border border-on-overlay/40 px-5 py-3.5 font-semibold transition-colors hover:bg-on-overlay/10"
 				onclick={onread}
 			>
 				Read story

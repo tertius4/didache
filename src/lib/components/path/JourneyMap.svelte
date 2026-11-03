@@ -41,7 +41,7 @@
 
 <div class="relative" style:height="{count * ROW}px">
 	<svg
-		class="absolute inset-0 size-full text-sepia/60"
+		class="absolute inset-0 size-full text-foreground-subtle"
 		viewBox="0 0 100 {count * ROW}"
 		preserveAspectRatio="none"
 		aria-hidden="true"
@@ -64,7 +64,7 @@
 			<li class="grid h-44 grid-cols-2 items-center">
 				<a
 					class={[
-						'group col-span-2 grid grid-cols-subgrid items-center text-ink no-underline',
+						'group col-span-2 grid grid-cols-subgrid items-center text-foreground no-underline',
 						right && '[&>*:first-child]:order-2'
 					]}
 					href={resolve('/learn/[section]/[unit]', { section: section.id, unit: unit.id })}
@@ -73,23 +73,23 @@
 					<span class="relative mx-auto">
 						{#if current}
 							<span
-								class="absolute -top-7 left-1/2 -translate-x-1/2 rounded-sm bg-rubric px-2 py-0.5 text-xs font-semibold whitespace-nowrap text-vellum"
+								class="absolute -top-7 left-1/2 -translate-x-1/2 rounded-sm bg-primary px-2 py-0.5 text-xs font-semibold whitespace-nowrap text-on-primary"
 								>You are here</span
 							>
 						{/if}
 						<span
 							class={[
-								'block size-24 overflow-hidden rounded-full border-2 bg-vellum transition-transform group-hover:scale-105',
-								complete && 'border-gold ring-4 ring-gold/25',
-								current && 'border-rubric ring-4 ring-rubric/20',
-								!complete && !current && 'border-sepia/40 opacity-75 sepia-[.4]'
+								'block size-24 overflow-hidden rounded-full border-2 bg-surface transition-transform group-hover:scale-105',
+								complete && 'border-secondary ring-4 ring-secondary/25',
+								current && 'border-primary ring-4 ring-primary/20',
+								!complete && !current && 'border-border-strong opacity-75 sepia-[.4]'
 							]}
 						>
 							<img class="size-full object-cover" src={unit.illustration} alt="" />
 						</span>
 						{#if complete}
 							<span
-								class="absolute right-0 bottom-0 grid size-7 place-items-center rounded-full bg-gold text-sm text-vellum"
+								class="absolute right-0 bottom-0 grid size-7 place-items-center rounded-full bg-secondary text-sm text-on-secondary"
 								aria-label="Complete">✓</span
 							>
 						{/if}
@@ -98,8 +98,8 @@
 						<span class="font-display text-xl leading-tight font-semibold group-hover:underline">
 							{unit.title}
 						</span>
-						<span class="line-clamp-2 text-sm text-sepia">{unit.description}</span>
-						<span class="text-sm small-caps text-sepia">
+						<span class="line-clamp-2 text-sm text-foreground-muted">{unit.description}</span>
+						<span class="text-sm small-caps text-foreground-muted">
 							{done} of {unit.lessons.length} lessons
 						</span>
 					</span>
@@ -110,16 +110,17 @@
 		<li class="grid h-44 grid-cols-2 items-center">
 			<span
 				class={[
-					'mx-auto grid size-24 place-items-center rounded-full border-2 border-dashed border-sepia/40 font-display text-3xl text-sepia/70',
+					'mx-auto grid size-24 place-items-center rounded-full border-2 border-dashed border-border-strong font-display text-3xl text-foreground-subtle',
 					stops.length % 2 === 1 && 'order-2'
 				]}
 				aria-hidden="true">✦</span
 			>
 			<span class={['grid gap-0.5 px-2', stops.length % 2 === 1 ? 'text-right' : 'text-left']}>
-				<span class="font-display text-xl font-semibold text-sepia">
+				<span class="font-display text-xl font-semibold text-foreground-muted">
 					{stops.length ? 'The road continues' : 'Coming soon'}
 				</span>
-				{#if section.upcoming}<span class="text-sm text-sepia">{section.upcoming}</span>{/if}
+				{#if section.upcoming}<span class="text-sm text-foreground-muted">{section.upcoming}</span
+					>{/if}
 			</span>
 		</li>
 	</ol>

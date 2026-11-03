@@ -26,7 +26,7 @@
 </script>
 
 {#if sendState === 'done'}
-	<p class="font-semibold text-olive" role="status">Thank you for your feedback!</p>
+	<p class="font-semibold text-success" role="status">Thank you for your feedback!</p>
 {:else}
 	<form class="grid grid-cols-1 gap-3" {onsubmit}>
 		<p class="font-display text-lg font-semibold" id="feedback-q">Did you enjoy this?</p>
@@ -50,13 +50,13 @@
 			>
 			<textarea
 				id="feedback-comment"
-				class="resize-y rounded-lg border border-sepia/35 bg-vellum/60 px-3.5 py-3 focus:border-ink focus:outline-none"
+				class="resize-y rounded-lg border border-border bg-card px-3.5 py-3 focus:border-primary focus:outline-none"
 				rows="3"
 				bind:value={comment}></textarea>
 			<Button type="submit" disabled={sendState === 'sending'}>Send feedback</Button>
 		{/if}
 		{#if sendState === 'error'}
-			<p class="font-semibold text-rubric" role="alert">Something went wrong. Please try again.</p>
+			<p class="font-semibold text-error" role="alert">Something went wrong. Please try again.</p>
 		{/if}
 	</form>
 {/if}
