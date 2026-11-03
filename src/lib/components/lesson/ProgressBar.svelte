@@ -1,5 +1,10 @@
 <script lang="ts">
-	let { value, label = 'Lesson progress' }: { value: number; label?: string } = $props();
+	interface Props {
+		value: number;
+		label?: string;
+	}
+
+	const { value, label = 'Lesson progress' }: Props = $props();
 	const pct = $derived(Math.round(Math.min(1, Math.max(0, value)) * 100));
 </script>
 

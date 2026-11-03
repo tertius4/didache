@@ -4,16 +4,7 @@
 	import Illustration from '#lib/components/illustrations/Illustration.svelte';
 	import Button from '#lib/components/ui/Button.svelte';
 
-	let {
-		lesson,
-		section,
-		unit,
-		onplay,
-		onended,
-		onlearnmore,
-		onread,
-		onpractice
-	}: {
+	interface Props {
 		lesson: Lesson;
 		/** Section and unit ids, for the close link back to the unit page. */
 		section: string;
@@ -23,7 +14,9 @@
 		onlearnmore: (content: LearnMore, cardId: string) => void;
 		onread: () => void;
 		onpractice: () => void;
-	} = $props();
+	}
+
+	const { lesson, section, unit, onplay, onended, onlearnmore, onread, onpractice }: Props = $props();
 
 	const deeper = $derived(lesson.story.filter((card) => card.learnMore));
 	let started = false;

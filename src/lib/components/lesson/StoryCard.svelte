@@ -3,7 +3,12 @@
 	import Illustration from '#lib/components/illustrations/Illustration.svelte';
 	import VerseQuote from './VerseQuote.svelte';
 
-	let { card, onlearnmore }: { card: StoryCard; onlearnmore: () => void } = $props();
+	interface Props {
+		card: StoryCard;
+		onlearnmore: () => void;
+	}
+
+	const { card, onlearnmore }: Props = $props();
 </script>
 
 <article class="grid animate-pop-in gap-4">

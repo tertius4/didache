@@ -4,11 +4,13 @@
 	import Button from '#lib/components/ui/Button.svelte';
 	import VerseQuote from './VerseQuote.svelte';
 
-	let {
-		exercise,
-		correct,
-		oncontinue
-	}: { exercise: Exercise; correct: boolean; oncontinue: () => void } = $props();
+	interface Props {
+		exercise: Exercise;
+		correct: boolean;
+		oncontinue: () => void;
+	}
+
+	const { exercise, correct, oncontinue }: Props = $props();
 
 	const praise = ['Well done!', 'Excellent!', 'That’s right!', 'Great job!', 'Amen!'];
 	const heading = $derived(

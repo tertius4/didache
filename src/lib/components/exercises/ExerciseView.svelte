@@ -7,16 +7,14 @@
 	import OrderEvents from './OrderEvents.svelte';
 	import MatchPairs from './MatchPairs.svelte';
 
-	let {
-		exercise,
-		status,
-		onanswer
-	}: {
+	interface Props {
 		exercise: Exercise;
 		status: Status;
 		/** Called with the current answer, or null while the answer is incomplete. */
 		onanswer: (answer: AnyAnswer | null) => void;
-	} = $props();
+	}
+
+	const { exercise, status, onanswer }: Props = $props();
 </script>
 
 <div data-exercise-id={exercise.id}>

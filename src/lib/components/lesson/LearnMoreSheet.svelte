@@ -3,7 +3,12 @@
 	import Button from '#lib/components/ui/Button.svelte';
 	import VerseQuote from './VerseQuote.svelte';
 
-	let { content, onclose }: { content: LearnMore | null; onclose: () => void } = $props();
+	interface Props {
+		content: LearnMore | null;
+		onclose: () => void;
+	}
+
+	const { content, onclose }: Props = $props();
 
 	let dialog = $state<HTMLDialogElement>();
 

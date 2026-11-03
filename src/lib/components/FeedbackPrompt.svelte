@@ -4,7 +4,11 @@
 	import Button from '#lib/components/ui/Button.svelte';
 	import { tile } from '#lib/components/ui/classes.ts';
 
-	let { context }: { context: Record<string, string> } = $props();
+	interface Props {
+		context: Record<string, string>;
+	}
+
+	const { context }: Props = $props();
 
 	let rating = $state<'up' | 'down' | null>(null);
 	let comment = $state('');

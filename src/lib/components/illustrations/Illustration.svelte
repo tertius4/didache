@@ -1,7 +1,12 @@
 <script lang="ts">
 	import type { IllustrationKey } from './keys';
 
-	let { name, label = '' }: { name: IllustrationKey; label?: string } = $props();
+	interface Props {
+		name: IllustrationKey;
+		label?: string;
+	}
+
+	const { name, label = '' }: Props = $props();
 </script>
 
 <svg

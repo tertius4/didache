@@ -4,15 +4,13 @@
 	import { tile } from '#lib/components/ui/classes.ts';
 	import { shuffle } from '#lib/lesson/check.ts';
 
-	let {
-		exercise,
-		status,
-		onanswer
-	}: {
+	interface Props {
 		exercise: MatchExercise;
 		status: Status;
 		onanswer: (answer: Record<string, string> | null) => void;
-	} = $props();
+	}
+
+	const { exercise, status, onanswer }: Props = $props();
 
 	// Manuscript pigments: lapis, ochre, madder, verdigris, umber.
 	const colors = ['#2f4f7a', '#b88a2e', '#8c3b5e', '#3d6b66', '#7a5c3e'];

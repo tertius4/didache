@@ -4,7 +4,11 @@
 	import { lessonKey } from '#lib/content/index.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
 
-	let { section }: { section: Section } = $props();
+	interface Props {
+		section: Section;
+	}
+
+	const { section }: Props = $props();
 
 	/** Height of one stop on the road, in px; the road is drawn on the same grid. */
 	const ROW = 176;

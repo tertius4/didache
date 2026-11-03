@@ -4,15 +4,13 @@
 	import { chip } from '#lib/components/ui/classes.ts';
 	import { shuffle } from '#lib/lesson/check.ts';
 
-	let {
-		exercise,
-		status,
-		onanswer
-	}: {
+	interface Props {
 		exercise: FillBlankExercise;
 		status: Status;
 		onanswer: (answer: string | null) => void;
-	} = $props();
+	}
+
+	const { exercise, status, onanswer }: Props = $props();
 
 	const options = $derived(shuffle(exercise.options));
 	const parts = $derived(exercise.text.split('___'));

@@ -3,7 +3,11 @@
 	import { track } from '#lib/analytics.ts';
 	import Button from '#lib/components/ui/Button.svelte';
 
-	let { source }: { source: string } = $props();
+	interface Props {
+		source: string;
+	}
+
+	const { source }: Props = $props();
 
 	let email = $state('');
 	let sendState = $state<'idle' | 'sending' | 'done' | 'error'>('idle');

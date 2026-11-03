@@ -4,15 +4,13 @@
 	import { tile } from '#lib/components/ui/classes.ts';
 	import { shuffle } from '#lib/lesson/check.ts';
 
-	let {
-		exercise,
-		status,
-		onanswer
-	}: {
+	interface Props {
 		exercise: MultipleChoiceExercise;
 		status: Status;
 		onanswer: (answer: string | null) => void;
-	} = $props();
+	}
+
+	const { exercise, status, onanswer }: Props = $props();
 
 	const options = $derived(shuffle(exercise.options));
 	let selected = $state<string | null>(null);

@@ -2,11 +2,16 @@
 	import { resolve } from '$app/paths';
 	import type { Section } from '#lib/content/types.ts';
 
-	let { sections, currentId }: { sections: Section[]; currentId: string } = $props();
+	interface Props {
+		sections: Section[];
+		currentId: string;
+	}
+
+	const { sections, currentId }: Props = $props();
 </script>
 
 <nav
-	class="-mx-5 mb-6 flex [scrollbar-width:none] gap-5 overflow-x-auto border-b border-sepia/25 px-5"
+	class="-mx-5 mb-6 flex scrollbar-none gap-5 overflow-x-auto border-b border-sepia/25 px-5"
 	aria-label="Sections"
 >
 	{#each sections as section (section.id)}

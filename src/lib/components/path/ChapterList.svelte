@@ -5,7 +5,12 @@
 	import { progress } from '#lib/progress/store.svelte.ts';
 	import { track } from '#lib/analytics.ts';
 
-	let { sectionId, unit }: { sectionId: string; unit: Unit } = $props();
+	interface Props {
+		sectionId: string;
+		unit: Unit;
+	}
+
+	const { sectionId, unit }: Props = $props();
 
 	const currentId = $derived(progress.currentLessonId(sectionId, unit));
 </script>

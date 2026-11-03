@@ -1,7 +1,11 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	let { children }: { children: Snippet } = $props();
+	interface Props {
+		children: Snippet;
+	}
+
+	const { children }: Props = $props();
 </script>
 
 <!-- Fixed to the bottom of the viewport, but only as wide as the scroll sheet. -->

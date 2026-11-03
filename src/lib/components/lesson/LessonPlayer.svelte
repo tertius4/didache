@@ -16,8 +16,12 @@
 	import FeedbackBanner from './FeedbackBanner.svelte';
 	import LessonComplete from './LessonComplete.svelte';
 
-	/** Mounted inside a {#key}, so `location` never changes for one instance. */
-	let { location }: { location: LessonLocation } = $props();
+	interface Props {
+		/** Mounted inside a {#key}, so `location` never changes for one instance. */
+		location: LessonLocation;
+	}
+
+	const { location }: Props = $props();
 
 	// svelte-ignore state_referenced_locally
 	const { section, unit, lesson, key } = location;

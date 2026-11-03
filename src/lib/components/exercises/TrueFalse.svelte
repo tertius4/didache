@@ -3,15 +3,13 @@
 	import { tile } from '#lib/components/ui/classes.ts';
 	import type { Status } from '#lib/lesson/engine.svelte.ts';
 
-	let {
-		exercise,
-		status,
-		onanswer
-	}: {
+	interface Props {
 		exercise: TrueFalseExercise;
 		status: Status;
 		onanswer: (answer: boolean | null) => void;
-	} = $props();
+	}
+
+	const { exercise, status, onanswer }: Props = $props();
 
 	let selected = $state<boolean | null>(null);
 

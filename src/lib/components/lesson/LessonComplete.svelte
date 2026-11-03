@@ -8,21 +8,16 @@
 	import type { Lesson } from '#lib/content/types.ts';
 	import VerseQuote from './VerseQuote.svelte';
 
-	let {
-		lesson,
-		accuracy,
-		total,
-		unitComplete,
-		location,
-		context
-	}: {
+	interface Props {
 		lesson: Lesson;
 		accuracy: number;
 		total: number;
 		unitComplete: boolean;
 		location: LessonLocation;
 		context: Record<string, string>;
-	} = $props();
+	}
+
+	const { lesson, accuracy, total, unitComplete, location, context }: Props = $props();
 
 	const pct = $derived(Math.round(accuracy * 100));
 	const next = $derived(nextLesson(location));

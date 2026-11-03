@@ -2,7 +2,11 @@
 	import type { Snippet } from 'svelte';
 	import ScrollRoller from './ScrollRoller.svelte';
 
-	let { children }: { children: Snippet } = $props();
+	interface Props {
+		children: Snippet;
+	}
+
+	const { children }: Props = $props();
 </script>
 
 <!-- The page is a vellum scroll unrolled on a papyrus desk; the inset edge shading reads as a curl. -->
