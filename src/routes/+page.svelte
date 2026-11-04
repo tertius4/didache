@@ -10,6 +10,7 @@
 	import Brand from '#lib/components/ui/Brand.svelte';
 	import Button from '#lib/components/ui/Button.svelte';
 	import Icon from '#lib/components/ui/Icon.svelte';
+	import { iconLink } from '#lib/components/ui/classes.ts';
 
 	const slides: { art: string; title: string; body: string }[] = [
 		{
@@ -55,6 +56,33 @@
 		goto(resolve(`/?slide=${i + 1}`), { replace: true });
 	}
 
+	/** Moves to slide `i` if there is one. Leaving the intro always takes a tap on the last slide. */
+	function step(i: number) {
+		if (i >= 0 && i < slides.length && i !== index) show(i);
+	}
+
+	// Swipe left/right between slides; vertical drags still scroll the page (touch-pan-y).
+	let swipeStart: { x: number; y: number; id: number } | null = null;
+
+	function onpointerdown(e: PointerEvent) {
+		if (!e.isPrimary || e.button !== 0) return;
+		swipeStart = { x: e.clientX, y: e.clientY, id: e.pointerId };
+	}
+
+	function onpointerup(e: PointerEvent) {
+		if (!swipeStart || e.pointerId !== swipeStart.id) return;
+		const dx = e.clientX - swipeStart.x;
+		const dy = e.clientY - swipeStart.y;
+		swipeStart = null;
+		if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+		step(dx < 0 ? index + 1 : index - 1);
+	}
+
+	function onkeydown(e: KeyboardEvent) {
+		if (e.key === 'ArrowRight') step(index + 1);
+		else if (e.key === 'ArrowLeft') step(index - 1);
+	}
+
 	function finish(skipped: boolean) {
 		progress.markIntroSeen();
 		track('intro_completed', { skipped, slide: index + 1 });
@@ -64,29 +92,47 @@
 
 <Meta description={mission} path="/" preload={slides.map((s) => s.art)} />
 
+<svelte:window {onkeydown} />
+
 <!-- Hidden for returning visitors (marked in app.html) while they're sent on to the journey. -->
 <main class="flex flex-1 flex-col gap-5 px-5 pt-4 in-data-returning:invisible">
 	<div class="flex items-center justify-between">
 		<Brand />
-		{#if !last}
-			<Button variant="quiet" class="w-auto! px-2!" onclick={() => finish(true)}>Skip</Button>
-		{/if}
+		<div class="flex items-center gap-2">
+			{#if !last}
+				<Button variant="quiet" class="w-auto! px-2!" onclick={() => finish(true)}>Skip</Button>
+			{/if}
+			<a href={resolve('/feedback')} class={iconLink} aria-label="Send feedback">
+				<Icon name="comment" size={18} />
+			</a>
+		</div>
 	</div>
 
-	{#key index}
-		<div class="grid animate-pop-in gap-4 text-center">
-			<img
-				class="block aspect-4/3 h-auto w-full rounded-lg border border-border object-cover sepia-[.2]"
-				src={slide.art}
-				width="1200"
-				height="900"
-				fetchpriority="high"
-				alt=""
-			/>
-			<h1 class="text-4xl">{slide.title}</h1>
-			<p class="text-lg text-foreground-muted">{slide.body}</p>
-		</div>
-	{/key}
+	<div
+		class="touch-pan-y select-none"
+		role="group"
+		aria-roledescription="slide"
+		aria-label="{index + 1} of {slides.length}"
+		{onpointerdown}
+		{onpointerup}
+		onpointercancel={() => (swipeStart = null)}
+	>
+		{#key index}
+			<div class="grid animate-pop-in gap-4 text-center">
+				<img
+					class="block aspect-4/3 h-auto w-full rounded-lg border border-border object-cover sepia-[.2]"
+					src={slide.art}
+					width="1200"
+					height="900"
+					fetchpriority="high"
+					draggable="false"
+					alt=""
+				/>
+				<h1 class="text-4xl">{slide.title}</h1>
+				<p class="text-lg text-foreground-muted">{slide.body}</p>
+			</div>
+		{/key}
+	</div>
 
 	<div class="flex justify-center gap-2" aria-hidden="true">
 		{#each slides as s, i (s.title)}

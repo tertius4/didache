@@ -34,6 +34,10 @@ export function tile(
 	];
 }
 
+/** A round, outlined icon link in a page header (feedback, about). */
+export const iconLink =
+	'grid size-10 place-items-center rounded-full border border-border-strong text-foreground-muted no-underline transition-colors hover:bg-card-hover hover:text-foreground';
+
 /** A word/phrase chip in a word bank; `used` leaves an empty gap where it was. */
 export function chip(used = false) {
 	return [

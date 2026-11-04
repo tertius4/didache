@@ -70,7 +70,7 @@
 	{/if}
 
 	<div class="grid gap-3">
-		<Button href={unitHref}><Icon name="arrow-left" size={16} /> Back to lessons</Button>
+		<Button href={unitHref}><Icon name="check" size={16} /> Finish</Button>
 		{#if !unitComplete}
 			<a
 				class="inline-flex items-center justify-center gap-1.5 text-sm"

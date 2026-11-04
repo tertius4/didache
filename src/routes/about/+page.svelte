@@ -52,9 +52,7 @@
 	<section>
 		<h2>What we believe</h2>
 		<p>
-			We believe the Bible is God’s Word and that it speaks for itself. Didache doesn’t add a
-			theological system on top of it: each lesson tells the story as Scripture tells it and points
-			you back to the verses, so you can see for yourself what God says.
+			We believe the Bible is God’s Word and that it speaks for itself. We try to make what Scripture says easier to understand, and we always point you back to the verses so you can see for yourself what God says.
 		</p>
 	</section>
 

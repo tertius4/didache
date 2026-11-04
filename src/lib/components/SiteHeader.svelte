@@ -3,9 +3,7 @@
 	import { sections } from '#lib/content/index.ts';
 	import Brand from '#lib/components/ui/Brand.svelte';
 	import Icon from '#lib/components/ui/Icon.svelte';
-
-	const iconLink =
-		'grid size-10 place-items-center rounded-full border border-border-strong text-foreground-muted no-underline transition-colors hover:bg-card-hover hover:text-foreground';
+	import { iconLink } from '#lib/components/ui/classes.ts';
 </script>
 
 <header class="mb-4 flex items-center justify-between gap-3">

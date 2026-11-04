@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { afterNavigate } from '$app/navigation';
 	import { sections } from '#lib/content/index.ts';
+	import { progress } from '#lib/progress/store.svelte.ts';
 	import Meta from '#lib/components/Meta.svelte';
 	import FeedbackPrompt from '#lib/components/FeedbackPrompt.svelte';
 	import Icon from '#lib/components/ui/Icon.svelte';
@@ -13,6 +14,11 @@
 		cameFromApp = from !== null;
 		fromPath = from?.url.pathname ?? '';
 	});
+
+	/** Opened straight from a link: back to the intro if it hasn't been seen yet. */
+	const fallback = $derived(
+		progress.seenIntro ? resolve('/learn/[section]', { section: sections[0].id }) : resolve('/')
+	);
 
 	function back(e: MouseEvent) {
 		if (!cameFromApp) return;
@@ -30,7 +36,7 @@
 <main class="grid gap-6 px-5 pt-4 pb-10">
 	<a
 		class="inline-flex items-center gap-1.5 justify-self-start text-sm text-foreground-muted no-underline hover:text-foreground"
-		href={resolve('/learn/[section]', { section: sections[0].id })}
+		href={fallback}
 		onclick={back}
 	>
 		<Icon name="arrow-left" size={14} /> Back
