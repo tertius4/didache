@@ -38,27 +38,35 @@ export const lesson: Lesson = {
 	title: 'Into the ark',
 	passage: 'Genesis 7:1–16',
 	illustration: 'ark',
+	video: {
+		src: '/media/bible-stories/noah/into-the-ark/video.mp4',
+		poster: "",
+		duration: "0:28"
+	},
 	story: [
 		{
 			id: 'go-in',
 			title: '“Go into the ark”',
 			body: 'The ark was finished. God told Noah to go in with his family and the animals: seven pairs of every clean animal and one pair of the others. In seven days the rain would come.',
 			verse: gen7_1,
-			illustration: 'ark'
+			illustration: 'ark',
+			image: '/media/bible-stories/noah/into-the-ark/go-in.webp'
 		},
 		{
 			id: 'flood-begins',
 			title: 'The flood begins',
 			body: 'Noah was 600 years old. Water burst up from deep under the earth and poured down from the sky. It rained for forty days and forty nights.',
 			verse: gen7_11,
-			illustration: 'rain'
+			illustration: 'rain',
+			image: '/media/bible-stories/noah/into-the-ark/flood-begins.webp'
 		},
 		{
 			id: 'shut-in',
 			title: 'The LORD shut him in',
 			body: 'Once everyone was inside, Noah didn’t close the door. God did. Noah and his family were safe because God himself shut them in.',
 			verse: gen7_16,
-			illustration: 'ark'
+			illustration: 'ark',
+			image: '/media/bible-stories/noah/into-the-ark/shut-in.webp'
 		}
 	],
 	exercises: [

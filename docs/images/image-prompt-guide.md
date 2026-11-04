@@ -26,7 +26,7 @@ Build every prompt from these slots, in this order. Grok weighs the start of a p
 [1 STYLE LOCK]
 [2 LIGHT preset for the mood]
 [3 CAMERA preset]
-[4 CHARACTER / PROP lines, word for word from style-guide.md §5, only if they appear]
+[4 CHARACTER / PROP lines, word for word from characters.md, only if they appear]
 SCENE: [5 one to four sentences: where, who, doing what, focal point, what fills the left and right sides]
 [6 AVOID line]
 ```
@@ -41,8 +41,12 @@ Rules for the SCENE line, because this is where wiggle room creeps back in:
 ## 1. STYLE LOCK (paste first, every time, unchanged)
 
 ```
-Traditional gouache painting with light watercolour washes, from a hand-made family Bible storybook. Full-bleed: the painting fills the entire frame edge to edge, no visible paper edge, no border, no tape, not a photo of a painting. Matte opaque gouache on warm cream cold-press cotton paper, with fine paper grain visible across the whole image. Broad, simple, flat shapes built from soft visible brush strokes; wet-in-wet softness in skies and distances; light dry-brush texture on earth, wood, stone and foliage. No outlines: shapes are separated by colour and value only, with occasional fine coloured-pencil marks for small details. Limited pigment palette only: yellow ochre, raw sienna, burnt sienna, Naples yellow, warm cadmium yellow for glows, cerulean blue, ultramarine, sap green and olive green, with a warm cream paper tone. Shadows are transparent ultramarine-violet, never black or grey. Medium-low contrast, soft gentle saturation, nothing neon, no pure white and no pure black. Atmospheric perspective: the distance becomes bluer and simpler. Bronze-Age Ancient Near Eastern world. Portrait 3:4 aspect ratio, taller than wide.
+Traditional gouache painting with light watercolour washes, from a hand-made family Bible storybook. Full-bleed: the painting fills the entire frame edge to edge, no visible paper edge, no border, no tape, not a photo of a painting. Matte opaque gouache on warm cream cold-press cotton paper, with fine paper grain visible across the whole image. Broad, simple, flat shapes built from soft visible brush strokes; wet-in-wet softness in skies and distances; light dry-brush texture on earth, wood, stone and foliage. No outlines: shapes are separated by colour and value only, with occasional fine coloured-pencil marks for small details. Limited pigment palette only: yellow ochre, raw sienna, burnt sienna, Naples yellow, warm cadmium yellow for glows, cerulean blue, ultramarine, sap green and olive green, with a warm cream paper tone. Shadows are transparent ultramarine-violet, never black or grey. Medium-low contrast, soft gentle saturation, nothing neon, no pure white and no pure black. Atmospheric perspective: the distance becomes bluer and simpler. Bronze-Age Ancient Near Eastern world. Every person has the same warm olive-brown skin and dark hair.
 ```
+
+### FORMAT (set this setting on grok before generating)
+
+Every scene is used twice: full screen in the **9:16** intro video, and as the **4:3** picture on its story card ("Read story"). Lesson 1 works this way: the card is the same painting as the video frame, widened. Make the video image first, then turn it into the 4:3 card (§6b).
 
 ## 2. LIGHT presets (paste exactly one)
 
@@ -145,13 +149,17 @@ Avoid: text, letters, numbers, signatures, watermarks; borders or frames; outlin
 
 Text alone gets you about 80% of the way. The rest comes from showing Grok the style.
 
-1. **Make one style anchor first.** Generate lesson 1 image 1 (`world-filling-up`) with the template above. Generate a few batches until one image is exactly the look you want. That image becomes `docs/art/anchors/style-anchor.png`. Never replace it lightly: every later image is measured against it.
+1. **Make one style anchor first.** Generate lesson 1 image 1 (`world-filling-up`) with the template above. Generate a few batches until one image is exactly the look you want. That image becomes `docs/images/anchors/style-anchor.png` (lesson 1's `world-filling-up` is the natural choice). Never replace it lightly: every later image is measured against it.
 2. **Attach the anchor to every new prompt.** In Grok, attach the anchor image (the paperclip or image button), then start the prompt with this line before the STYLE LOCK:
    ```
    Use the attached image only as a style reference. Copy its paint handling, paper grain, brushwork, palette and level of detail exactly. Do not copy its composition, place or content. Paint a new scene:
    ```
-3. **Make one anchor per character.** The first time Noah appears and looks right (lesson 2), save a clean, close version as `docs/art/anchors/noah.png`. Do the same for each family member and for the ark. When a character appears again, attach their anchor and add: `The man is the same person as in the attached image: same face, beard, head wrap and clothing.` If Grok only lets you attach one image, attach the character anchor and rely on the STYLE LOCK for the style.
+3. **Make one anchor per character.** The first time Noah appears and looks right (lesson 2), save a clean, close version as `docs/images/anchors/noah.png`. Do the same for each family member and for the ark. When a character appears again, attach their anchor and add: `The man is the same person as in the attached image: same face, beard, head wrap and clothing.` If Grok only lets you attach one image, attach the character anchor and rely on the STYLE LOCK for the style.
 4. **Iterate by editing, not by rewriting.** When an image is nearly right, use Grok's edit on that image ("make the sky calmer, remove the second tree") instead of generating from scratch. Every fresh generation is a new roll of the dice.
+
+## 6b. The 4:3 story-card version of the same image
+
+When you are happy with a 9:16 video image, choose the **4:3** aspect ratio on that image in Grok and let it make the same image again. No second prompt is needed. Save it as a 1200×900 WebP named after the scene id. `npm run check:media` (and every deploy) fails if a card isn't exactly 1200×900.
 
 ## 7. A selection routine
 
@@ -160,7 +168,7 @@ Consistency also comes from what you _keep_.
 - Generate a full batch (Grok gives several images per prompt). Judge them side by side with the style anchor open next to them.
 - Throw away anything that fails the style guide's checklist (§7) on the first look. Do not "fix" a wrong look by adding adjectives to the prompt. Change only the SCENE line, or regenerate.
 - When all images for a lesson are done, look at them in a row as small thumbnails. The odd one out is usually obvious. Regenerate it.
-- Run the finished images through `docs/video/tools/finish-images.sh` (see the [production workflow](../video/production-workflow.md)). It crops every image to exactly 3:4 portrait, gives it the same gentle colour grade and lays the same paper grain over all of them, which hides most of the small differences that are left.
+- Save the story-card versions as WebP at exactly 1200×900, like lesson 1. `npm run check:media` checks every size before a deploy.
 - Keep a prompt log: paste the exact prompt that made each kept image into the lesson file under the image. When a later image drifts, you can see what changed.
 
 ## 8. Worked example: lesson 1, image 2 (`sin-spread`)
@@ -170,7 +178,7 @@ This is the same scene as in `noah/01-a-wicked-world.md`, rebuilt with the lock.
 ```
 Use the attached image only as a style reference. Copy its paint handling, paper grain, brushwork, palette and level of detail exactly. Do not copy its composition, place or content. Paint a new scene:
 
-Traditional gouache painting with light watercolour washes, from a hand-made family Bible storybook. Full-bleed: the painting fills the entire frame edge to edge, no visible paper edge, no border, no tape, not a photo of a painting. Matte opaque gouache on warm cream cold-press cotton paper, with fine paper grain visible across the whole image. Broad, simple, flat shapes built from soft visible brush strokes; wet-in-wet softness in skies and distances; light dry-brush texture on earth, wood, stone and foliage. No outlines: shapes are separated by colour and value only, with occasional fine coloured-pencil marks for small details. Limited pigment palette only: yellow ochre, raw sienna, burnt sienna, Naples yellow, warm cadmium yellow for glows, cerulean blue, ultramarine, sap green and olive green, with a warm cream paper tone. Shadows are transparent ultramarine-violet, never black or grey. Medium-low contrast, soft gentle saturation, nothing neon, no pure white and no pure black. Atmospheric perspective: the distance becomes paler, bluer and simpler. Bronze-Age Ancient Near Eastern world. Calm, dignified and warm, for all ages. Portrait 3:4 aspect ratio, taller than wide.
+Traditional gouache painting with light watercolour washes, from a hand-made family Bible storybook. Full-bleed: the painting fills the entire frame edge to edge, no visible paper edge, no border, no tape, not a photo of a painting. Matte opaque gouache on warm cream cold-press cotton paper, with fine paper grain visible across the whole image. Broad, simple, flat shapes built from soft visible brush strokes; wet-in-wet softness in skies and distances; light dry-brush texture on earth, wood, stone and foliage. No outlines: shapes are separated by colour and value only, with occasional fine coloured-pencil marks for small details. Limited pigment palette only: yellow ochre, raw sienna, burnt sienna, Naples yellow, warm cadmium yellow for glows, cerulean blue, ultramarine, sap green and olive green, with a warm cream paper tone. Shadows are transparent ultramarine-violet, never black or grey. Medium-low contrast, soft gentle saturation, nothing neon, no pure white and no pure black. Atmospheric perspective: the distance becomes paler, bluer and simpler. Bronze-Age Ancient Near Eastern world. Calm, dignified and warm, for all ages.
 
 LIGHT: low dusk light from the far left, colours slightly greyed and cooler than a normal day, long cool violet shadows across the ground, a dull fading ochre-orange sky turning grey-violet overhead. Uneasy and quiet.
 
