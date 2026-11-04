@@ -7,9 +7,10 @@
 </script>
 
 <!--
-	The curled, deckled end of the parchment sheet. Drawn in CSS for now; to swap in
-	generated art, see docs/images/ui/scroll-frame.md.
-	The outer element casts the shadow (a mask would clip it), the inner one is masked.
+	A rolled-up end of the parchment sheet, flush with the screen edge.
+	The roll body is a seamless tile (/media/ui/scroll-edge-{position}.svg) repeated across the
+	width so it never stretches; /media/ui/scroll-edge-end.svg shows the rolled layers at each end.
+	The outer element casts the shadow (a mask would clip it), the inner one shows the art.
 -->
 <div
 	class={[
@@ -18,27 +19,28 @@
 	]}
 	aria-hidden="true"
 >
-	<div class={['curl h-5', position === 'bottom' && '-scale-y-100']}></div>
+	<div class="relative h-8">
+		<div
+			class="roll absolute inset-x-1.5 inset-y-0"
+			style:background-image={`url(/media/ui/scroll-edge-${position}.svg)`}
+		></div>
+		{#each ['left-0', 'right-0 -scale-x-100'] as side (side)}
+			<div class={['roll-end absolute h-5.5 w-3', side, position === 'top' ? 'top-0' : 'bottom-0']}></div>
+		{/each}
+	</div>
 </div>
 
 <style>
 	.edge {
-		filter: drop-shadow(0 3px 3px color-mix(in srgb, var(--color-overlay) 22%, transparent));
+		filter: drop-shadow(0 2px 2px color-mix(in srgb, var(--color-overlay) 25%, transparent));
 	}
 
-	/* Light on the rolled-over lip, shadow where it turns under, then a torn edge. */
-	.curl {
-		background: linear-gradient(
-			to bottom,
-			var(--color-neutral-200),
-			var(--color-neutral-50) 30%,
-			var(--color-neutral-100) 55%,
-			var(--color-neutral-300) 85%,
-			var(--color-neutral-400)
-		);
-		--deckle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='6'%3E%3Cpath d='M0 0H44V2.5Q40 6 35 3.8T25 4.6T14 3.4T6 5T0 2.5Z'/%3E%3C/svg%3E");
-		mask:
-			linear-gradient(#000, #000) top / 100% calc(100% - 6px) no-repeat,
-			var(--deckle) bottom / 44px 6px repeat-x;
+	.roll {
+		background-repeat: repeat-x;
+		background-size: auto 100%;
+	}
+
+	.roll-end {
+		background: url(/media/ui/scroll-edge-end.svg) center / 100% 100% no-repeat;
 	}
 </style>

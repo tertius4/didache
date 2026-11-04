@@ -14,7 +14,8 @@
 		"format": "prettier --write .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"deploy": "npm run build && wrangler deploy"
+		"check:media": "node scripts/check-media.js",
+		"deploy": "npm run check:media && npm run build && wrangler deploy"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "^7.6.9",

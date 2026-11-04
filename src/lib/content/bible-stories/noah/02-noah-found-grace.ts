@@ -45,34 +45,43 @@ export const lesson: Lesson = {
 	title: 'Noah found grace',
 	passage: 'Genesis 6:8–22',
 	illustration: 'ark-build',
+	video: {
+		src: '/media/bible-stories/noah/noah-found-grace/video.mp4',
+		poster: '/media/bible-stories/noah/noah-found-grace/poster.webp',
+		duration: '0:32'
+	},
 	story: [
 		{
 			id: 'but-noah',
 			title: '“But Noah…”',
 			body: 'In a world full of evil, one small word changes everything: “But”. God showed favor to Noah.',
 			verse: gen6_8,
-			illustration: 'scroll'
+			illustration: 'scroll',
+			image: '/media/bible-stories/noah/noah-found-grace/but-noah.webp'
 		},
 		{
 			id: 'walked-with-god',
 			title: 'Noah walked with God',
 			body: 'Noah lived close to God in a world that had turned away from him. He had three sons: Shem, Ham and Japheth.',
 			verse: gen6_9,
-			illustration: 'world'
+			illustration: 'world',
+			image: '/media/bible-stories/noah/noah-found-grace/walked-with-god.webp'
 		},
 		{
 			id: 'build-an-ark',
 			title: 'Build an ark',
 			body: 'God told Noah the flood was coming and gave him exact plans: a huge boat of gopher wood, sealed with pitch, about 135 metres long!',
 			verse: gen6_14,
-			illustration: 'ark-build'
+			illustration: 'ark-build',
+			image: '/media/bible-stories/noah/noah-found-grace/build-an-ark.webp'
 		},
 		{
 			id: 'noah-did-all',
 			title: 'Noah did all God commanded',
 			body: 'God promised to make a covenant with Noah and keep his family alive. Noah believed God and got to work, even though no flood had ever been seen.',
 			verse: gen6_22,
-			illustration: 'ark-build'
+			illustration: 'ark-build',
+			image: '/media/bible-stories/noah/noah-found-grace/noah-did-all.webp'
 		}
 	],
 	exercises: [

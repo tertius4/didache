@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dev } from '$app/env';
 	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
 	import type { LessonLocation } from '#lib/content/index.ts';
@@ -99,11 +100,15 @@
 		if (session.done) finish();
 	}
 
-	function finish() {
+	function complete() {
 		progress.markComplete(key);
 		unitComplete =
 			location.index === unit.lessons.length - 1 && progress.isUnitComplete(section.id, unit);
-		phase = 'complete';
+		goTo('complete');
+	}
+
+	function finish() {
+		complete();
 		track('lesson_completed', {
 			...ids,
 			accuracy: Math.round(session.accuracy * 100),
@@ -195,6 +200,17 @@
 				<FeedbackBanner exercise={session.current} correct={lastCorrect} oncontinue={continueOn} />
 			{/if}
 		</ActionBar>
+	{/if}
+
+	<!-- Dev-only shortcut: completes the lesson without analytics. `dev` is false in builds. -->
+	{#if dev && phase !== 'complete'}
+		<button
+			type="button"
+			onclick={complete}
+			class="fixed right-3 bottom-24 z-20 cursor-pointer rounded-md border border-dashed border-warning bg-warning-soft px-2.5 py-1 text-xs font-semibold text-warning-foreground"
+		>
+			Skip lesson (dev)
+		</button>
 	{/if}
 </div>
 

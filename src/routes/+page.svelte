@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { goto, replaceState } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { sections } from '#lib/content/index.ts';
 	import { progress } from '#lib/progress/store.svelte.ts';
@@ -52,7 +52,7 @@
 
 	function show(i: number) {
 		index = i;
-		replaceState(resolve(`/?slide=${i + 1}`), {});
+		goto(resolve(`/?slide=${i + 1}`), { replace: true });
 	}
 
 	function finish(skipped: boolean) {
@@ -65,7 +65,7 @@
 <Meta description={mission} path="/" preload={slides.map((s) => s.art)} />
 
 <!-- Hidden for returning visitors (marked in app.html) while they're sent on to the journey. -->
-<main class="flex flex-1 flex-col gap-5 px-5 pt-4 [[data-returning]_&]:invisible">
+<main class="flex flex-1 flex-col gap-5 px-5 pt-4 in-data-returning:invisible">
 	<div class="flex items-center justify-between">
 		<Brand />
 		{#if !last}
