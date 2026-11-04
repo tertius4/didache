@@ -9,6 +9,7 @@
 	import { scrollPageToTop } from '#lib/components/ui/scroll.ts';
 	import { track } from '#lib/analytics.ts';
 	import ExerciseView from '#lib/components/exercises/ExerciseView.svelte';
+	import { sheetBars } from '#lib/components/ui/sheet-bars.svelte.ts';
 	import ActionBar from '#lib/components/ui/ActionBar.svelte';
 	import Button from '#lib/components/ui/Button.svelte';
 	import Icon from '#lib/components/ui/Icon.svelte';
@@ -55,6 +56,17 @@
 
 	$effect(() => {
 		if (phase === 'story') track('story_card_viewed', { ...ids, card: card.id });
+	});
+
+	// The close/progress bar sits on the sheet, above the scrolling text (ActionBar does the
+	// same below it).
+	$effect(() => {
+		const inLesson = phase === 'story' || phase === 'exercises';
+		sheetBars.top = inLesson ? topBar : undefined;
+	});
+	$effect(() => () => {
+		// Only clear our own bar: the next lesson may already have set its own.
+		if (sheetBars.top === topBar) sheetBars.top = undefined;
 	});
 
 	function goTo(next: typeof phase) {
@@ -118,22 +130,22 @@
 	}
 </script>
 
-<div class="flex flex-1 flex-col">
-	{#if phase === 'story' || phase === 'exercises'}
-		<header class="sticky top-0 z-5 flex items-center gap-3.5 bg-surface px-4 py-3">
-			<a
-				class="p-1 text-xl text-foreground-muted no-underline hover:text-foreground"
-				href={resolve('/learn/[section]/[unit]', { section: section.id, unit: unit.id })}
-				aria-label="Close lesson"><Icon name="xmark" size={22} /></a
-			>
-			<ProgressBar
-				value={barValue}
-				label={phase === 'story' ? 'Story progress' : 'Exercise progress'}
-			/>
-		</header>
-	{/if}
+{#snippet topBar()}
+	<header class="flex items-center gap-3.5 px-4 py-3">
+		<a
+			class="p-1 text-xl text-foreground-muted no-underline hover:text-foreground"
+			href={resolve('/learn/[section]/[unit]', { section: section.id, unit: unit.id })}
+			aria-label="Close lesson"><Icon name="xmark" size={22} /></a
+		>
+		<ProgressBar
+			value={barValue}
+			label={phase === 'story' ? 'Story progress' : 'Exercise progress'}
+		/>
+	</header>
+{/snippet}
 
-	<main class="px-5 pt-2 pb-6">
+<div class="flex flex-1 flex-col">
+	<main class="px-5 pt-3 pb-6">
 		{#if phase === 'video'}
 			<VideoIntro
 				{lesson}
@@ -207,7 +219,7 @@
 		<button
 			type="button"
 			onclick={complete}
-			class="fixed right-3 bottom-24 z-20 cursor-pointer rounded-md border border-dashed border-warning bg-warning-soft px-2.5 py-1 text-xs font-semibold text-warning-foreground"
+			class="fixed right-3 bottom-36 z-20 cursor-pointer rounded-md border border-dashed border-warning bg-warning-soft px-2.5 py-1 text-xs font-semibold text-warning-foreground"
 		>
 			Skip lesson (dev)
 		</button>
