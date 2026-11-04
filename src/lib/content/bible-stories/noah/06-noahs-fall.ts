@@ -2,7 +2,7 @@ import type { Lesson, Verse } from '../../types';
 
 const gen6_8: Verse = {
 	ref: 'Genesis 6:8',
-	text: 'But Noah found favor in the eyes of the LORD.'
+	text: 'But Noah found favour in the eyes of the LORD.'
 };
 const gen9_20: Verse = {
 	ref: 'Genesis 9:20',
@@ -40,6 +40,7 @@ export const lesson: Lesson = {
 	id: 'noahs-fall',
 	title: 'Noah’s fall',
 	passage: 'Genesis 9:18–29',
+	comingSoon: true,
 	illustration: 'vineyard',
 	story: [
 		{
@@ -160,7 +161,7 @@ export const lesson: Lesson = {
 			answer: true,
 			verse: gen6_8,
 			explanation:
-				'Noah’s story began with grace (“Noah found favor”) and ends by showing how much he needed it.'
+				'Noah’s story began with grace (“Noah found favour”) and ends by showing how much he needed it.'
 		}
 	]
 };

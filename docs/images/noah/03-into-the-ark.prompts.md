@@ -24,7 +24,7 @@ Read one paragraph per image, with a pause between them. These are the story car
 
 2. **`flood-begins`**: Noah was 600 years old. Water burst up from deep under the earth and poured down from the sky. It rained for forty days and forty nights. *(Genesis 7:11)*
 
-3. **`shut-in`**: Once everyone was inside, Noah didn’t close the door. God did. Noah and his family were safe because God himself shut them in. *(Genesis 7:16)*
+3. **`shut-in`**: Noah, his wife, their three sons and their sons’ wives went in: eight people in all. Noah didn’t close the door. God did. They were safe because God himself shut them in. *(Genesis 7:16)*
 
 ---
 
@@ -101,7 +101,7 @@ The kept image at **4:3**, saved as `static/media/bible-stories/noah/into-the-ar
 
 ## 3. `shut-in`
 
-**Narration:** Once everyone was inside, Noah didn’t close the door. God did. Noah and his family were safe because God himself shut them in.
+**Narration:** Noah, his wife, their three sons and their sons’ wives went in: eight people in all. Noah didn’t close the door. God did. They were safe because God himself shut them in.
 
 **Watch for:** The card says God shut the door, so no one may be seen closing it: reject any hand, figure, beam or glow on the door itself. The only warmth is the lamplight inside.
 

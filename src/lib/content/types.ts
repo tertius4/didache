@@ -109,6 +109,8 @@ export interface Lesson {
 	/** The story as text, shown via "Read story". Follows the video script card by card. */
 	story: StoryCard[];
 	exercises: Exercise[];
+	/** Listed in its unit but not open yet, whatever the learner's progress. */
+	comingSoon?: boolean;
 }
 
 export interface Unit {

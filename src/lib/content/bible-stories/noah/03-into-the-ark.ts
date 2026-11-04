@@ -28,10 +28,6 @@ const pet3_20: Verse = {
 	ref: '1 Peter 3:20',
 	text: '…while the ark was being prepared, in which a few, that is, eight persons, were brought safely through water.'
 };
-const matt24_38: Verse = {
-	ref: 'Matthew 24:38–39',
-	text: 'For as in those days before the flood they were eating and drinking, marrying and giving in marriage, until the day when Noah entered the ark, and they were unaware until the flood came and swept them all away, so will be the coming of the Son of Man.'
-};
 
 export const lesson: Lesson = {
 	id: 'into-the-ark',
@@ -40,8 +36,8 @@ export const lesson: Lesson = {
 	illustration: 'ark',
 	video: {
 		src: '/media/bible-stories/noah/into-the-ark/video.mp4',
-		poster: "",
-		duration: "0:28"
+		poster: '',
+		duration: '0:30'
 	},
 	story: [
 		{
@@ -63,7 +59,7 @@ export const lesson: Lesson = {
 		{
 			id: 'shut-in',
 			title: 'The LORD shut him in',
-			body: 'Once everyone was inside, Noah didn’t close the door. God did. Noah and his family were safe because God himself shut them in.',
+			body: 'Noah, his wife, their three sons and their sons’ wives went in: eight people in all. Noah didn’t close the door. God did. They were safe because God himself shut them in.',
 			verse: gen7_16,
 			illustration: 'ark',
 			image: '/media/bible-stories/noah/into-the-ark/shut-in.webp'
@@ -169,13 +165,6 @@ export const lesson: Lesson = {
 				'Forty days and nights of rain'
 			],
 			verse: gen7_4
-		},
-		{
-			id: 'l3-unaware',
-			type: 'truefalse',
-			statement: 'Jesus said people before the flood were unaware until it came.',
-			answer: true,
-			verse: matt24_38
 		}
 	]
 };

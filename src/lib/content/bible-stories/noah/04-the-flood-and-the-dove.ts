@@ -36,6 +36,7 @@ export const lesson: Lesson = {
 	id: 'the-flood-and-the-dove',
 	title: 'The flood and the dove',
 	passage: 'Genesis 7:17–8:19',
+	comingSoon: true,
 	illustration: 'dove',
 	story: [
 		{

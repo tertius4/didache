@@ -35,21 +35,27 @@ export class Progress {
 		return this.completed.includes(key);
 	}
 
-	/** The first lesson of a unit is always open; each later lesson opens when the one before it is complete. */
+	/**
+	 * The first lesson of a unit is always open; each later lesson opens when the one before it
+	 * is complete. Coming-soon lessons stay locked.
+	 */
 	isUnlocked(sectionId: string, unit: Unit, lessonId: string): boolean {
 		const index = unit.lessons.findIndex((l) => l.id === lessonId);
-		if (index < 0) return false;
+		if (index < 0 || unit.lessons[index].comingSoon) return false;
 		if (index === 0) return true;
 		return this.isComplete(lessonKey(sectionId, unit.id, unit.lessons[index - 1].id));
 	}
 
-	/** The first lesson in the unit that isn't complete yet, if any. */
+	/** The first open lesson in the unit that isn't complete yet, if any. */
 	currentLessonId(sectionId: string, unit: Unit): string | undefined {
-		return unit.lessons.find((l) => !this.isComplete(lessonKey(sectionId, unit.id, l.id)))?.id;
+		return unit.lessons.find(
+			(l) => !l.comingSoon && !this.isComplete(lessonKey(sectionId, unit.id, l.id))
+		)?.id;
 	}
 
+	/** Every lesson is complete; never true while some are still coming soon. */
 	isUnitComplete(sectionId: string, unit: Unit): boolean {
-		return this.currentLessonId(sectionId, unit) === undefined;
+		return unit.lessons.every((l) => this.isComplete(lessonKey(sectionId, unit.id, l.id)));
 	}
 
 	markComplete(key: string): void {

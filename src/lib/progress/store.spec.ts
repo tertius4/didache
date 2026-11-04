@@ -30,11 +30,22 @@ describe('Progress', () => {
 		expect(b.seenIntro).toBe(true);
 	});
 
-	it('reports unit completion', () => {
+	it('keeps coming-soon lessons locked', () => {
 		const p = new Progress(memoryStorage());
-		for (const l of noah.lessons) p.markComplete(lessonKey(section, noah.id, l.id));
-		expect(p.isUnitComplete(section, noah)).toBe(true);
+		const open = noah.lessons.filter((l) => !l.comingSoon);
+		const soon = noah.lessons.find((l) => l.comingSoon)!;
+		for (const l of open) p.markComplete(lessonKey(section, noah.id, l.id));
+		expect(p.isUnlocked(section, noah, soon.id)).toBe(false);
 		expect(p.currentLessonId(section, noah)).toBeUndefined();
+		expect(p.isUnitComplete(section, noah)).toBe(false);
+	});
+
+	it('reports unit completion', () => {
+		const unit = { ...noah, lessons: noah.lessons.map((l) => ({ ...l, comingSoon: false })) };
+		const p = new Progress(memoryStorage());
+		for (const l of unit.lessons) p.markComplete(lessonKey(section, unit.id, l.id));
+		expect(p.isUnitComplete(section, unit)).toBe(true);
+		expect(p.currentLessonId(section, unit)).toBeUndefined();
 	});
 
 	it('ignores corrupt saved data', () => {

@@ -16,10 +16,6 @@ const gen6_7: Verse = {
 	ref: 'Genesis 6:7',
 	text: 'So the LORD said, “I will blot out man whom I have created from the face of the land, man and animals and creeping things and birds of the heavens, for I am sorry that I made them.”'
 };
-const rom3_10: Verse = {
-	ref: 'Romans 3:10',
-	text: 'As it is written: “None is righteous, no, not one.”'
-};
 const pet3_20: Verse = {
 	ref: '1 Peter 3:20',
 	text: '…when God’s patience waited in the days of Noah, while the ark was being prepared…'
@@ -33,7 +29,7 @@ export const lesson: Lesson = {
 	video: {
 		src: '/media/bible-stories/noah/a-wicked-world/video.mp4',
 		poster: '/media/bible-stories/noah/a-wicked-world/poster.webp',
-		duration: '0:39'
+		duration: '0:38'
 	},
 	// One card per scene of the video script: docs/images/noah/01-a-wicked-world.md
 	story: [
@@ -154,15 +150,6 @@ export const lesson: Lesson = {
 				'The LORD decided to blot out man'
 			],
 			verse: gen6_7
-		},
-		{
-			id: 'l1-none-righteous',
-			type: 'fill',
-			prompt: 'Paul says the same about all of us',
-			text: 'None is ___, no, not one.',
-			options: ['righteous', 'lost', 'strong', 'wise'],
-			answer: 'righteous',
-			verse: rom3_10
 		},
 		{
 			id: 'l1-patience',

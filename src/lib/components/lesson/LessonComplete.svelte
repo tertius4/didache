@@ -5,7 +5,7 @@
 	import Button from '#lib/components/ui/Button.svelte';
 	import Ornament from '#lib/components/ui/Ornament.svelte';
 	import Icon from '#lib/components/ui/Icon.svelte';
-	import { nextLesson, type LessonLocation } from '#lib/content/index.ts';
+	import type { LessonLocation } from '#lib/content/index.ts';
 	import type { Lesson } from '#lib/content/types.ts';
 	import VerseQuote from './VerseQuote.svelte';
 
@@ -21,7 +21,6 @@
 	const { lesson, accuracy, total, unitComplete, location, context }: Props = $props();
 
 	const pct = $derived(Math.round(accuracy * 100));
-	const next = $derived(nextLesson(location));
 	/** The story's closing verse is the one to carry away. */
 	const keyVerse = $derived(lesson.story.toReversed().find((c) => c.verse)?.verse);
 	const unitHref = $derived(
@@ -71,22 +70,7 @@
 	{/if}
 
 	<div class="grid gap-3">
-		{#if next && !unitComplete}
-			<Button
-				href={resolve('/learn/[section]/[unit]/[lesson]', {
-					section: location.section.id,
-					unit: location.unit.id,
-					lesson: next.id
-				})}>Next stop: {next.title} <Icon name="arrow-right" size={16} /></Button
-			>
-			<Button variant="ghost" href={unitHref}
-				><Icon name="arrow-left" size={16} /> Back to {location.unit.title}</Button
-			>
-		{:else}
-			<Button href={resolve('/learn/[section]', { section: location.section.id })}>
-				Back to the journey
-			</Button>
-		{/if}
+		<Button href={unitHref}><Icon name="arrow-left" size={16} /> Back to lessons</Button>
 		{#if !unitComplete}
 			<a
 				class="inline-flex items-center justify-center gap-1.5 text-sm"

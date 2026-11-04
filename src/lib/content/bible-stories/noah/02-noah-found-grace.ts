@@ -2,7 +2,7 @@ import type { Lesson, Verse } from '../../types';
 
 const gen6_8: Verse = {
 	ref: 'Genesis 6:8',
-	text: 'But Noah found favor in the eyes of the LORD.'
+	text: 'But Noah found favour in the eyes of the LORD.'
 };
 const gen6_9: Verse = {
 	ref: 'Genesis 6:9',
@@ -28,10 +28,6 @@ const gen6_18: Verse = {
 	ref: 'Genesis 6:18',
 	text: 'But I will establish my covenant with you, and you shall come into the ark, you, your sons, your wife, and your sons’ wives with you.'
 };
-const gen6_19: Verse = {
-	ref: 'Genesis 6:19',
-	text: 'And of every living thing of all flesh, you shall bring two of every sort into the ark to keep them alive with you. They shall be male and female.'
-};
 const gen6_22: Verse = {
 	ref: 'Genesis 6:22',
 	text: 'Noah did this; he did all that God commanded him.'
@@ -48,13 +44,13 @@ export const lesson: Lesson = {
 	video: {
 		src: '/media/bible-stories/noah/noah-found-grace/video.mp4',
 		poster: '/media/bible-stories/noah/noah-found-grace/poster.webp',
-		duration: '0:32'
+		duration: '0:37'
 	},
 	story: [
 		{
 			id: 'but-noah',
 			title: '“But Noah…”',
-			body: 'In a world full of evil, one small word changes everything: “But”. God showed favor to Noah.',
+			body: 'In a world full of evil, one small word changes everything: “But”. God showed favour to Noah.',
 			verse: gen6_8,
 			illustration: 'scroll',
 			image: '/media/bible-stories/noah/noah-found-grace/but-noah.webp'
@@ -70,7 +66,7 @@ export const lesson: Lesson = {
 		{
 			id: 'build-an-ark',
 			title: 'Build an ark',
-			body: 'God told Noah the flood was coming and gave him exact plans: a huge boat of gopher wood, sealed with pitch, about 135 metres long!',
+			body: 'God told Noah the flood was coming and gave him exact plans: a huge boat of gopher wood, sealed with pitch, 300 cubits long, 50 cubits wide and 30 cubits high. That’s about 135 metres long!',
 			verse: gen6_14,
 			illustration: 'ark-build',
 			image: '/media/bible-stories/noah/noah-found-grace/build-an-ark.webp'
@@ -86,12 +82,12 @@ export const lesson: Lesson = {
 	],
 	exercises: [
 		{
-			id: 'l2-found-favor',
+			id: 'l2-found-favour',
 			type: 'fill',
 			prompt: 'Complete the verse',
 			text: 'But Noah found ___ in the eyes of the LORD.',
-			options: ['favor', 'gold', 'rest', 'fault'],
-			answer: 'favor',
+			options: ['favour', 'gold', 'rest', 'fault'],
+			answer: 'favour',
 			verse: gen6_8
 		},
 		{
@@ -150,14 +146,6 @@ export const lesson: Lesson = {
 			options: ['walked', 'argued', 'ran', 'slept'],
 			answer: 'walked',
 			verse: gen6_9
-		},
-		{
-			id: 'l2-two-of-every-sort',
-			type: 'mc',
-			prompt: 'In Genesis 6, how many of every sort of living thing did God tell Noah to bring?',
-			options: ['Two, male and female', 'One of each', 'Ten of each', 'As many as would fit'],
-			answer: 'Two, male and female',
-			verse: gen6_19
 		},
 		{
 			id: 'l2-order',

@@ -36,6 +36,7 @@ export const lesson: Lesson = {
 	id: 'the-rainbow-covenant',
 	title: 'The rainbow covenant',
 	passage: 'Genesis 8:20–9:17',
+	comingSoon: true,
 	illustration: 'rainbow',
 	story: [
 		{

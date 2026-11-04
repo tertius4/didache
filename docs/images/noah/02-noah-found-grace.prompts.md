@@ -21,11 +21,11 @@ Genesis 6:8–22. 4 scenes, about 44 seconds of video.
 
 Read one paragraph per image, with a pause between them. These are the story card texts, word for word.
 
-1. **`but-noah`**: In a world full of evil, one small word changes everything: “But”. God showed favor to Noah. *(Genesis 6:8)*
+1. **`but-noah`**: In a world full of evil, one small word changes everything: “But”. God showed favour to Noah. *(Genesis 6:8)*
 
 2. **`walked-with-god`**: Noah lived close to God in a world that had turned away from him. He had three sons: Shem, Ham and Japheth. *(Genesis 6:9)*
 
-3. **`build-an-ark`**: God told Noah the flood was coming and gave him exact plans: a huge boat of gopher wood, sealed with pitch, about 135 metres long! *(Genesis 6:14)*
+3. **`build-an-ark`**: God told Noah the flood was coming and gave him exact plans: a huge boat of gopher wood, sealed with pitch, 300 cubits long, 50 cubits wide and 30 cubits high. That’s about 135 metres long! *(Genesis 6:14)*
 
 4. **`noah-did-all`**: God promised to make a covenant with Noah and keep his family alive. Noah believed God and got to work, even though no flood had ever been seen. *(Genesis 6:22)*
 
@@ -33,7 +33,7 @@ Read one paragraph per image, with a pause between them. These are the story car
 
 ## 1. `but-noah`
 
-**Narration:** In a world full of evil, one small word changes everything: “But”. God showed favor to Noah.
+**Narration:** In a world full of evil, one small word changes everything: “But”. God showed favour to Noah.
 
 **Watch for:** This is the same house and town as lesson 1's `one-light`, now seen up close. Attach `one-light` as a second reference if Grok allows two images. Nothing in the sky but stars.
 
@@ -107,7 +107,7 @@ The kept image at **4:3**, saved as `static/media/bible-stories/noah/noah-found-
 
 ## 3. `build-an-ark`
 
-**Narration:** God told Noah the flood was coming and gave him exact plans: a huge boat of gopher wood, sealed with pitch, about 135 metres long!
+**Narration:** God told Noah the flood was coming and gave him exact plans: a huge boat of gopher wood, sealed with pitch, 300 cubits long, 50 cubits wide and 30 cubits high. That’s about 135 metres long!
 
 **Watch for:** No crowd and no mocking onlookers: the text doesn't mention them. The ark must already look box-shaped, with no bow and no mast.
 

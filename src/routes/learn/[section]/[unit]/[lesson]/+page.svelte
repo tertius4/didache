@@ -36,8 +36,13 @@
 {:else}
 	<main class="grid flex-1 place-content-center gap-4 px-5 text-center">
 		<Icon name="lock" size={56} class="mx-auto text-foreground-muted" />
-		<h1 class="font-display text-3xl font-semibold">This lesson is locked</h1>
-		<p>Finish the lessons before it to unlock “{loc.lesson.title}”.</p>
+		{#if loc.lesson.comingSoon}
+			<h1 class="font-display text-3xl font-semibold">Coming soon</h1>
+			<p>“{loc.lesson.title}” isn’t ready yet.</p>
+		{:else}
+			<h1 class="font-display text-3xl font-semibold">This lesson is locked</h1>
+			<p>Finish the lessons before it to unlock “{loc.lesson.title}”.</p>
+		{/if}
 		<Button
 			href={resolve('/learn/[section]/[unit]', { section: loc.section.id, unit: loc.unit.id })}
 		>

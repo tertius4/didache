@@ -50,11 +50,6 @@ export function findLesson(
 	};
 }
 
-/** The next lesson in the same unit, if any. */
-export function nextLesson(loc: LessonLocation): Lesson | undefined {
-	return loc.unit.lessons[loc.index + 1];
-}
-
 /** Every lesson route, for prerendering. */
 export function allLessonParams(): { section: string; unit: string; lesson: string }[] {
 	return sections.flatMap((section) =>

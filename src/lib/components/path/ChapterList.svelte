@@ -63,7 +63,9 @@
 						<span class="text-foreground-muted">{i + 1}.</span>
 						{lesson.title}
 					</span>
-					<span class="text-sm small-caps text-foreground-muted">{lesson.passage}</span>
+					<span class="text-sm small-caps text-foreground-muted"
+						>{lesson.comingSoon ? 'Coming soon' : lesson.passage}</span
+					>
 				</span>
 				{#if lesson.video?.duration}
 					<span class="text-sm text-foreground-muted tabular-nums">{lesson.video.duration}</span>
