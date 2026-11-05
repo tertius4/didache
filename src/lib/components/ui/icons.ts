@@ -26,4 +26,5 @@ export type IconName =
 	| 'thumbs-down'
 	| 'scroll'
 	| 'list'
-	| 'star';
+	| 'star'
+	| 'share-nodes';

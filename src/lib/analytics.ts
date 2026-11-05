@@ -55,7 +55,8 @@ export type AnalyticsEvent =
 	| 'lesson_abandoned'
 	| 'unit_completed'
 	| 'waitlist_joined'
-	| 'feedback_submitted';
+	| 'feedback_submitted'
+	| 'page_shared';
 
 export function track(event: AnalyticsEvent, props: Record<string, unknown> = {}): void {
 	if (client) client.capture(event, props);

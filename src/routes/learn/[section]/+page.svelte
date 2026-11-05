@@ -23,7 +23,13 @@
 />
 
 <main class="px-5 pt-4 pb-10">
-	<SiteHeader />
+	<SiteHeader
+		share={{
+			title: `${section.title} · Didache`,
+			text: section.description,
+			context: { section: section.id }
+		}}
+	/>
 
 	<section aria-labelledby="section-{section.id}">
 		<!-- The title opens the list of all sections. -->
