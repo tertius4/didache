@@ -8,16 +8,10 @@ let pending: [AnalyticsEvent, Record<string, unknown>][] | undefined;
 let pendingExceptions: Error[] = [];
 
 export function initAnalytics(): void {
+	// No recording from dev: events are only logged to the console (see track).
+	if (import.meta.env.DEV) return;
 	if (typeof window === 'undefined' || pending) return;
-	if (!key || !host) {
-		if (import.meta.env.DEV) {
-			const variable = !key ? 'VITE_POSTHOG_KEY' : 'VITE_POSTHOG_HOST';
-			throw new Error(
-				`${variable} variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once ${variable} is configured`
-			);
-		}
-		return;
-	}
+	if (!key || !host) return;
 
 	pending = [];
 	import('posthog-js').then(({ default: posthog }) => {

@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import type { OrderExercise } from '#lib/content/types.ts';
 	import type { Status } from '#lib/lesson/engine.svelte.ts';
-	import { chip, tile } from '#lib/components/ui/classes.ts';
-	import { shuffle } from '#lib/lesson/check.ts';
+	import { tile } from '#lib/components/ui/classes.ts';
+	import { move, shuffle } from '#lib/lesson/check.ts';
+	import Icon from '#lib/components/ui/Icon.svelte';
 
 	interface Props {
 		exercise: OrderExercise;
@@ -12,57 +14,53 @@
 
 	const { exercise, status, onanswer }: Props = $props();
 
-	const bank = $derived(shuffle(exercise.items));
-	let placed = $state<string[]>([]);
+	// The list is always a complete answer, so it starts shuffled and is already answerable.
+	let order = $state(untrack(() => shuffle(exercise.items)));
 	const locked = $derived(status !== 'answering');
 
-	function update(next: string[]) {
-		placed = next;
-		onanswer(next.length === exercise.items.length ? next : null);
-	}
+	$effect(() => {
+		onanswer(order);
+	});
+
+	const arrow =
+		'grid size-11 flex-none cursor-pointer place-items-center rounded-md text-foreground-muted enabled:hover:bg-surface-sunken disabled:cursor-default disabled:opacity-30';
 </script>
 
 <h2 class="text-2xl">{exercise.prompt}</h2>
-<p class="mt-1 text-foreground-muted">Tap the events in the order they happened.</p>
+<p class="mt-1 text-foreground-muted">Use the arrows to put the events in the order they happened.</p>
 
 <ol class="mt-5 grid list-decimal gap-2 pl-7 font-display text-lg text-foreground-muted">
-	{#each { length: exercise.items.length }, i (i)}
+	{#each order as item, i (item)}
 		<li>
-			{#if placed[i]}
+			<div
+				class={[
+					tile(
+						{ correct: status === 'correct', wrong: status === 'wrong' },
+						'flex items-center gap-1 py-1 pr-1 pl-3.5'
+					),
+					'font-sans text-base text-foreground'
+				]}
+			>
+				<span class="min-w-0 flex-1 py-1.5">{item}</span>
 				<button
 					type="button"
-					class={[
-						tile(
-							{ correct: status === 'correct', wrong: status === 'wrong' },
-							'px-3.5 py-2.5 text-left'
-						),
-						'font-sans text-base text-foreground'
-					]}
-					disabled={locked}
-					aria-label={`Remove “${placed[i]}”`}
-					onclick={() => update(placed.filter((p) => p !== placed[i]))}
+					class={arrow}
+					disabled={locked || i === 0}
+					aria-label={`Move “${item}” up`}
+					onclick={() => (order = move(order, i, -1))}
 				>
-					{placed[i]}
+					<Icon name="chevron-down" size={18} class="rotate-180" />
 				</button>
-			{:else}
-				<span
-					class="block h-11 rounded-lg border border-dashed border-border-strong"
-					aria-hidden="true"
-				></span>
-			{/if}
+				<button
+					type="button"
+					class={arrow}
+					disabled={locked || i === order.length - 1}
+					aria-label={`Move “${item}” down`}
+					onclick={() => (order = move(order, i, 1))}
+				>
+					<Icon name="chevron-down" size={18} />
+				</button>
+			</div>
 		</li>
 	{/each}
 </ol>
-
-<div class="mt-6 flex flex-wrap gap-2.5">
-	{#each bank as item (item)}
-		<button
-			type="button"
-			class={[chip(placed.includes(item)), 'text-left']}
-			disabled={locked || placed.includes(item)}
-			onclick={() => update([...placed, item])}
-		>
-			{item}
-		</button>
-	{/each}
-</div>

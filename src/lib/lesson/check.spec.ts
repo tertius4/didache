@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Exercise } from '#lib/content/types.ts';
-import { checkAnswer, correctAnswerText, shuffle } from './check';
+import { checkAnswer, correctAnswerText, move, shuffle } from './check';
 
 const verse = { ref: 'Genesis 6:8', text: '…' };
 
@@ -70,5 +70,19 @@ describe('shuffle', () => {
 			expect([...out].sort()).toEqual(items);
 			expect(out).not.toEqual(items);
 		}
+	});
+});
+
+describe('move', () => {
+	it('swaps with the neighbour without mutating', () => {
+		const items = ['a', 'b', 'c'];
+		expect(move(items, 1, -1)).toEqual(['b', 'a', 'c']);
+		expect(move(items, 1, 1)).toEqual(['a', 'c', 'b']);
+		expect(items).toEqual(['a', 'b', 'c']);
+	});
+
+	it('ignores moves past either end', () => {
+		expect(move(['a', 'b'], 0, -1)).toEqual(['a', 'b']);
+		expect(move(['a', 'b'], 1, 1)).toEqual(['a', 'b']);
 	});
 });

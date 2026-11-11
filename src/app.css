@@ -201,8 +201,15 @@
 		-webkit-tap-highlight-color: transparent;
 	}
 
+	/* The sheet (ScrollSheet) scrolls its own middle; the document itself never moves. */
+	html,
 	body {
-		min-height: 100dvh;
+		height: 100%;
+		overflow: hidden;
+		overscroll-behavior: none;
+	}
+
+	body {
 		font-size: 17px;
 		line-height: 1.55;
 	}

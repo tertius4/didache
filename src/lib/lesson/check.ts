@@ -50,3 +50,12 @@ export function shuffle<T>(items: readonly T[], random = Math.random): T[] {
 	} while (new Set(items).size > 1 && out.every((item, i) => item === items[i]));
 	return out;
 }
+
+/** Swaps the item at `index` with its neighbour; out-of-range moves return the list unchanged. */
+export function move<T>(items: readonly T[], index: number, direction: -1 | 1): T[] {
+	const target = index + direction;
+	const out = [...items];
+	if (index < 0 || index >= out.length || target < 0 || target >= out.length) return out;
+	[out[index], out[target]] = [out[target], out[index]];
+	return out;
+}

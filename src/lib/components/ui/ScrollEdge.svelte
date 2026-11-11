@@ -14,7 +14,7 @@
 -->
 <div
 	class={[
-		'edge relative z-10 flex-none',
+		'edge relative z-10 flex-none touch-none',
 		position === 'top' ? 'pt-[env(safe-area-inset-top)]' : 'pb-[env(safe-area-inset-bottom)]'
 	]}
 	aria-hidden="true"
